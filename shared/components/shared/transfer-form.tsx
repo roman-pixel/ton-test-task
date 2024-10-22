@@ -77,13 +77,13 @@ export const TransferForm: React.FC<Props> = ({ className }) => {
       <p className="mb-7 text-3xl font-bold">Перевод средств</p>
 
       <Input
-        className={cn({ "border-destructive": isError })}
+        className={cn("text-base", { "border-destructive": isError })}
         placeholder="Адрес кошелька"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
       />
       <Input
-        className={cn({ "border-destructive": isError })}
+        className={cn("text-base", { "border-destructive": isError })}
         placeholder="Сумма (TON)"
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
