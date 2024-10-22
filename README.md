@@ -1,36 +1,50 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TON Link Test Task
 
-## Getting Started
+### Демо
 
-First, run the development server:
+Вы можете увидеть демо-версию приложения по следующей ссылке:
+
+[Демо-приложение](https://ton-test-task.vercel.app)
+
+## Описание
+
+Одностраничное приложение, созданное с использованием Next.js и библиотеки ton-connect. Приложение позволяет пользователям подключать криптокошелёк TonKeeper, просматривать баланс и осуществлять переводы средств в TestNet сети TON с интуитивно понятным интерфейсом.
+
+## Инструкция по использованию
+
+- **Подключение кошелька**:
+  - Для привязки своего кошелька TonKeeper нажмите кнопку "Привязать кошелек".
+  - В диалоговом окне выберите кошелек TonKeeper.
+  - Подтвердите привязку кошелька в приложении TonKeeper.
+
+- **Отправка средств**:
+  - На главном экране нажмите кнопку "Отправить", чтобы перейти на страницу перевода средств.
+  - Введите необходимую сумму и адрес получателя в форму перевода, чтобы инициировать процесс отправки.
+  - Подтвердите перевод в кошельке TonKeeper.
+
+## Технологии
+
+- **@tonconnect/ui-react** - Библиотека для интеграции с кошельком TonKeeper через TonConnect.
+- **next** - Фреймворк для создания серверных и статических приложений на React.
+- **tailwindcss** - Утилитарный CSS-фреймворк для создания пользовательских интерфейсов.
+- **typescript** - Язык программирования для строгой типизации в JavaScript.
+
+## Установка и запуск приложения
+
+1. Клонируйте репозиторий:
+```bash
+git clone https://github.com/roman-pixel/ton-test-task.git
+```
+
+2.	Перейдите в каталог проекта
+   
+3.	Установите зависимости с помощью yarn или npm:
+
+ ```bash
+ npm install
+ ```
+4. Запустите приложение 
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
