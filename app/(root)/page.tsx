@@ -3,17 +3,13 @@
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { ArrowUp } from "lucide-react";
 import Link from "next/link";
-import { useEffect } from "react";
 
 import {
   Balance,
   Button,
   Container,
-  ModeToggle,
   TonWalletAddress,
 } from "@/shared/components";
-import { getBalance } from "@/shared/services/getBalance";
-import { useBalanceStore } from "@/shared/store/balance";
 
 export default function Home() {
   const [tonConnectUI] = useTonConnectUI();
@@ -21,29 +17,27 @@ export default function Home() {
 
   return (
     <Container className="relative">
-      <div className="flex h-screen flex-col items-center justify-center gap-8">
+      <div className="flex h-[85vh] flex-col items-center justify-center gap-8">
         {wallet ? (
           <>
             <Balance address={wallet.account.address} />
-            <TonWalletAddress walletAddress={wallet.account.address} />
+            <TonWalletAddress
+              walletAddress={wallet.account.address}
+              tonConnectUI={tonConnectUI}
+            />
             <Link href="/transfer">
-              <Button size="lg">
+              <Button
+                size="lg"
+                className="rounded-full px-7 py-5 dark:shadow-[0_0_30px_5px_hsla(221.2,83.2%,53.3%,0.5)]"
+              >
                 <ArrowUp />
                 <span>Отправить</span>
               </Button>
             </Link>
-            <Button
-              className="text-destructive hover:text-destructive"
-              size="sm"
-              variant="ghost"
-              onClick={() => tonConnectUI.disconnect()}
-            >
-              Отвязать кошелек
-            </Button>
           </>
         ) : (
           <Button
-            className="p-8 text-xl font-bold text-white"
+            className="relative rounded-full px-8 py-10 text-xl font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
             size="lg"
             onClick={() => tonConnectUI.openModal()}
           >

@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 
-import { Header, ModeToggle } from "@/shared/components/shared";
-
-// import { Suspense } from 'react';
+import { Header } from "@/shared/components/shared";
 
 export const metadata: Metadata = {
   title: "TonLink | Main",
@@ -14,7 +12,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="min-h-screen">
+    <main>
       <Header />
       {children}
     </main>

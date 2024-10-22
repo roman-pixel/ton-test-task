@@ -1,7 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
@@ -36,37 +36,33 @@ export const HeaderBalance: React.FC<Props> = ({ className }) => {
   const { wholePart, decimalPart } = convertTonsValue(data.balance);
 
   return (
-    <Container
-      className={cn(
-        "flex h-[10vh] items-center justify-between px-7",
-        className,
-      )}
-    >
-      <Link href="/">
-        <Button
-          size="icon"
-          variant="link"
-          className="hover:text-accent-foreground hover:no-underline"
-        >
-          <ArrowLeft />
+    <header className={cn("relative", className)}>
+      <Container className="absolute inset-0 flex items-center justify-between p-7">
+        <Link href="/">
+          <Button
+            size="icon"
+            variant="link"
+            className="hover:text-accent-foreground hover:no-underline"
+          >
+            <ChevronLeft />
+            <span>Назад</span>
+          </Button>
+        </Link>
 
-          <span>Назад</span>
-        </Button>
-      </Link>
-
-      {loading ? (
-        <>
-          <Skeleton className="h-8 w-28" />
-        </>
-      ) : (
-        <>
-          <div className="flex items-center text-xl font-bold">
-            <span>{wholePart}</span>
-            <span>,{decimalPart}</span>
-            <span className="pl-2 text-sm uppercase opacity-60">ton</span>
-          </div>
-        </>
-      )}
-    </Container>
+        {loading ? (
+          <>
+            <Skeleton className="h-8 w-28" />
+          </>
+        ) : (
+          <>
+            <div className="flex items-center text-xl font-bold">
+              <span>{wholePart}</span>
+              <span>,{decimalPart}</span>
+              <span className="pl-2 text-sm uppercase opacity-60">ton</span>
+            </div>
+          </>
+        )}
+      </Container>
+    </header>
   );
 };

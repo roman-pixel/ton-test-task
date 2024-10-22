@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect } from "react";
-import toast from "react-hot-toast";
 
 import { Skeleton } from "../ui";
 

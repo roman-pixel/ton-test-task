@@ -1,5 +1,3 @@
-import { address } from "ton-core";
-
 export const getBalance = async (address: string | undefined) => {
   try {
     const res = await fetch(

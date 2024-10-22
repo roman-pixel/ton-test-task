@@ -12,7 +12,7 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="min-h-screen">
+    <main>
       <HeaderBalance />
       {children}
     </main>
