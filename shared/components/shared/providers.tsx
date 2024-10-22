@@ -2,8 +2,8 @@
 
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import React, { PropsWithChildren } from "react";
-import { Toaster } from "react-hot-toast";
 
+import { Toaster } from "../ui";
 import { ThemeProvider } from "./theme-provider";
 
 export const Providers: React.FC<PropsWithChildren> = ({ children }) => {
@@ -21,20 +21,9 @@ export const Providers: React.FC<PropsWithChildren> = ({ children }) => {
         <TonConnectUIProvider manifestUrl={manifestUrl}>
           {children}
         </TonConnectUIProvider>
-      </ThemeProvider>
 
-      <Toaster
-        toastOptions={{
-          // style: {
-          //   background: "bg-red",
-          //   color: "#fff",
-          // },
-          duration: 2000,
-          error: {
-            duration: 4000,
-          },
-        }}
-      />
+        <Toaster />
+      </ThemeProvider>
     </>
   );
 };

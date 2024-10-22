@@ -18,11 +18,11 @@ export default function Home() {
   return (
     <Container className="relative">
       <div className="flex h-[85vh] flex-col items-center justify-center gap-8">
-        {wallet ? (
+        {tonConnectUI?.account ? (
           <>
-            <Balance address={wallet.account.address} />
+            <Balance address={wallet?.account.address} />
             <TonWalletAddress
-              walletAddress={wallet.account.address}
+              walletAddress={wallet?.account.address}
               tonConnectUI={tonConnectUI}
             />
             <Link href="/transfer">

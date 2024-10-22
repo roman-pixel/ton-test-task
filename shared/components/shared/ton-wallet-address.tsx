@@ -3,7 +3,6 @@
 import { TonConnectUI } from "@tonconnect/ui-react";
 import { Clipboard, EllipsisVertical, LogOut } from "lucide-react";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 import {
   Button,
@@ -14,8 +13,10 @@ import {
   Input,
 } from "../ui";
 
+import { useToast } from "@/shared/hooks/use-toast";
+
 interface Props {
-  walletAddress: string;
+  walletAddress: string | undefined;
   tonConnectUI: TonConnectUI;
 }
 
@@ -24,17 +25,19 @@ export const TonWalletAddress: React.FC<Props> = ({
   tonConnectUI,
 }) => {
   const [inputValue, setInputValue] = useState(walletAddress || "");
-  const [isCopied, setIsCopied] = useState(false);
+  const { toast } = useToast();
 
   const handleCopy = () => {
     navigator.clipboard
       .writeText(inputValue)
       .then(() => {
-        toast.success("Скопировано в буфер обмена");
-        setIsCopied(true);
+        toast({ title: "Скопировано в буфер обмена" });
       })
       .catch((err) => {
-        toast.error("Ошибка при копировании: ", err);
+        toast({
+          title: "Ошибка при копировании: ",
+          variant: "destructive",
+        });
         console.error(err);
       });
   };

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import { HeaderBalance } from "@/shared/components/shared";
 
@@ -13,7 +14,9 @@ export default function HomeLayout({
 }>) {
   return (
     <main>
-      <HeaderBalance />
+      <Suspense>
+        <HeaderBalance />
+      </Suspense>
       {children}
     </main>
   );

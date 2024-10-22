@@ -29,7 +29,7 @@ export const HeaderBalance: React.FC<Props> = ({ className }) => {
     if (wallet?.account.address) fetchBalance(wallet?.account.address);
   }, [wallet?.account.address]);
 
-  if (error || data.error) {
+  if (error || data?.error) {
     return null;
   }
 

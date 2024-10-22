@@ -9,7 +9,7 @@ import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
 interface Props {
-  address: string;
+  address: string | undefined;
   className?: string;
 }
 
@@ -23,9 +23,9 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
 
   useEffect(() => {
     if (address) fetchBalance(address);
-  }, [address]);
+  }, [address, fetchBalance]);
 
-  if (error || data.error) {
+  if (error || data?.error || data?.code) {
     return null;
   }
 

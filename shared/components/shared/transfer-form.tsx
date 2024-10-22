@@ -3,10 +3,10 @@
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
 
 import { Button, Input } from "../ui";
 
+import { useToast } from "@/shared/hooks/use-toast";
 import { cn } from "@/shared/lib/utils";
 
 interface Props {
@@ -15,16 +15,20 @@ interface Props {
 
 export const TransferForm: React.FC<Props> = ({ className }) => {
   const router = useRouter();
+  const { toast } = useToast();
   const [address, setAddress] = useState("");
   const [amount, setAmount] = useState("");
   const [isError, setIsError] = useState(false);
-  const [tonConnectUI, setOptions] = useTonConnectUI();
+  const [tonConnectUI] = useTonConnectUI();
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!address || !amount) {
-      toast.error("Заполните все обязательные поля");
+      toast({
+        title: "Заполните все обязательные поля",
+        variant: "destructive",
+      });
       setIsError(true);
       return;
     } else {
@@ -43,14 +47,17 @@ export const TransferForm: React.FC<Props> = ({ className }) => {
       ],
     };
 
-    const result = await tonConnectUI
+    await tonConnectUI
       .sendTransaction(transaction)
       .then(() => {
-        toast.success("Транзакция успешно отправлена");
+        toast({ title: "Транзакция успешно отправлена" });
         router.push("/");
       })
       .catch((err) => {
-        toast.error("Транзакция не отправлена");
+        toast({
+          title: "Транзакция не отправлена",
+          variant: "destructive",
+        });
         console.error(err);
       })
       .finally(() => {

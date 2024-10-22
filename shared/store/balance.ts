@@ -23,7 +23,7 @@ export interface StoreState {
   fetchBalance: (address: string) => Promise<void>;
 }
 
-export const useBalanceStore = create<StoreState>((set, get) => ({
+export const useBalanceStore = create<StoreState>((set) => ({
   error: false,
   loading: true,
   data: {
