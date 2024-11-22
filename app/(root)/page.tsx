@@ -2,7 +2,7 @@
 
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { ArrowUp, Plus } from "lucide-react";
-import Link from "next/link";
+import { useState } from "react";
 
 import {
   Balance,
@@ -11,11 +11,13 @@ import {
   IconButton,
   QrCode,
   TonWalletAddress,
+  TransferForm,
 } from "@/shared/components";
 
 export default function Home() {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
+  const [isTransferOpen, setIsTransferOpen] = useState(false);
 
   return (
     <Container className="relative">
@@ -29,17 +31,20 @@ export default function Home() {
             />
 
             <div className="flex gap-7">
-              <Link href="/transfer">
-                <IconButton
-                  label="Отправить"
-                  icon={
-                    <ArrowUp
-                      className="text-background"
-                      style={{ width: "21px", height: "21px" }}
-                    />
-                  }
-                />
-              </Link>
+              <TransferForm
+                isOpen={isTransferOpen}
+                onclose={() => setIsTransferOpen(false)}
+              />
+              <IconButton
+                label="Отправить"
+                icon={
+                  <ArrowUp
+                    className="text-background"
+                    style={{ width: "21px", height: "21px" }}
+                  />
+                }
+                onClick={() => setIsTransferOpen(true)}
+              />
               <QrCode address={wallet?.account.address}>
                 <IconButton
                   label="Пополнить"
