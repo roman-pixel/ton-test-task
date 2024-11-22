@@ -15,7 +15,7 @@ export const Header: React.FC<Props> = ({ className }) => {
       <Container className="absolute inset-0 flex items-center justify-center p-8">
         <div className="flex items-center gap-2">
           <Image
-            src="/toncoin-ton-logo.png"
+            src="/ton-logo.svg"
             width={30}
             height={30}
             alt="Toncoin logo"

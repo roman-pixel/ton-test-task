@@ -1,13 +1,15 @@
 "use client";
 
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Plus } from "lucide-react";
 import Link from "next/link";
 
 import {
   Balance,
   Button,
   Container,
+  IconButton,
+  QrCode,
   TonWalletAddress,
 } from "@/shared/components";
 
@@ -25,15 +27,31 @@ export default function Home() {
               walletAddress={wallet?.account.address}
               tonConnectUI={tonConnectUI}
             />
-            <Link href="/transfer">
-              <Button
-                size="lg"
-                className="rounded-full px-7 py-5 dark:shadow-[0_0_30px_5px_hsla(221.2,83.2%,53.3%,0.5)]"
-              >
-                <ArrowUp />
-                <span>Отправить</span>
-              </Button>
-            </Link>
+
+            <div className="flex gap-7">
+              <Link href="/transfer">
+                <IconButton
+                  label="Отправить"
+                  icon={
+                    <ArrowUp
+                      className="text-background"
+                      style={{ width: "21px", height: "21px" }}
+                    />
+                  }
+                />
+              </Link>
+              <QrCode address={wallet?.account.address}>
+                <IconButton
+                  label="Пополнить"
+                  icon={
+                    <Plus
+                      className="text-background"
+                      style={{ width: "21px", height: "21px" }}
+                    />
+                  }
+                />
+              </QrCode>
+            </div>
           </>
         ) : (
           <Button
