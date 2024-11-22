@@ -1,8 +1,10 @@
+"use client";
+
 import { Copy } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Button } from "../ui";
+import { Button, Skeleton } from "../ui";
 import {
   Drawer,
   DrawerClose,
@@ -26,12 +28,25 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
   children,
 }) => {
   const { copyToClipboard } = useClipboard();
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!address) return;
+
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 1500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [address]);
 
   return (
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container>
+        <Container className="w-full">
           <DrawerHeader className="mt-3 flex flex-col items-center gap-3">
             <DrawerTitle>Получить Toncoin</DrawerTitle>
             <DrawerDescription className="text-center">
@@ -39,32 +54,45 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
               иначе вы можете потерять свои средства
             </DrawerDescription>
           </DrawerHeader>
-          <div className="mx-4 flex flex-col items-center gap-4 rounded-lg bg-white p-5">
-            <QRCodeCanvas
-              value={address || ""}
-              size={270}
-              level="Q"
-              imageSettings={{
-                src: "/ton-logo.svg",
-                height: 50,
-                width: 50,
-                excavate: true,
-              }}
-            />
-            <p className="break-all text-center text-sm text-black">
-              {address}
-            </p>
-          </div>
+          {isLoading ? (
+            <Skeleton className="h-80 w-full rounded-lg" />
+          ) : (
+            <div className="mx-4 flex flex-col items-center gap-4 rounded-lg bg-white p-5">
+              <QRCodeCanvas
+                value={address || ""}
+                size={270}
+                level="Q"
+                imageSettings={{
+                  src: "/ton-logo.svg",
+                  height: 50,
+                  width: 50,
+                  excavate: true,
+                }}
+              />
+              <p className="break-all text-center text-sm text-black">
+                {address}
+              </p>
+            </div>
+          )}
           <DrawerFooter className="gap-4">
-            <Button onClick={() => copyToClipboard(address || "")}>
-              <Copy />
-              <span>Скопировать</span>
-            </Button>
-            <DrawerClose>
-              <Button className="w-full" variant="outline" size="sm">
-                Закрыть
-              </Button>
-            </DrawerClose>
+            {isLoading ? (
+              <>
+                <Skeleton className="h-10 w-full" />
+                <Skeleton className="h-9 w-full" />
+              </>
+            ) : (
+              <>
+                <Button onClick={() => copyToClipboard(address || "")}>
+                  <Copy />
+                  <span>Скопировать</span>
+                </Button>
+                <DrawerClose>
+                  <Button className="w-full" variant="outline" size="sm">
+                    Закрыть
+                  </Button>
+                </DrawerClose>
+              </>
+            )}
           </DrawerFooter>
         </Container>
       </DrawerContent>
