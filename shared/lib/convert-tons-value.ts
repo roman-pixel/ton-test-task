@@ -1,4 +1,4 @@
-const TON_MULTIPLIER = 1000000000;
+import { TON_MULTIPLIER } from "../components/constants/ton";
 
 /**
  * Converts nano Tons to Tons

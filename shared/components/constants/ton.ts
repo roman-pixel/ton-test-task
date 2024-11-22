@@ -1,0 +1,1 @@
+export const TON_MULTIPLIER = 1000000000;
