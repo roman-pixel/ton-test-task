@@ -171,6 +171,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
 
                   {transferData.address && (
                     <Button
+                      type="button"
                       variant="ghost"
                       size="icon"
                       className="absolute right-3 top-1/2 -translate-y-1/2"
@@ -207,6 +208,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
 
                   {transferData.amount && (
                     <Button
+                      type="button"
                       variant="ghost"
                       size="icon"
                       className="absolute right-3 top-1/2 -translate-y-1/2"
@@ -253,6 +255,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                 />
                 {transferData.comment && (
                   <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="absolute right-3 top-1/2 -translate-y-1/2"
