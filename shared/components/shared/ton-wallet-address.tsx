@@ -13,7 +13,7 @@ import {
   Input,
 } from "../ui";
 
-import { useToast } from "@/shared/hooks/use-toast";
+import { useClipboard } from "@/shared/hooks/use-clipboard";
 
 interface Props {
   walletAddress: string | undefined;
@@ -25,22 +25,7 @@ export const TonWalletAddress: React.FC<Props> = ({
   tonConnectUI,
 }) => {
   const [inputValue, setInputValue] = useState(walletAddress || "");
-  const { toast } = useToast();
-
-  const handleCopy = () => {
-    navigator.clipboard
-      .writeText(inputValue)
-      .then(() => {
-        toast({ title: "Скопировано в буфер обмена" });
-      })
-      .catch((err) => {
-        toast({
-          title: "Ошибка при копировании: ",
-          variant: "destructive",
-        });
-        console.error(err);
-      });
-  };
+  const { copyToClipboard } = useClipboard();
 
   return (
     <div className="flex w-9/12 items-center">
@@ -57,7 +42,7 @@ export const TonWalletAddress: React.FC<Props> = ({
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onClick={handleCopy}>
+          <DropdownMenuItem onClick={() => copyToClipboard(inputValue)}>
             <Clipboard />
             <span className="ml-2">Копировать</span>
           </DropdownMenuItem>
