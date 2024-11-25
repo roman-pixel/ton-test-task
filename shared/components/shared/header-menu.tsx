@@ -1,9 +1,9 @@
 "use client";
 
-import { useTonConnectUI } from "@tonconnect/ui-react";
+import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { LogOut, Moon, Settings, Sun, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "../ui";
 import {
@@ -25,6 +25,7 @@ interface Props {
 export const HeaderMenu: React.FC<Props> = ({ className }) => {
   const [tonConnectUI] = useTonConnectUI();
   const { setTheme } = useTheme();
+  const wallet = useTonWallet();
 
   return (
     <div className={cn(className)}>
@@ -40,7 +41,7 @@ export const HeaderMenu: React.FC<Props> = ({ className }) => {
         <DropdownMenuContent align="end" className="w-64">
           <DropdownMenuLabel className="text-base">Настройки</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {tonConnectUI?.account && (
+          {wallet && (
             <>
               <DropdownMenuGroup>
                 <DropdownMenuItem

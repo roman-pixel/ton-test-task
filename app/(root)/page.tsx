@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <Container className="relative">
       <div className="flex flex-col items-center justify-center gap-6">
-        {tonConnectUI?.account ? (
+        {wallet ? (
           <>
             <Balance address={wallet?.account.address} />
             <TonWalletAddress walletAddress={wallet?.account.address} />
