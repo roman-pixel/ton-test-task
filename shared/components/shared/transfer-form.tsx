@@ -135,10 +135,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
       <DrawerContent>
         <Container className="relative w-full max-w-md py-6">
           <DrawerClose asChild className="absolute -top-4 right-3">
-            <Button
-              size="icon"
-              className="rounded-full bg-secondary text-secondary-foreground"
-            >
+            <Button variant="secondary" size="icon" className="rounded-full">
               <X />
             </Button>
           </DrawerClose>
@@ -171,6 +168,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
 
                   {transferData.address && (
                     <Button
+                      type="button"
                       variant="ghost"
                       size="icon"
                       className="absolute right-3 top-1/2 -translate-y-1/2"
@@ -207,6 +205,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
 
                   {transferData.amount && (
                     <Button
+                      type="button"
                       variant="ghost"
                       size="icon"
                       className="absolute right-3 top-1/2 -translate-y-1/2"
@@ -224,7 +223,8 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   </p>
                 )}
                 <Button
-                  className="mt-3 bg-secondary text-xs text-secondary-foreground hover:bg-secondary"
+                  className="mt-3 h-8 text-xs opacity-85"
+                  variant="secondary"
                   type="button"
                   size="sm"
                   onClick={() =>
@@ -235,7 +235,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   }
                 >
                   Все {formattedBalance}
-                  <span className="uppercase opacity-70">Ton</span>
+                  <span className="uppercase">Ton</span>
                 </Button>
               </div>
 
@@ -253,6 +253,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                 />
                 {transferData.comment && (
                   <Button
+                    type="button"
                     variant="ghost"
                     size="icon"
                     className="absolute right-3 top-1/2 -translate-y-1/2"

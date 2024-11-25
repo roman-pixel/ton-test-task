@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Skeleton } from "../ui";
 
@@ -20,6 +20,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     state.loading,
     state.fetchBalance,
   ]);
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     if (address) fetchBalance(address);
@@ -34,7 +35,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-3",
+        "flex flex-col items-center justify-center gap-2",
         className,
       )}
     >

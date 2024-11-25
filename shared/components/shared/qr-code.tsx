@@ -1,6 +1,6 @@
 "use client";
 
-import { Copy } from "lucide-react";
+import { Copy, X } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 import React, { useEffect, useState } from "react";
 
@@ -46,7 +46,12 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container className="w-full">
+        <Container className="relative mb-4 w-full">
+          <DrawerClose asChild className="absolute -top-4 right-3">
+            <Button size="icon" variant="secondary" className="rounded-full">
+              <X />
+            </Button>
+          </DrawerClose>
           <DrawerHeader className="mt-3 flex flex-col items-center gap-3">
             <DrawerTitle>Получить Toncoin</DrawerTitle>
             <DrawerDescription className="text-center">
@@ -81,17 +86,10 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
                 <Skeleton className="h-9 w-full" />
               </>
             ) : (
-              <>
-                <Button onClick={() => copyToClipboard(address || "")}>
-                  <Copy />
-                  <span>Скопировать</span>
-                </Button>
-                <DrawerClose>
-                  <Button className="w-full" variant="outline" size="sm">
-                    Закрыть
-                  </Button>
-                </DrawerClose>
-              </>
+              <Button onClick={() => copyToClipboard(address || "")}>
+                <Copy />
+                <span>Скопировать</span>
+              </Button>
             )}
           </DrawerFooter>
         </Container>
