@@ -3,7 +3,6 @@ import Script from "next/script";
 
 import "./globals.css";
 
-import { ModeToggle } from "@/shared/components";
 import { Providers } from "@/shared/components/shared/providers";
 
 const inter = Inter({
@@ -26,10 +25,7 @@ export default function RootLayout({
         ></Script>
       </head>
       <body className={inter.className}>
-        <Providers>
-          {children}
-          <ModeToggle />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

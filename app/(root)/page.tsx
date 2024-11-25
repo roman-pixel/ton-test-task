@@ -21,16 +21,13 @@ export default function Home() {
 
   return (
     <Container className="relative">
-      <div className="flex h-[85vh] flex-col items-center justify-center gap-8">
+      <div className="flex flex-col items-center justify-center gap-6">
         {tonConnectUI?.account ? (
           <>
             <Balance address={wallet?.account.address} />
-            <TonWalletAddress
-              walletAddress={wallet?.account.address}
-              tonConnectUI={tonConnectUI}
-            />
+            <TonWalletAddress walletAddress={wallet?.account.address} />
 
-            <div className="flex gap-7">
+            <div className="mt-4 flex gap-7">
               <TransferForm
                 isOpen={isTransferOpen}
                 onclose={() => setIsTransferOpen(false)}
@@ -59,13 +56,15 @@ export default function Home() {
             </div>
           </>
         ) : (
-          <Button
-            className="relative rounded-full px-8 py-10 text-xl font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
-            size="lg"
-            onClick={() => tonConnectUI.openModal()}
-          >
-            Привязать кошелек
-          </Button>
+          <div className="flex h-[60vh] items-center">
+            <Button
+              className="relative rounded-full px-6 py-8 text-xl font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
+              size="lg"
+              onClick={() => tonConnectUI.openModal()}
+            >
+              Привязать кошелек
+            </Button>
+          </div>
         )}
       </div>
     </Container>
