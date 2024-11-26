@@ -3,7 +3,7 @@
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { LogOut, Moon, Settings, Sun, SunMoon } from "lucide-react";
 import { useTheme } from "next-themes";
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import { Button } from "../ui";
 import {
@@ -45,7 +45,7 @@ export const HeaderMenu: React.FC<Props> = ({ className }) => {
             <>
               <DropdownMenuGroup>
                 <DropdownMenuItem
-                  className="text-base text-destructive"
+                  className="text-base text-destructive dark:text-red-600"
                   onClick={() => tonConnectUI.disconnect()}
                 >
                   <LogOut style={{ width: "16px", height: "16px" }} />

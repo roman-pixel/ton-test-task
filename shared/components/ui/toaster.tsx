@@ -9,7 +9,7 @@ import {
   ToastViewport,
 } from "./toast";
 
-import { useToast } from "@/shared/hooks/use-toast";
+import { useToast } from "@/shared/hooks";
 
 export function Toaster() {
   const { toasts } = useToast();
