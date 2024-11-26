@@ -13,5 +13,6 @@ export const convertTonsValue = (balance: string) => {
   return {
     wholePart,
     decimalPart,
+    fullPart: parsedData,
   };
 };

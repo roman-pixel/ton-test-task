@@ -1,13 +1,14 @@
 "use client";
 
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
-import { ArrowUp, Plus } from "lucide-react";
+import { ArrowUp, History, Plus } from "lucide-react";
 import { useState } from "react";
 
 import {
   Balance,
   Button,
   Container,
+  CurrencyContainer,
   IconButton,
   QrCode,
   TonWalletAddress,
@@ -22,12 +23,12 @@ export default function Home() {
   return (
     <Container className="relative">
       <div className="flex flex-col items-center justify-center gap-6">
-        {tonConnectUI?.account ? (
+        {wallet ? (
           <>
             <Balance address={wallet?.account.address} />
             <TonWalletAddress walletAddress={wallet?.account.address} />
 
-            <div className="mt-4 flex gap-7">
+            <div className="mt-4 flex gap-2">
               <TransferForm
                 isOpen={isTransferOpen}
                 onclose={() => setIsTransferOpen(false)}
@@ -53,7 +54,19 @@ export default function Home() {
                   }
                 />
               </QrCode>
+              <IconButton
+                disabled
+                label="История"
+                icon={
+                  <History
+                    className="text-background"
+                    style={{ width: "21px", height: "21px" }}
+                  />
+                }
+              />
             </div>
+
+            <CurrencyContainer className="mt-4 w-full" />
           </>
         ) : (
           <div className="flex h-[60vh] items-center">

@@ -8,3 +8,5 @@ export { QrCode } from "./qr-code";
 export { IconButton } from "./icon-button";
 export { Logo } from "./logo";
 export { HeaderMenu } from "./header-menu";
+
+export * from "./currency";

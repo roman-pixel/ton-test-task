@@ -17,7 +17,7 @@ import {
 } from "../ui/drawer";
 import { Container } from "./container";
 
-import { useClipboard } from "@/shared/hooks/use-clipboard";
+import { useClipboard } from "@/shared/hooks";
 
 interface QrCodeProps {
   address: string | undefined;

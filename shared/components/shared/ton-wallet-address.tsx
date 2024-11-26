@@ -5,7 +5,7 @@ import React from "react";
 
 import { Button } from "../ui";
 
-import { useClipboard } from "@/shared/hooks/use-clipboard";
+import { useClipboard } from "@/shared/hooks";
 
 interface Props {
   walletAddress: string | undefined;

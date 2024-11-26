@@ -3,7 +3,7 @@
 import { beginCell } from "@ton/ton";
 import { useTonConnectUI } from "@tonconnect/ui-react";
 import { X } from "lucide-react";
-import React, { PropsWithChildren, useState } from "react";
+import React, { useState } from "react";
 
 import { TON_MULTIPLIER } from "../constants/ton";
 import { Button, Input, Textarea } from "../ui";
@@ -14,11 +14,10 @@ import {
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from "../ui/drawer";
 import { Container } from "./container";
 
-import { useToast } from "@/shared/hooks/use-toast";
+import { useToast } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
