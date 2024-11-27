@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { RotateCw } from "lucide-react";
+import React, { useEffect } from "react";
 
-import { Skeleton } from "../ui";
+import { Button, Skeleton } from "../ui";
 
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
 import { cn } from "@/shared/lib/utils";
@@ -20,14 +21,32 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     state.loading,
     state.fetchBalance,
   ]);
-  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
-    if (address) fetchBalance(address);
+    if (address) {
+      fetchBalance(address);
+
+      const interval = setInterval(() => {
+        fetchBalance(address);
+      }, 30000);
+
+      return () => {
+        clearInterval(interval);
+      };
+    }
   }, [address, fetchBalance]);
 
-  if (error || data?.error || data?.code) {
-    return null;
+  if (error || data?.code || !data?.balance) {
+    return (
+      <Button
+        variant="secondary"
+        size="icon"
+        className="p-10"
+        onClick={() => fetchBalance(address || "")}
+      >
+        <RotateCw strokeWidth={2} style={{ width: "35px", height: "35px" }} />
+      </Button>
+    );
   }
 
   const { wholePart, decimalPart } = convertTonsValue(data.balance);
@@ -39,7 +58,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
         className,
       )}
     >
-      {loading ? (
+      {loading && !data.balance ? (
         <>
           <Skeleton className="h-8 w-24" />
           <Skeleton className="h-16 w-56" />

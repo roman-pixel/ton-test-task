@@ -3,7 +3,6 @@ import React from "react";
 
 import { Skeleton } from "../../ui";
 
-import { useToast } from "@/shared/hooks";
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
@@ -28,9 +27,8 @@ export const CurrencyCard: React.FC<Props> = ({
   className,
 }) => {
   const [data] = useBalanceStore((state) => [state.data]);
-  const { toast } = useToast();
 
-  const { fullPart } = convertTonsValue(data.balance);
+  const { fullPart } = convertTonsValue(data?.balance);
 
   return (
     <div
@@ -59,7 +57,10 @@ export const CurrencyCard: React.FC<Props> = ({
               {currencyPrice && (
                 <p className="opacity-70">
                   <span className="mr-[1px]">$</span>
-                  {Math.floor(currencyPrice * 100) / 100}
+                  {String(Math.floor(currencyPrice * 100) / 100).replace(
+                    ".",
+                    ",",
+                  )}
                 </p>
               )}
               <p
@@ -76,23 +77,27 @@ export const CurrencyCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="flex flex-col items-end">
-        {isLoading ? (
-          <Skeleton className="mb-2 h-5 w-14 bg-background" />
-        ) : (
-          <p className="font-medium">{String(fullPart).replace(".", ",")}</p>
-        )}
-        {isLoading ? (
-          <Skeleton className="h-4 w-12 bg-background" />
-        ) : (
-          currencyPrice && (
-            <p className="text-sm opacity-70">
-              <span className="mr-[1px]">$</span>
-              {Math.floor(fullPart * currencyPrice * 100) / 100}
-            </p>
-          )
-        )}
-      </div>
+      {data?.balance && (
+        <div className="flex flex-col items-end">
+          {isLoading ? (
+            <Skeleton className="mb-2 h-5 w-14 bg-background" />
+          ) : (
+            <p className="font-medium">{String(fullPart).replace(".", ",")}</p>
+          )}
+          {isLoading ? (
+            <Skeleton className="h-4 w-12 bg-background" />
+          ) : (
+            currencyPrice && (
+              <p className="text-sm opacity-70">
+                <span className="mr-[1px]">$</span>
+                {String(
+                  Math.floor(fullPart * currencyPrice * 100) / 100,
+                ).replace(".", ",")}
+              </p>
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 };

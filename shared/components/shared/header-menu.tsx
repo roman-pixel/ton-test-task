@@ -31,7 +31,11 @@ export const HeaderMenu: React.FC<Props> = ({ className }) => {
     <div className={cn(className)}>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="focus-visible:ring-0 focus-visible:ring-offset-0"
+          >
             <Settings
               className="opacity-90"
               style={{ width: "24px", height: "24px" }}

@@ -35,7 +35,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2000);
 
     return () => {
       clearTimeout(timeout);
