@@ -6,7 +6,9 @@ export { Balance } from "./balance";
 export { TransferForm } from "./transfer-form";
 export { QrCode } from "./qr-code";
 export { IconButton } from "./icon-button";
+export { IconButtons } from "./icon-buttons";
 export { Logo } from "./logo";
 export { HeaderMenu } from "./header-menu";
+export { ClearButton } from "./clear-button";
 
 export * from "./currency";

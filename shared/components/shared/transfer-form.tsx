@@ -15,6 +15,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "../ui/drawer";
+import { ClearButton } from "./clear-button";
 import { Container } from "./container";
 
 import { useToast } from "@/shared/hooks";
@@ -114,19 +115,19 @@ export const TransferForm: React.FC<TransferFormProps> = ({
       ],
     };
 
-    await tonConnectUI
-      .sendTransaction(transaction)
-      .then(() => {
-        toast({ title: "Транзакция успешно отправлена" });
-        setTransferData({ address: "", amount: "", comment: "" });
-      })
-      .catch((err) => {
-        toast({
-          title: err.message || "Ошибка при отправке транзакции",
-          variant: "destructive",
-        });
-        console.error(err);
+    try {
+      await tonConnectUI.sendTransaction(transaction);
+      toast({ title: "Транзакция успешно отправлена" });
+      setTransferData({ address: "", amount: "", comment: "" });
+      reset();
+    } catch (error: any) {
+      toast({
+        title: "Ошибка при отправке транзакции",
+        description: error?.message || "",
+        variant: "destructive",
       });
+      console.error(error);
+    }
   };
 
   return (
@@ -166,17 +167,11 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   />
 
                   {transferData.address && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
+                    <ClearButton
                       onClick={() =>
                         setTransferData({ ...transferData, address: "" })
                       }
-                    >
-                      <X />
-                    </Button>
+                    />
                   )}
                 </div>
                 {error.address && (
@@ -203,17 +198,11 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   />
 
                   {transferData.amount && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
+                    <ClearButton
                       onClick={() =>
                         setTransferData({ ...transferData, amount: "" })
                       }
-                    >
-                      <X />
-                    </Button>
+                    />
                   )}
                 </div>
                 {error.amount && (
@@ -251,17 +240,11 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   }
                 />
                 {transferData.comment && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                  <ClearButton
                     onClick={() =>
                       setTransferData({ ...transferData, comment: "" })
                     }
-                  >
-                    <X />
-                  </Button>
+                  />
                 )}
               </div>
             </div>
