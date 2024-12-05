@@ -2,14 +2,12 @@
 
 import { beginCell } from "@ton/ton";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-import { X } from "lucide-react";
 import React, { useState } from "react";
 
 import { TON_MULTIPLIER } from "../constants/ton";
 import { Button, Input, Textarea } from "../ui";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
@@ -17,6 +15,7 @@ import {
 } from "../ui/drawer";
 import { ClearButton } from "./clear-button";
 import { Container } from "./container";
+import { DrawerCloseButton } from "./drawer-close-button";
 
 import { useToast } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
@@ -133,12 +132,8 @@ export const TransferForm: React.FC<TransferFormProps> = ({
   return (
     <Drawer open={isOpen} onOpenChange={reset}>
       <DrawerContent>
-        <Container className="relative w-full max-w-md py-6">
-          <DrawerClose asChild className="absolute -top-4 right-3">
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <X />
-            </Button>
-          </DrawerClose>
+        <Container className="max-w-md py-6">
+          <DrawerCloseButton />
           <DrawerHeader>
             <DrawerTitle className="text-center text-2xl">
               Перевод средств

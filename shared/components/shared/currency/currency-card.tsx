@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { Skeleton } from "../../ui";
+import { Card } from "../card";
 
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
 import { cn } from "@/shared/lib/utils";
@@ -14,7 +15,6 @@ interface Props {
   currencyPrice: number | undefined;
   currencyDiff: string | undefined;
   isLoading: boolean;
-  className?: string;
 }
 
 export const CurrencyCard: React.FC<Props> = ({
@@ -24,19 +24,13 @@ export const CurrencyCard: React.FC<Props> = ({
   currencyPrice,
   currencyDiff,
   isLoading,
-  className,
 }) => {
   const [data] = useBalanceStore((state) => [state.data]);
 
   const { fullPart } = convertTonsValue(data?.balance);
 
   return (
-    <div
-      className={cn(
-        "flex items-center justify-between rounded-lg bg-secondary p-4 text-secondary-foreground",
-        className,
-      )}
-    >
+    <Card className="flex items-center justify-between">
       <div className="flex items-center gap-3">
         {isLoading ? (
           <Skeleton className="h-10 w-10 rounded-full bg-background" />
@@ -98,6 +92,6 @@ export const CurrencyCard: React.FC<Props> = ({
           )}
         </div>
       )}
-    </div>
+    </Card>
   );
 };
