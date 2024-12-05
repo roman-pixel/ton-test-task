@@ -6,6 +6,7 @@ import React from "react";
 import { Button } from "../ui";
 
 import { useClipboard } from "@/shared/hooks";
+import { cutWalletAddress } from "@/shared/lib";
 
 interface Props {
   walletAddress: string | undefined;
@@ -18,13 +19,6 @@ export const TonWalletAddress: React.FC<Props> = ({ walletAddress }) => {
     bounceable: true,
   });
 
-  const getEllipsisText = (text: string, maxLength: number) => {
-    if (text.length <= maxLength) return text;
-    const start = text.slice(0, maxLength / 2);
-    const end = text.slice(-maxLength / 2);
-    return `${start}...${end}`;
-  };
-
   return (
     <div className="flex items-center justify-center">
       <Button
@@ -33,7 +27,7 @@ export const TonWalletAddress: React.FC<Props> = ({ walletAddress }) => {
         size="sm"
         onClick={() => copyToClipboard(formatedAddress)}
       >
-        {getEllipsisText(formatedAddress, 15)}
+        {cutWalletAddress(formatedAddress, 15)}
       </Button>
     </div>
   );

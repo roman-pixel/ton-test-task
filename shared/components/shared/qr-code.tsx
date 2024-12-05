@@ -1,13 +1,12 @@
 "use client";
 
-import { Copy, X } from "lucide-react";
+import { Copy } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 import React, { useEffect, useState } from "react";
 
 import { Button, Skeleton } from "../ui";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -16,6 +15,7 @@ import {
   DrawerTrigger,
 } from "../ui/drawer";
 import { Container } from "./container";
+import { DrawerCloseButton } from "./drawer-close-button";
 
 import { useClipboard } from "@/shared/hooks";
 
@@ -35,7 +35,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 2000);
 
     return () => {
       clearTimeout(timeout);
@@ -46,14 +46,10 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container className="relative mb-4 w-full">
-          <DrawerClose asChild className="absolute -top-4 right-3">
-            <Button size="icon" variant="secondary" className="rounded-full">
-              <X />
-            </Button>
-          </DrawerClose>
-          <DrawerHeader className="mt-3 flex flex-col items-center gap-3">
-            <DrawerTitle>Получить Toncoin</DrawerTitle>
+        <Container className="mb-4">
+          <DrawerCloseButton className="right-0" />
+          <DrawerHeader className="mt-5 flex flex-col items-center gap-3">
+            <DrawerTitle className="text-xl">Получить Toncoin</DrawerTitle>
             <DrawerDescription className="text-center">
               Отправляйте на этот адрес только Toncoin TON и токены в сети TON,
               иначе вы можете потерять свои средства

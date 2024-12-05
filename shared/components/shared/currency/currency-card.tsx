@@ -2,8 +2,8 @@ import Image from "next/image";
 import React from "react";
 
 import { Skeleton } from "../../ui";
+import { Card } from "../card";
 
-import { useToast } from "@/shared/hooks";
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
@@ -15,7 +15,6 @@ interface Props {
   currencyPrice: number | undefined;
   currencyDiff: string | undefined;
   isLoading: boolean;
-  className?: string;
 }
 
 export const CurrencyCard: React.FC<Props> = ({
@@ -25,20 +24,13 @@ export const CurrencyCard: React.FC<Props> = ({
   currencyPrice,
   currencyDiff,
   isLoading,
-  className,
 }) => {
   const [data] = useBalanceStore((state) => [state.data]);
-  const { toast } = useToast();
 
-  const { fullPart } = convertTonsValue(data.balance);
+  const { fullPart } = convertTonsValue(data?.balance);
 
   return (
-    <div
-      className={cn(
-        "flex items-center justify-between rounded-lg bg-secondary p-4 text-secondary-foreground",
-        className,
-      )}
-    >
+    <Card className="flex items-center justify-between">
       <div className="flex items-center gap-3">
         {isLoading ? (
           <Skeleton className="h-10 w-10 rounded-full bg-background" />
@@ -59,7 +51,10 @@ export const CurrencyCard: React.FC<Props> = ({
               {currencyPrice && (
                 <p className="opacity-70">
                   <span className="mr-[1px]">$</span>
-                  {Math.floor(currencyPrice * 100) / 100}
+                  {String(Math.floor(currencyPrice * 100) / 100).replace(
+                    ".",
+                    ",",
+                  )}
                 </p>
               )}
               <p
@@ -76,23 +71,27 @@ export const CurrencyCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      <div className="flex flex-col items-end">
-        {isLoading ? (
-          <Skeleton className="mb-2 h-5 w-14 bg-background" />
-        ) : (
-          <p className="font-medium">{String(fullPart).replace(".", ",")}</p>
-        )}
-        {isLoading ? (
-          <Skeleton className="h-4 w-12 bg-background" />
-        ) : (
-          currencyPrice && (
-            <p className="text-sm opacity-70">
-              <span className="mr-[1px]">$</span>
-              {Math.floor(fullPart * currencyPrice * 100) / 100}
-            </p>
-          )
-        )}
-      </div>
-    </div>
+      {data?.balance && (
+        <div className="flex flex-col items-end">
+          {isLoading ? (
+            <Skeleton className="mb-2 h-5 w-14 bg-background" />
+          ) : (
+            <p className="font-medium">{String(fullPart).replace(".", ",")}</p>
+          )}
+          {isLoading ? (
+            <Skeleton className="h-4 w-12 bg-background" />
+          ) : (
+            currencyPrice && (
+              <p className="text-sm opacity-70">
+                <span className="mr-[1px]">$</span>
+                {String(
+                  Math.floor(fullPart * currencyPrice * 100) / 100,
+                ).replace(".", ",")}
+              </p>
+            )
+          )}
+        </div>
+      )}
+    </Card>
   );
 };

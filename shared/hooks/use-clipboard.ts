@@ -7,15 +7,13 @@ export const useClipboard = () => {
 
   const copyToClipboard = useCallback(
     (text: string) => {
-      navigator.clipboard
-        .writeText(text)
-        .then(() => {
-          toast({ title: "Скопировано в буфер обмена" });
-        })
-        .catch((err) => {
-          toast({ title: "Ошибка при копировании", variant: "destructive" });
-          console.error(err);
-        });
+      try {
+        navigator.clipboard.writeText(text);
+        toast({ title: "Скопировано в буфер обмена" });
+      } catch (error) {
+        toast({ title: "Ошибка при копировании", variant: "destructive" });
+        console.error(error);
+      }
     },
     [toast],
   );

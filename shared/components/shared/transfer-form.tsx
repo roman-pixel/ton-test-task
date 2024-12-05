@@ -2,20 +2,20 @@
 
 import { beginCell } from "@ton/ton";
 import { useTonConnectUI } from "@tonconnect/ui-react";
-import { X } from "lucide-react";
 import React, { useState } from "react";
 
 import { TON_MULTIPLIER } from "../constants/ton";
 import { Button, Input, Textarea } from "../ui";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
   DrawerTitle,
 } from "../ui/drawer";
+import { ClearButton } from "./clear-button";
 import { Container } from "./container";
+import { DrawerCloseButton } from "./drawer-close-button";
 
 import { useToast } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
@@ -44,7 +44,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
   const { toast } = useToast();
   const [tonConnectUI] = useTonConnectUI();
   const { data } = useBalanceStore();
-  const formattedBalance = Number(data.balance) / TON_MULTIPLIER;
+  const formattedBalance = Number(data?.balance) / TON_MULTIPLIER;
 
   const [transferData, setTransferData] = useState<Transfer>({
     address: "",
@@ -114,30 +114,26 @@ export const TransferForm: React.FC<TransferFormProps> = ({
       ],
     };
 
-    await tonConnectUI
-      .sendTransaction(transaction)
-      .then(() => {
-        toast({ title: "Транзакция успешно отправлена" });
-        setTransferData({ address: "", amount: "", comment: "" });
-      })
-      .catch((err) => {
-        toast({
-          title: err.message || "Ошибка при отправке транзакции",
-          variant: "destructive",
-        });
-        console.error(err);
+    try {
+      await tonConnectUI.sendTransaction(transaction);
+      toast({ title: "Транзакция успешно отправлена" });
+      setTransferData({ address: "", amount: "", comment: "" });
+      reset();
+    } catch (error: any) {
+      toast({
+        title: "Ошибка при отправке транзакции",
+        description: error?.message || "",
+        variant: "destructive",
       });
+      console.error(error);
+    }
   };
 
   return (
     <Drawer open={isOpen} onOpenChange={reset}>
       <DrawerContent>
-        <Container className="relative w-full max-w-md py-6">
-          <DrawerClose asChild className="absolute -top-4 right-3">
-            <Button variant="secondary" size="icon" className="rounded-full">
-              <X />
-            </Button>
-          </DrawerClose>
+        <Container className="max-w-md py-6">
+          <DrawerCloseButton />
           <DrawerHeader>
             <DrawerTitle className="text-center text-2xl">
               Перевод средств
@@ -166,17 +162,11 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   />
 
                   {transferData.address && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
+                    <ClearButton
                       onClick={() =>
                         setTransferData({ ...transferData, address: "" })
                       }
-                    >
-                      <X />
-                    </Button>
+                    />
                   )}
                 </div>
                 {error.address && (
@@ -203,17 +193,11 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   />
 
                   {transferData.amount && (
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      className="absolute right-3 top-1/2 -translate-y-1/2"
+                    <ClearButton
                       onClick={() =>
                         setTransferData({ ...transferData, amount: "" })
                       }
-                    >
-                      <X />
-                    </Button>
+                    />
                   )}
                 </div>
                 {error.amount && (
@@ -251,17 +235,11 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   }
                 />
                 {transferData.comment && (
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                  <ClearButton
                     onClick={() =>
                       setTransferData({ ...transferData, comment: "" })
                     }
-                  >
-                    <X />
-                  </Button>
+                  />
                 )}
               </div>
             </div>

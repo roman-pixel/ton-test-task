@@ -1,24 +1,19 @@
 "use client";
 
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
-import { ArrowUp, History, Plus } from "lucide-react";
-import { useState } from "react";
 
 import {
   Balance,
   Button,
   Container,
   CurrencyContainer,
-  IconButton,
-  QrCode,
+  IconButtons,
   TonWalletAddress,
-  TransferForm,
 } from "@/shared/components";
 
 export default function Home() {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
-  const [isTransferOpen, setIsTransferOpen] = useState(false);
 
   return (
     <Container className="relative">
@@ -27,44 +22,7 @@ export default function Home() {
           <>
             <Balance address={wallet?.account.address} />
             <TonWalletAddress walletAddress={wallet?.account.address} />
-
-            <div className="mt-4 flex gap-2">
-              <TransferForm
-                isOpen={isTransferOpen}
-                onclose={() => setIsTransferOpen(false)}
-              />
-              <IconButton
-                label="Отправить"
-                icon={
-                  <ArrowUp
-                    className="text-background"
-                    style={{ width: "21px", height: "21px" }}
-                  />
-                }
-                onClick={() => setIsTransferOpen(true)}
-              />
-              <QrCode address={wallet?.account.address}>
-                <IconButton
-                  label="Пополнить"
-                  icon={
-                    <Plus
-                      className="text-background"
-                      style={{ width: "21px", height: "21px" }}
-                    />
-                  }
-                />
-              </QrCode>
-              <IconButton
-                disabled
-                label="История"
-                icon={
-                  <History
-                    className="text-background"
-                    style={{ width: "21px", height: "21px" }}
-                  />
-                }
-              />
-            </div>
+            <IconButtons className="mt-4" />
 
             <CurrencyContainer className="mt-4 w-full" />
           </>

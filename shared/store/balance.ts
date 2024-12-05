@@ -4,6 +4,7 @@ import { getBalance } from "../services/getBalance";
 
 // Успешный ответ с балансом
 interface AccountInfoResponse {
+  ok: boolean;
   balance: string;
   last_transaction_hash: string;
   last_transaction_lt: string;
@@ -12,7 +13,7 @@ interface AccountInfoResponse {
   wallet_id: number;
   wallet_type: string;
   code: number;
-  error: string;
+  result: string;
 }
 
 export interface StoreState {
@@ -35,7 +36,8 @@ export const useBalanceStore = create<StoreState>((set) => ({
     wallet_id: 0,
     wallet_type: "",
     code: 0,
-    error: "",
+    result: "",
+    ok: true,
   },
 
   fetchBalance: async (address: string) => {
