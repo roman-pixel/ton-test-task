@@ -2,8 +2,14 @@
 
 import { useTonWallet } from "@tonconnect/ui-react";
 
-import { Container, Transaction } from "@/shared/components";
+import {
+  Container,
+  Transaction,
+  TransactionDate,
+  TransactionSkeleton,
+} from "@/shared/components";
 import { useTransactions } from "@/shared/hooks";
+import { groupTransactionsByDate } from "@/shared/lib";
 
 export default function Transactions() {
   const wallet = useTonWallet();
@@ -12,14 +18,26 @@ export default function Transactions() {
   );
   const { transactions } = transactionsResponse || {};
 
-  if (isLoading) return <p>Loading...</p>;
+  const currentMonth = new Date().getMonth();
+
+  const groupedTransactions = groupTransactionsByDate(
+    transactions,
+    currentMonth,
+  );
 
   return (
-    <Container className="flex flex-col gap-3">
-      {/* <h1 className="pb-2 text-xl font-bold tracking-wide">Сегодня</h1> */}
-      {transactions?.map((transaction) => (
-        <Transaction key={transaction.hash} transaction={transaction} />
-      ))}
+    <Container className="flex flex-col gap-2">
+      {isLoading ? (
+        <TransactionSkeleton count={10} />
+      ) : (
+        groupedTransactions.map(({ date, transactions }) => (
+          <TransactionDate key={date} date={date}>
+            {transactions?.map((transaction) => (
+              <Transaction key={transaction.hash} transaction={transaction} />
+            ))}
+          </TransactionDate>
+        ))
+      )}
     </Container>
   );
 }
