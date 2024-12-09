@@ -15,7 +15,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       <Button
         ref={ref} // Передача `ref` в кнопку
         variant="ghost"
-        className="flex flex-col items-center gap-2 hover:bg-transparent"
+        className="flex flex-col items-center gap-2"
         onClick={onClick}
         disabled={disabled}
       >

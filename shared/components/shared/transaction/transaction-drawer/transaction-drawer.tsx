@@ -95,7 +95,7 @@ export const TransactionDrawer: React.FC<PropsWithChildren<Props>> = ({
               <p className="opacity-60">
                 Адрес {isIncoming ? "отправителя" : "получателя"}
               </p>
-              <p>{cutWalletAddress(address, 28)}</p>
+              <p>{cutWalletAddress(address, 26)}</p>
             </div>
             <hr className="-mx-4 border-t border-secondary-foreground/5" />
             <div className="flex justify-between">

@@ -1,6 +1,6 @@
 import { format, fromUnixTime, isSameMonth } from "date-fns";
 import { ru } from "date-fns/locale";
-import { ArrowDownToLine, ArrowUpFromLine, TriangleAlert } from "lucide-react";
+import { ArrowDownToLine, ArrowUpFromLine, CircleAlert } from "lucide-react";
 import React from "react";
 
 import { Comment } from "./comment";
@@ -34,9 +34,9 @@ export const TransactionItem: React.FC<Props> = ({
 
   return (
     <>
-      <div className="min-w-screen mr-2 rounded-full bg-[#D1DDE8] p-3 text-[#708DA7] dark:bg-[#323C4C]">
+      <div className="min-w-screen mr-2 rounded-full bg-[#D1DDE7] p-3 text-[#708DA7] dark:bg-[#323C4C]">
         {isError ? (
-          <TriangleAlert strokeWidth={2.5} />
+          <CircleAlert strokeWidth={2.5} />
         ) : isIncoming ? (
           <ArrowDownToLine strokeWidth={2.5} />
         ) : (

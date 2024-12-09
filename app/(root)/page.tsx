@@ -17,7 +17,7 @@ export default function Home() {
 
   return (
     <Container className="relative">
-      <div className="flex flex-col items-center justify-center gap-6">
+      <div className="mt-8 flex flex-col items-center justify-center gap-6">
         {wallet ? (
           <>
             <Balance address={wallet?.account.address} />

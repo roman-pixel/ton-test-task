@@ -8,15 +8,13 @@ import { Card } from "../card";
 import { TransactionDrawer } from "./transaction-drawer";
 import { TransactionItem } from "./transaction-item";
 
-import { cn } from "@/shared/lib/utils";
 import { Transaction as TransactionType } from "@/shared/types/transaction-types";
 
 interface Props {
   transaction: TransactionType;
-  className?: string;
 }
 
-export const Transaction: React.FC<Props> = ({ transaction, className }) => {
+export const Transaction: React.FC<Props> = ({ transaction }) => {
   const isIncoming = !!transaction.in_msg.source;
   const isError = !transaction.in_msg.source && !transaction.out_msgs.length;
 
@@ -62,12 +60,7 @@ export const Transaction: React.FC<Props> = ({ transaction, className }) => {
       hash={transaction.hash}
       isError={isError}
     >
-      <Card
-        className={cn(
-          "grid cursor-pointer grid-cols-[auto_1fr_auto] gap-2",
-          className,
-        )}
-      >
+      <Card className="grid cursor-pointer grid-cols-[auto_1fr_auto] gap-2">
         <TransactionItem
           isIncoming={isIncoming}
           address={formatedAddress}

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Header } from "@/shared/components/shared";
+import { Header, MenuBar } from "@/shared/components/shared";
 
 export const metadata: Metadata = {
   title: "TonLink",
@@ -15,6 +15,7 @@ export default function HomeLayout({
     <main>
       <Header />
       {children}
+      <MenuBar />
     </main>
   );
 }

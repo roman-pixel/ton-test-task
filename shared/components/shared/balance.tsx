@@ -65,7 +65,6 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
         </>
       ) : (
         <>
-          <p className="text-xl">Баланс</p>
           <div className="flex items-end font-bold">
             <span className="text-6xl">{wholePart}</span>
             <span className="text-5xl">,{decimalPart}</span>

@@ -45,7 +45,7 @@ export const TransactionDate: React.FC<PropsWithChildren<Props>> = ({
 
   return (
     <div className="relative">
-      <div className="sticky top-0 bg-background py-4 text-xl font-bold tracking-wide">
+      <div className="sticky top-0 bg-background py-3 text-lg font-bold tracking-wide">
         {getFormattedDate()}
       </div>
       <div className="flex flex-col gap-2">{children}</div>

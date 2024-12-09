@@ -12,7 +12,7 @@ export const Logo: React.FC = () => {
       className="сursor-pointer flex items-center gap-2"
       onClick={() => router.push("/")}
     >
-      <Image src="/ton-logo.svg" width={30} height={30} alt="Toncoin logo" />
+      <Image src="/ton-logo.svg" width={28} height={28} alt="Toncoin logo" />
       <h1 className="text-xl font-semibold">TonLink Test</h1>
     </div>
   );
