@@ -95,7 +95,7 @@ export const TransactionDrawer: React.FC<PropsWithChildren<Props>> = ({
               <p className="opacity-60">
                 Адрес {isIncoming ? "отправителя" : "получателя"}
               </p>
-              <p>{cutWalletAddress(address, 28)}</p>
+              <p>{cutWalletAddress(address, 26)}</p>
             </div>
             <hr className="-mx-4 border-t border-secondary-foreground/5" />
             <div className="flex justify-between">
@@ -116,10 +116,7 @@ export const TransactionDrawer: React.FC<PropsWithChildren<Props>> = ({
             )}
           </Card>
           <DrawerFooter className="flex items-center">
-            <a
-              href={`https://testnet.tonviewer.com/transaction/${hash}`}
-              target="_blank"
-            >
+            <a href={`https://testnet.tonviewer.com/transaction/${hash}`}>
               <Card className="flex w-min items-center justify-center gap-1 rounded-full px-4 py-2">
                 <Globe
                   style={{ width: "18px", height: "18px" }}

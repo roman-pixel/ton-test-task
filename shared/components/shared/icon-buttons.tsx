@@ -1,7 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
-import { ArrowUp, History, Plus } from "lucide-react";
+import { ArrowUp, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -21,7 +21,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
   const wallet = useTonWallet();
 
   return (
-    <div className={cn("flex gap-2", className)}>
+    <div className={cn("flex gap-6", className)}>
       <TransferForm
         isOpen={isTransferOpen}
         onclose={() => setIsTransferOpen(false)}
@@ -47,7 +47,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
           }
         />
       </QrCode>
-      <IconButton
+      {/* <IconButton
         label="История"
         icon={
           <History
@@ -56,7 +56,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
           />
         }
         onClick={() => router.push("/transactions")}
-      />
+      /> */}
     </div>
   );
 };

@@ -1,5 +1,6 @@
-import { format, fromUnixTime } from "date-fns";
-import { ArrowDownToLine, ArrowUpFromLine } from "lucide-react";
+import { format, fromUnixTime, isSameMonth } from "date-fns";
+import { ru } from "date-fns/locale";
+import { ArrowDownToLine, ArrowUpFromLine, CircleAlert } from "lucide-react";
 import React from "react";
 
 import { Comment } from "./comment";
@@ -23,12 +24,20 @@ export const TransactionItem: React.FC<Props> = ({
   comment,
   isError,
 }) => {
-  const formattedDate = format(fromUnixTime(date), "HH:mm");
+  const isCurrentMonth = isSameMonth(new Date(), fromUnixTime(date));
+
+  const formattedDate = format(
+    fromUnixTime(date),
+    isCurrentMonth ? "HH:mm" : "d MMM, HH:mm",
+    { locale: ru },
+  );
 
   return (
     <>
-      <div className="min-w-screen mr-2 rounded-full bg-[#D1DDE8] p-3 text-[#708DA7] dark:bg-[#323C4C]">
-        {isIncoming ? (
+      <div className="min-w-screen mr-2 rounded-full bg-[#D1DDE7] p-3 text-[#708DA7] dark:bg-[#323C4C]">
+        {isError ? (
+          <CircleAlert strokeWidth={2.5} />
+        ) : isIncoming ? (
           <ArrowDownToLine strokeWidth={2.5} />
         ) : (
           <ArrowUpFromLine strokeWidth={2.5} />

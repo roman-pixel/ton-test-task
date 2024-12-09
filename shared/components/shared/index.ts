@@ -8,10 +8,12 @@ export { QrCode } from "./qr-code";
 export { IconButton } from "./icon-button";
 export { IconButtons } from "./icon-buttons";
 export { Logo } from "./logo";
-export { HeaderMenu } from "./header-menu";
 export { ClearButton } from "./clear-button";
 export { Card } from "./card";
 export { DrawerCloseButton } from "./drawer-close-button";
+export { MenuBar } from "./menu-bar";
+export { MenuButton } from "./menu-button";
 
 export * from "./currency";
 export * from "./transaction";
+export * from "./settings";
