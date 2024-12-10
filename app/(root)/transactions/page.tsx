@@ -7,21 +7,31 @@ import {
   Container,
   Transaction,
   TransactionDate,
+  TransactionError,
   TransactionSkeleton,
 } from "@/shared/components";
 import { useTransactions } from "@/shared/hooks";
 import { groupTransactionsByDate } from "@/shared/lib";
+import { TransactionsResponse } from "@/shared/types/transaction-types";
 
 export default function Transactions() {
   const wallet = useTonWallet();
   const router = useRouter();
-  const { transactions: transactionsResponse, isLoading } = useTransactions(
-    wallet?.account.address,
-  );
+  const {
+    transactions: transactionsResponse,
+    isLoading,
+    isError,
+    error,
+    refetch,
+  } = useTransactions(wallet?.account.address);
 
   if (!wallet) {
     router.replace("/");
     return;
+  }
+
+  if (isError) {
+    return <TransactionError error={error} onClick={refetch} />;
   }
 
   const { transactions } = transactionsResponse || {};

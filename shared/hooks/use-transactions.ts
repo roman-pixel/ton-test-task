@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { getTransactions } from "../services/getTransactions";
 import { TransactionsResponse } from "../types/transaction-types";
@@ -11,27 +11,44 @@ export const useTransactions = (
   const [transactions, setTransactions] = useState<TransactionsResponse | null>(
     null,
   );
+  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetchTransactions = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setIsError(false);
+      setError(null);
+
+      const res = await getTransactions(address || "", "desc", limit);
+      const data = await res.json();
+      setTransactions(data);
+
+      if ("ok" in data && !data.ok) {
+        throw new Error(
+          JSON.stringify({ code: data.code, result: data.result }),
+        );
+      }
+    } catch (error: any) {
+      console.error("Error [GET TRANSACTIONS]", error);
+      setIsError(true);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [address, limit]);
 
   useEffect(() => {
-    async function fetchTransactions() {
-      try {
-        setIsLoading(true);
-
-        const res = await getTransactions(address || "", "desc", limit);
-        const data = await res.json();
-        setTransactions(data);
-      } catch (error) {
-        console.error("Error [GET RATE]", error);
-      } finally {
-        setIsLoading(false);
-      }
+    if (address) {
+      fetchTransactions();
     }
-
-    if (address) fetchTransactions();
-  }, [address, limit]);
+  }, [address, limit, fetchTransactions]);
 
   return {
     transactions,
     isLoading,
+    isError,
+    error,
+    refetch: fetchTransactions,
   };
 };

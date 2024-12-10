@@ -19,7 +19,14 @@ export const MenuBar: React.FC = () => {
   if (!wallet) return;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full bg-background py-3 text-foreground">
+    <div
+      className={cn(
+        "fixed bottom-0 left-0 w-full bg-background pb-6 pt-3 text-foreground",
+        {
+          "border-t": pathName !== "/",
+        },
+      )}
+    >
       <Container className="flex items-center justify-evenly gap-10">
         <MenuButton
           label="Кошелёк"
