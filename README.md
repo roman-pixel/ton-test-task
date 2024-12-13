@@ -1,52 +1,58 @@
-# TON Link Test Task
+<p align="center">
+  <img src="docs/images/ton-logo.svg" alt="Project Logo" width="100"/>
+</p>
 
-### Демо
+<h1 align="center">TON Link Test</h1>
 
-Вы можете увидеть демо-версию приложения по следующим ссылкам:
+### Demo
 
-[🌐 Демо-приложение](https://ton-test-task.vercel.app)
+You can view the demo version of the application using the following links:
 
-[📱 Telegram app](https://t.me/ton_link_test_bot)
+[🌐 Demo Application](https://ton-test-task.vercel.app)
 
-## Описание
+[📱 Telegram App](https://t.me/ton_link_test_bot)
 
-Одностраничное приложение, созданное с использованием Next.js и библиотеки ton-connect. Приложение позволяет пользователям подключать криптокошелёк TonKeeper, просматривать баланс и осуществлять переводы средств в TestNet сети TON с интуитивно понятным интерфейсом.
+## Description
 
-## Инструкция по использованию
+A single-page application built with Next.js and the ton-connect library. The app allows users to connect their TonKeeper or any other crypto wallet, view their balance, and make transfers within the TON TestNet network through an intuitive interface.
 
-- **Подключение кошелька**:
-  - Для привязки своего кошелька TonKeeper нажмите кнопку "Привязать кошелек".
-  - В диалоговом окне выберите кошелек TonKeeper.
-  - Подтвердите привязку кошелька в приложении TonKeeper.
+## Usage Instructions
 
-- **Отправка средств**:
-  - На главном экране нажмите кнопку "Отправить", чтобы перейти на страницу перевода средств.
-  - Введите необходимую сумму и адрес получателя в форму перевода, чтобы инициировать процесс отправки.
-  - Подтвердите перевод в кошельке TonKeeper.
+- **Connecting a Wallet**:
 
-## Технологии
+  - To link your TonKeeper wallet, click the "Connect Wallet" button.
+  - In the dialog box, select the TonKeeper wallet or choose any other wallet from the list.
+  - Confirm the wallet connection.
+- **Sending Funds**:
 
-- **@tonconnect/ui-react** - Библиотека для интеграции с кошельком TonKeeper через TonConnect.
-- **next** - Фреймворк для создания серверных и статических приложений на React.
-- **tailwindcss** - Утилитарный CSS-фреймворк для создания пользовательских интерфейсов.
-- **typescript** - Язык программирования для строгой типизации в JavaScript.
+  - On the main screen, click the "Send" button to navigate to the transfer page.
+  - Enter the required amount and recipient's address into the transfer form to initiate the sending process.
+  - Confirm the transfer in the TonKeeper wallet.
 
-## Установка и запуск приложения
+## Technologies
 
-1. Клонируйте репозиторий:
+- **@tonconnect/ui-react** - A library for integrating with the TonKeeper wallet using TonConnect.
+- **next** - A framework for building server-side and static applications with React.
+- **tailwindcss** - A utility-first CSS framework for designing user interfaces.
+- **typescript** - A programming language for strong typing in JavaScript.
+
+## Installation and Running the Application
+
+1. Clon the repository:
+
 ```bash
 git clone https://github.com/roman-pixel/ton-test-task.git
 ```
 
-2.	Перейдите в каталог проекта
-   
-3.	Установите зависимости с помощью yarn или npm:
-
- ```bash
- npm install
- ```
-4. Запустите приложение 
+2. Navigate to the project directory.
+3. Install dependencies using yarn or npm:
 
 ```bash
-npm run dev
+ npm install
+```
+
+4. Start the application:
+
+```bash
+ npm run dev
 ```
