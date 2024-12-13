@@ -1,4 +1,3 @@
-import { Frown } from "lucide-react";
 import React from "react";
 
 import { Button } from "../../ui";
@@ -26,13 +25,15 @@ export const TransactionError: React.FC<Props> = ({
         className,
       )}
     >
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center justify-center gap-2 text-center">
         <p className="text-7xl font-semibold text-primary">{code}</p>
-        <p className="text-2xl tracking-wide text-foreground">{result}</p>
+        <p className="text-xl tracking-wide text-foreground">{result}</p>
       </div>
-      <Button variant="secondary" className="text-primary" onClick={onClick}>
-        Попробовать снова
-      </Button>
+      {code !== 422 && (
+        <Button variant="secondary" className="text-primary" onClick={onClick}>
+          Попробовать снова
+        </Button>
+      )}
     </Container>
   );
 };

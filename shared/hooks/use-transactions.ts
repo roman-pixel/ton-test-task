@@ -6,6 +6,7 @@ import { TransactionsResponse } from "../types/transaction-types";
 export const useTransactions = (
   address: string | undefined,
   limit?: number,
+  offset?: number,
 ) => {
   const [isLoading, setIsLoading] = useState(true);
   const [transactions, setTransactions] = useState<TransactionsResponse | null>(
@@ -20,15 +21,20 @@ export const useTransactions = (
       setIsError(false);
       setError(null);
 
-      const res = await getTransactions(address || "", "desc", limit);
+      const res = await getTransactions(address || "", "desc", limit, offset);
+      console.log(res);
       const data = await res.json();
       setTransactions(data);
 
-      if ("ok" in data && !data.ok) {
+      if (res.status !== 200) {
         throw new Error(
-          JSON.stringify({ code: data.code, result: data.result }),
+          JSON.stringify({
+            code: res.status,
+            result: data.result ? data.result : data.error,
+          }),
         );
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       console.error("Error [GET TRANSACTIONS]", error);
       setIsError(true);
@@ -36,7 +42,7 @@ export const useTransactions = (
     } finally {
       setIsLoading(false);
     }
-  }, [address, limit]);
+  }, [address, limit, offset]);
 
   useEffect(() => {
     if (address) {
@@ -49,6 +55,6 @@ export const useTransactions = (
     isLoading,
     isError,
     error,
-    refetch: fetchTransactions,
+    fetchTransactions,
   };
 };

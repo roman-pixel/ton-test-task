@@ -21,9 +21,9 @@ export const MenuBar: React.FC = () => {
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-0 w-full bg-background pb-6 pt-3 text-foreground",
+        "fixed bottom-0 left-0 w-full bg-background pb-7 pt-4 text-foreground",
         {
-          "border-t": pathName !== "/",
+          "border-t": pathName === "/transactions",
         },
       )}
     >

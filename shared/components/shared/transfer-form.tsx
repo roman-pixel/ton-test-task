@@ -119,6 +119,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
       toast({ title: "Транзакция успешно отправлена" });
       setTransferData({ address: "", amount: "", comment: "" });
       reset();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast({
         title: "Ошибка при отправке транзакции",

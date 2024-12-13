@@ -12,9 +12,9 @@ export default function HomeLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
+    <main className="mb-28 flex flex-col">
       <Header />
-      {children}
+      <div className="flex-grow">{children}</div>
       <MenuBar />
     </main>
   );

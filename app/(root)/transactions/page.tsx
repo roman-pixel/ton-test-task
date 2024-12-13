@@ -12,18 +12,20 @@ import {
 } from "@/shared/components";
 import { useTransactions } from "@/shared/hooks";
 import { groupTransactionsByDate } from "@/shared/lib";
-import { TransactionsResponse } from "@/shared/types/transaction-types";
+
+const TRANSACTION_LIMIT = 20;
 
 export default function Transactions() {
   const wallet = useTonWallet();
   const router = useRouter();
+
   const {
     transactions: transactionsResponse,
     isLoading,
     isError,
     error,
-    refetch,
-  } = useTransactions(wallet?.account.address);
+    fetchTransactions,
+  } = useTransactions(wallet?.account.address, TRANSACTION_LIMIT);
 
   if (!wallet) {
     router.replace("/");
@@ -31,7 +33,7 @@ export default function Transactions() {
   }
 
   if (isError) {
-    return <TransactionError error={error} onClick={refetch} />;
+    return <TransactionError error={error} onClick={fetchTransactions} />;
   }
 
   const { transactions } = transactionsResponse || {};
