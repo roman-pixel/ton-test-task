@@ -1,13 +1,13 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
-import { Bolt, Clock, CreditCard } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
-import { Container } from "./container";
+import { Container } from "../container";
+import { SettingsMenu } from "../settings";
+import { Icons } from "./icons";
 import { MenuButton } from "./menu-button";
-import { SettingsMenu } from "./settings";
 
 import { cn } from "@/shared/lib";
 
@@ -17,6 +17,8 @@ export const MenuBar: React.FC = () => {
   const wallet = useTonWallet();
 
   if (!wallet) return;
+
+  const { Wallet, Clock, Settings } = Icons;
 
   return (
     <div
@@ -30,25 +32,37 @@ export const MenuBar: React.FC = () => {
       <Container className="flex items-center justify-evenly gap-10">
         <MenuButton
           label="Кошелёк"
-          className={cn("w-14", {
+          className={cn("w-14 text-[#858F99]", {
             "text-primary": pathName === "/",
           })}
           onClick={() => router.push("/")}
         >
-          <CreditCard style={{ width: "26px", height: "26px" }} />
+          <Wallet
+            width="25px"
+            height="22px"
+            className={cn("fill-[#858F99]", {
+              "fill-primary": pathName === "/",
+            })}
+          />
         </MenuButton>
         <MenuButton
           label="История"
-          className={cn("w-14", {
+          className={cn("w-14 text-[#858F99]", {
             "text-primary": pathName === "/transactions",
           })}
           onClick={() => router.push("/transactions")}
         >
-          <Clock style={{ width: "26px", height: "26px" }} />
+          <Clock
+            width="24px"
+            height="24px"
+            className={cn("fill-[#858F99]", {
+              "fill-primary": pathName === "/transactions",
+            })}
+          />
         </MenuButton>
         <SettingsMenu>
-          <MenuButton label="Настройки" className="w-14">
-            <Bolt style={{ width: "26px", height: "26px" }} />
+          <MenuButton label="Настройки" className="w-14 text-[#858F99]">
+            <Settings width="26px" height="26px" fill="#858F99" />
           </MenuButton>
         </SettingsMenu>
       </Container>

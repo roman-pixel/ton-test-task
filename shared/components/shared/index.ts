@@ -11,9 +11,8 @@ export { Logo } from "./logo";
 export { ClearButton } from "./clear-button";
 export { Card } from "./card";
 export { DrawerCloseButton } from "./drawer-close-button";
-export { MenuBar } from "./menu-bar";
-export { MenuButton } from "./menu-button";
 
 export * from "./currency";
 export * from "./transaction";
 export * from "./settings";
+export * from "./menu-bar";

@@ -76,7 +76,9 @@ export const CurrencyCard: React.FC<Props> = ({
           {isLoading ? (
             <Skeleton className="mb-2 h-5 w-14 bg-background" />
           ) : (
-            <p className="font-medium">{String(fullPart).replace(".", ",")}</p>
+            <p className="font-medium">
+              {fullPart ? String(fullPart).replace(".", ",") : "0,00"}
+            </p>
           )}
           {isLoading ? (
             <Skeleton className="h-4 w-12 bg-background" />

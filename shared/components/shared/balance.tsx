@@ -66,8 +66,8 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
       ) : (
         <>
           <div className="flex items-end font-bold">
-            <span className="text-6xl">{wholePart}</span>
-            <span className="text-5xl">,{decimalPart}</span>
+            <span className="text-6xl">{wholePart || "0"}</span>
+            <span className="text-5xl">,{decimalPart || "00"}</span>
             <span className="pl-2 text-2xl uppercase opacity-60">ton</span>
           </div>
         </>

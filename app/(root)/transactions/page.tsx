@@ -8,12 +8,11 @@ import {
   Transaction,
   TransactionDate,
   TransactionError,
+  TransactionMessage,
   TransactionSkeleton,
 } from "@/shared/components";
 import { useTransactions } from "@/shared/hooks";
 import { groupTransactionsByDate } from "@/shared/lib";
-
-const TRANSACTION_LIMIT = 20;
 
 export default function Transactions() {
   const wallet = useTonWallet();
@@ -25,7 +24,7 @@ export default function Transactions() {
     isError,
     error,
     fetchTransactions,
-  } = useTransactions(wallet?.account.address, TRANSACTION_LIMIT);
+  } = useTransactions(wallet?.account.address);
 
   if (!wallet) {
     router.replace("/");
@@ -34,6 +33,15 @@ export default function Transactions() {
 
   if (isError) {
     return <TransactionError error={error} onClick={fetchTransactions} />;
+  }
+
+  if (transactionsResponse?.transactions?.length === 0) {
+    return (
+      <TransactionMessage
+        message="Ваша история будет показана здесь"
+        label="Совершите первую транзакцию!"
+      />
+    );
   }
 
   const { transactions } = transactionsResponse || {};

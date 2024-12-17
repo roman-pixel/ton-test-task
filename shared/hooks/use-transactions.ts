@@ -22,7 +22,6 @@ export const useTransactions = (
       setError(null);
 
       const res = await getTransactions(address || "", "desc", limit, offset);
-      console.log(res);
       const data = await res.json();
       setTransactions(data);
 
