@@ -1,6 +1,8 @@
+"use client";
+
 import { Check } from "lucide-react";
 import { useTheme } from "next-themes";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 
 import {
   Command,
@@ -22,6 +24,15 @@ export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
   const { theme: currentTheme, themes, setTheme } = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
 
   const labeledThemes = themes.map((theme) => ({
     value: theme,

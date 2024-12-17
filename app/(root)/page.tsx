@@ -1,6 +1,7 @@
 "use client";
 
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
+import { Plus } from "lucide-react";
 
 import {
   Balance,
@@ -27,12 +28,16 @@ export default function Home() {
             <CurrencyContainer className="mt-4 w-full" />
           </>
         ) : (
-          <div className="flex h-[60vh] items-center">
+          <div className="flex h-[65vh] items-center">
             <Button
-              className="relative rounded-full px-6 py-8 text-xl font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
+              className="relative rounded-2xl px-6 py-8 text-lg font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
               size="lg"
               onClick={() => tonConnectUI.openModal()}
             >
+              <Plus
+                style={{ width: "24px", height: "24px" }}
+                strokeWidth={2.7}
+              />
               Привязать кошелек
             </Button>
           </div>
