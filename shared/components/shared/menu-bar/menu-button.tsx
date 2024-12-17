@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from "react";
 
-import { Button } from "../ui";
+import { Button } from "../../ui";
 
 import { cn } from "@/shared/lib/utils";
 
@@ -20,7 +20,7 @@ export const MenuButton = React.forwardRef<
       ref={ref}
       variant="ghost"
       className={cn(
-        "flex flex-col items-center gap-[0.5px] text-foreground/90 focus-visible:ring-0 focus-visible:ring-offset-0",
+        "flex flex-col items-center gap-[2px] font-semibold tracking-wide text-foreground/90 focus-visible:ring-0 focus-visible:ring-offset-0",
         className,
       )}
       onClick={onClick}
