@@ -2,6 +2,7 @@
 
 import { useTonWallet } from "@tonconnect/ui-react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 import {
   Container,
@@ -26,10 +27,11 @@ export default function Transactions() {
     fetchTransactions,
   } = useTransactions(wallet?.account.address);
 
-  if (!wallet) {
-    router.replace("/");
-    return;
-  }
+  useEffect(() => {
+    if (!wallet) {
+      router.replace("/"); // вызов replace после рендера
+    }
+  }, [wallet, router]);
 
   if (isError) {
     return <TransactionError error={error} onClick={fetchTransactions} />;

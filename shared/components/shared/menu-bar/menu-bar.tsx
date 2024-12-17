@@ -5,7 +5,6 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
 import { Container } from "../container";
-import { SettingsMenu } from "../settings";
 import { Icons } from "./icons";
 import { MenuButton } from "./menu-button";
 
@@ -15,8 +14,6 @@ export const MenuBar: React.FC = () => {
   const router = useRouter();
   const pathName = usePathname();
   const wallet = useTonWallet();
-
-  if (!wallet) return;
 
   const { Wallet, Clock, Settings } = Icons;
 
@@ -45,26 +42,38 @@ export const MenuBar: React.FC = () => {
             })}
           />
         </MenuButton>
+        {wallet && (
+          <MenuButton
+            label="История"
+            className={cn("w-14 text-[#858F99]", {
+              "text-primary": pathName === "/transactions",
+            })}
+            onClick={() => router.push("/transactions")}
+          >
+            <Clock
+              width="24px"
+              height="24px"
+              className={cn("fill-[#858F99]", {
+                "fill-primary": pathName === "/transactions",
+              })}
+            />
+          </MenuButton>
+        )}
         <MenuButton
-          label="История"
+          label="Настройки"
           className={cn("w-14 text-[#858F99]", {
-            "text-primary": pathName === "/transactions",
+            "text-primary": pathName === "/settings",
           })}
-          onClick={() => router.push("/transactions")}
+          onClick={() => router.push("/settings")}
         >
-          <Clock
-            width="24px"
-            height="24px"
+          <Settings
+            width="26px"
+            height="26px"
             className={cn("fill-[#858F99]", {
-              "fill-primary": pathName === "/transactions",
+              "fill-primary": pathName === "/settings",
             })}
           />
         </MenuButton>
-        <SettingsMenu>
-          <MenuButton label="Настройки" className="w-14 text-[#858F99]">
-            <Settings width="26px" height="26px" fill="#858F99" />
-          </MenuButton>
-        </SettingsMenu>
       </Container>
     </div>
   );
