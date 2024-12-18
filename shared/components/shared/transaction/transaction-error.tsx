@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React from "react";
 
 import { Button } from "../../ui";
@@ -16,6 +17,7 @@ export const TransactionError: React.FC<Props> = ({
   onClick,
   className,
 }) => {
+  const t = useTranslations("Transactions.error");
   const { code, result } = JSON.parse(error || "{}");
 
   return (
@@ -31,7 +33,7 @@ export const TransactionError: React.FC<Props> = ({
       </div>
       {code !== 422 && (
         <Button variant="secondary" className="text-primary" onClick={onClick}>
-          Попробовать снова
+          {t("buttonRetry")}
         </Button>
       )}
     </Container>

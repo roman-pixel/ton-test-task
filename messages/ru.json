@@ -1,0 +1,138 @@
+{
+  "Wallet": {
+    "transfer": {
+      "title": "Отправить"
+    },
+    "topUp": {
+      "title": "Пополнить"
+    },
+    "connectWallet": {
+      "title": "Привязать кошелек"
+    },
+    "TransactionDrawer": {
+      "drawerTitle": {
+        "title": "Перевод средств"
+      },
+      "placeholders": {
+        "address": "Адрес кошелька",
+        "amount": "Сумма (TON)",
+        "comment": "Комментарий"
+      },
+      "transferAll": {
+        "title": "Все {amount} TON"
+      },
+      "sendButton": {
+        "title": "Отправить"
+      },
+      "toastMessages": {
+        "success": "Транзакция успешно отправлена",
+        "transeferError": "Ошибка при отправке транзакции",
+        "validationError": "Заполните все обязательные поля"
+      },
+      "inputLabels": {
+        "required": "Обязательное поле",
+        "invalidAmount": "Введите корректное число"
+      }
+    },
+    "GetTonDrawer": {
+      "drawerTitle": {
+        "title": "Получить Toncoin"
+      },
+      "drawerDescription": {
+        "title": "Отправляйте на этот адрес только Toncoin TON и токены в сети TON, иначе вы можете потерять свои средства"
+      },
+      "copyButton": {
+        "title": "Скопировать"
+      }
+    }
+  },
+  "Transactions": {
+    "title": "История",
+    "noTransactions": {
+      "message": "Ваша история будет показана здесь",
+      "label": "Совершите первую транзакцию!",
+      "backButton": "На главную"
+    },
+    "error": {
+      "buttonRetry": "Попробовать снова"
+    },
+    "dates": {
+      "today": "Сегодня",
+      "yesterday": "Вчера"
+    },
+    "Transaction": {
+      "type": {
+        "received": "Получено",
+        "sent": "Отправлено"
+      },
+      "error": "Неуспешно",
+      "amount": "{amount} TON",
+      "TransactionItem": {
+        "type": {
+          "received": "Получено {date}",
+          "sent": "Отправлено {date}"
+        },
+        "details": {
+          "address": {
+            "type": {
+              "sender": "Адрес отправителя",
+              "recipient": "Адрес получателя"
+            }
+          },
+          "fee": "Комиссия",
+          "comment": "Комментарий"
+        },
+        "transaction": {
+          "title": "Транзакция"
+        }
+      }
+    }
+  },
+  "Settings": {
+    "title": "Настройки",
+    "theme": {
+      "title": "Тема",
+      "type": {
+        "system": "Системная",
+        "light": "Светлая",
+        "dark": "Темная"
+      }
+    },
+    "language": {
+      "title": "Язык",
+      "type": {
+        "ru": "Русский",
+        "en": "Английский"
+      }
+    },
+    "support": {
+      "title": "Поддержка"
+    },
+    "github": {
+      "title": "GitHub"
+    },
+    "logout": {
+      "title": "Выйти",
+      "logoutDrawer": {
+        "title": "Выйти",
+        "description": "Вы действительно хотите выйти?",
+        "confirmButton": "Выйти"
+      }
+    }
+  },
+  "MenuBar": {
+    "wallet": {
+      "title": "Кошелёк"
+    },
+    "transactions": {
+      "title": "История"
+    },
+    "settings": {
+      "title": "Настройки"
+    }
+  },
+  "CopyToClipboard": {
+    "success": "Скопировано в буфер обмена",
+    "error": "Ошибка при копировании"
+  }
+}

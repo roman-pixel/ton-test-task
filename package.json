@@ -24,6 +24,7 @@
     "date-fns": "^4.1.0",
     "lucide-react": "^0.453.0",
     "next": "14.2.15",
+    "next-intl": "^3.26.1",
     "next-themes": "^0.3.0",
     "qrcode.react": "^4.1.0",
     "react": "^18",

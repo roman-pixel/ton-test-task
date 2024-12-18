@@ -1,6 +1,7 @@
 "use client";
 
 import { Check } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import React, { PropsWithChildren, useEffect, useState } from "react";
 
@@ -14,13 +15,8 @@ import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 
 import { cn } from "@/shared/lib";
 
-export const themeLabels: Record<string, string> = {
-  light: "Светлая",
-  dark: "Темная",
-  system: "Системная",
-};
-
 export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
+  const t = useTranslations("Settings.theme");
   const { theme: currentTheme, themes, setTheme } = useTheme();
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
@@ -36,7 +32,7 @@ export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
 
   const labeledThemes = themes.map((theme) => ({
     value: theme,
-    label: themeLabels[theme] || theme,
+    label: t(`type.${theme}`),
   }));
 
   const handleChange = (selectedValue: string) => {
@@ -57,7 +53,7 @@ export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
                   key={theme.value}
                   value={theme.value}
                   onSelect={(e) => handleChange(e)}
-                  className="flex items-center justify-between data-[selected='true']:bg-transparent"
+                  className="flex cursor-pointer items-center justify-between py-3 data-[selected='true']:bg-transparent"
                 >
                   {theme.label}
                   <Check

@@ -1,6 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 
@@ -14,63 +15,63 @@ export const MenuBar: React.FC = () => {
   const router = useRouter();
   const pathName = usePathname();
   const wallet = useTonWallet();
+  const locale = useLocale();
+
+  const t = useTranslations("MenuBar");
 
   const { Wallet, Clock, Settings } = Icons;
 
   return (
     <div
-      className={cn(
-        "fixed bottom-0 left-0 w-full bg-background pb-7 pt-4 text-foreground",
-        {
-          "border-t": pathName === "/transactions",
-        },
-      )}
+      className={cn("fixed bottom-0 left-0 w-full bg-background pb-6 pt-4", {
+        "border-t": pathName === "/transactions",
+      })}
     >
       <Container className="flex items-center justify-evenly gap-10">
         <MenuButton
-          label="Кошелёк"
+          label={t("wallet.title")}
           className={cn("w-14 text-[#858F99]", {
-            "text-primary": pathName === "/",
+            "text-primary": pathName === `/${locale}`,
           })}
-          onClick={() => router.push("/")}
+          onClick={() => router.push(`/${locale}`)}
         >
           <Wallet
             width="25px"
             height="22px"
             className={cn("fill-[#858F99]", {
-              "fill-primary": pathName === "/",
+              "fill-primary": pathName === `/${locale}`,
             })}
           />
         </MenuButton>
         {wallet && (
           <MenuButton
-            label="История"
+            label={t("transactions.title")}
             className={cn("w-14 text-[#858F99]", {
-              "text-primary": pathName === "/transactions",
+              "text-primary": pathName === `/${locale}/transactions`,
             })}
-            onClick={() => router.push("/transactions")}
+            onClick={() => router.push(`/${locale}/transactions`)}
           >
             <Clock
               width="24px"
               height="24px"
               className={cn("fill-[#858F99]", {
-                "fill-primary": pathName === "/transactions",
+                "fill-primary": pathName === `/${locale}/transactions`,
               })}
             />
           </MenuButton>
         )}
         <MenuButton
-          label="Настройки"
+          label={t("settings.title")}
           className={cn("w-14 text-[#858F99]", {
-            "text-primary": pathName === "/settings",
+            "text-primary": pathName === `/${locale}/settings`,
           })}
-          onClick={() => router.push("/settings")}
+          onClick={() => router.push(`/${locale}/settings`)}
         >
           <Settings
             width="26px"
             height="26px"
             className={cn("fill-[#858F99]", {
-              "fill-primary": pathName === "/settings",
+              "fill-primary": pathName === `/${locale}/settings`,
             })}
           />
         </MenuButton>
