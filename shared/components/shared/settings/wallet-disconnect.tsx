@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import React, { PropsWithChildren } from "react";
 
 import { Button } from "../../ui";
@@ -22,6 +23,8 @@ export const WalletDisconnect: React.FC<PropsWithChildren<Props>> = ({
   onClick,
   children,
 }) => {
+  const t = useTranslations("Settings.logout.logoutDrawer");
+
   return (
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
@@ -29,10 +32,8 @@ export const WalletDisconnect: React.FC<PropsWithChildren<Props>> = ({
         <Container className="mb-4">
           <DrawerCloseButton />
           <DrawerHeader className="mt-6">
-            <DrawerTitle>Выйти</DrawerTitle>
-            <DrawerDescription>
-              Вы действительно хотите выйти?
-            </DrawerDescription>
+            <DrawerTitle>{t("title")}</DrawerTitle>
+            <DrawerDescription>{t("description")}</DrawerDescription>
           </DrawerHeader>
           <DrawerFooter>
             <DrawerClose>
@@ -41,7 +42,7 @@ export const WalletDisconnect: React.FC<PropsWithChildren<Props>> = ({
                 variant="secondary"
                 onClick={onClick}
               >
-                Выйти
+                {t("confirmButton")}
               </Button>
             </DrawerClose>
           </DrawerFooter>

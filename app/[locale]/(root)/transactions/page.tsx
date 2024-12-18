@@ -1,6 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -16,8 +17,10 @@ import { useTransactions } from "@/shared/hooks";
 import { groupTransactionsByDate } from "@/shared/lib";
 
 export default function Transactions() {
+  const t = useTranslations("Transactions");
   const wallet = useTonWallet();
   const router = useRouter();
+  const locale = useLocale();
 
   const {
     transactions: transactionsResponse,
@@ -29,9 +32,9 @@ export default function Transactions() {
 
   useEffect(() => {
     if (!wallet) {
-      router.replace("/"); // вызов replace после рендера
+      router.replace(`/${locale}`); // вызов replace после рендера
     }
-  }, [wallet, router]);
+  }, [wallet, router, locale]);
 
   if (isError) {
     return <TransactionError error={error} onClick={fetchTransactions} />;
@@ -40,8 +43,8 @@ export default function Transactions() {
   if (transactionsResponse?.transactions?.length === 0) {
     return (
       <TransactionMessage
-        message="Ваша история будет показана здесь"
-        label="Совершите первую транзакцию!"
+        message={t("noTransactions.message")}
+        label={t("noTransactions.label")}
       />
     );
   }
@@ -57,7 +60,7 @@ export default function Transactions() {
 
   return (
     <Container className="flex flex-col gap-2">
-      <p className="text-2xl font-semibold tracking-wide">История</p>
+      <p className="text-2xl font-semibold tracking-wide">{t("title")}</p>
       {isLoading ? (
         <TransactionSkeleton count={10} />
       ) : (

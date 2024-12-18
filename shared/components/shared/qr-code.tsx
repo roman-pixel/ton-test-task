@@ -1,6 +1,7 @@
 "use client";
 
 import { Copy } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { QRCodeCanvas } from "qrcode.react";
 import React, { useEffect, useState } from "react";
 
@@ -27,6 +28,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
   address,
   children,
 }) => {
+  const t = useTranslations("Wallet.GetTonDrawer");
   const { copyToClipboard } = useClipboard();
   const [isLoading, setIsLoading] = useState(true);
 
@@ -49,10 +51,11 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
         <Container className="mb-4">
           <DrawerCloseButton className="right-0" />
           <DrawerHeader className="mt-5 flex flex-col items-center gap-3">
-            <DrawerTitle className="text-xl">Получить Toncoin</DrawerTitle>
+            <DrawerTitle className="text-xl">
+              {t("drawerTitle.title")}
+            </DrawerTitle>
             <DrawerDescription className="text-center">
-              Отправляйте на этот адрес только Toncoin TON и токены в сети TON,
-              иначе вы можете потерять свои средства
+              {t("drawerDescription.title")}
             </DrawerDescription>
           </DrawerHeader>
           {isLoading ? (
@@ -61,7 +64,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
             <div className="mx-4 flex flex-col items-center gap-4 rounded-lg bg-white p-5">
               <QRCodeCanvas
                 value={address || ""}
-                size={270}
+                size={260}
                 level="Q"
                 imageSettings={{
                   src: "/ton-logo.svg",
@@ -84,7 +87,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
             ) : (
               <Button onClick={() => copyToClipboard(address || "")}>
                 <Copy />
-                <span>Скопировать</span>
+                <span>{t("copyButton.title")}</span>
               </Button>
             )}
           </DrawerFooter>

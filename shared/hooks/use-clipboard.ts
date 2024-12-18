@@ -1,21 +1,23 @@
+import { useTranslations } from "next-intl";
 import { useCallback } from "react";
 
 import { useToast } from "./use-toast";
 
 export const useClipboard = () => {
   const { toast } = useToast();
+  const t = useTranslations("CopyToClipboard");
 
   const copyToClipboard = useCallback(
     (text: string) => {
       try {
         navigator.clipboard.writeText(text);
-        toast({ title: "Скопировано в буфер обмена" });
+        toast({ title: t("success") });
       } catch (error) {
-        toast({ title: "Ошибка при копировании", variant: "destructive" });
+        toast({ title: t("error"), variant: "destructive" });
         console.error(error);
       }
     },
-    [toast],
+    [t, toast],
   );
 
   return { copyToClipboard };

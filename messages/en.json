@@ -1,0 +1,138 @@
+{
+  "Wallet": {
+    "transfer": {
+      "title": "Send"
+    },
+    "topUp": {
+      "title": "Add TON"
+    },
+    "connectWallet": {
+      "title": "Connect wallet"
+    },
+    "TransactionDrawer": {
+      "drawerTitle": {
+        "title": "Transfer funds"
+      },
+      "placeholders": {
+        "address": "Wallet address",
+        "amount": "Amount (TON)",
+        "comment": "Comment"
+      },
+      "transferAll": {
+        "title": "All {amount} TON"
+      },
+      "sendButton": {
+        "title": "Send"
+      },
+      "toastMessages": {
+        "success": "Transaction successfully sent",
+        "transeferError": "Transaction error",
+        "validationError": "Fill all required fields"
+      },
+      "inputLabels": {
+        "required": "Field is required",
+        "invalidAmount": "Invalid amount"
+      }
+    },
+    "GetTonDrawer": {
+      "drawerTitle": {
+        "title": "Get Toncoin"
+      },
+      "drawerDescription": {
+        "title": "Send only Toncoin TON and tokens on the TON network, otherwise you may lose your funds"
+      },
+      "copyButton": {
+        "title": "Copy"
+      }
+    }
+  },
+  "Transactions": {
+    "title": "History",
+    "noTransactions": {
+      "message": "Your history will be shown here",
+      "label": "Make the first transaction!",
+      "backButton": "Back to main"
+    },
+    "error": {
+      "buttonRetry": "Retry"
+    },
+    "dates": {
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "Transaction": {
+      "type": {
+        "received": "Received",
+        "sent": "Sent"
+      },
+      "error": "Failed",
+      "amount": "{amount} TON",
+      "TransactionItem": {
+        "type": {
+          "received": "Received on {date}",
+          "sent": "Sent on {date}"
+        },
+        "details": {
+          "address": {
+            "type": {
+              "sender": "Sender address",
+              "recipient": "Recipient address"
+            }
+          },
+          "fee": "Fee",
+          "comment": "Comment"
+        },
+        "transaction": {
+          "title": "Transaction"
+        }
+      }
+    }
+  },
+  "Settings": {
+    "title": "Settings",
+    "theme": {
+      "title": "Theme",
+      "type": {
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark"
+      }
+    },
+    "language": {
+      "title": "Language",
+      "type": {
+        "ru": "Russian",
+        "en": "English"
+      }
+    },
+    "support": {
+      "title": "Support"
+    },
+    "github": {
+      "title": "GitHub"
+    },
+    "logout": {
+      "title": "Logout",
+      "logoutDrawer": {
+        "title": "Logout",
+        "description": "Are you sure you want to logout?",
+        "confirmButton": "Logout"
+      }
+    }
+  },
+  "MenuBar": {
+    "wallet": {
+      "title": "Wallet"
+    },
+    "transactions": {
+      "title": "History"
+    },
+    "settings": {
+      "title": "Settings"
+    }
+  },
+  "CopyToClipboard": {
+    "success": "Copied to clipboard",
+    "error": "Failed to copy to clipboard"
+  }
+}

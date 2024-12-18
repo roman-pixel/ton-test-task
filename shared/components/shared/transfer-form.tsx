@@ -2,6 +2,7 @@
 
 import { beginCell } from "@ton/ton";
 import { useTonConnectUI } from "@tonconnect/ui-react";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import { TON_MULTIPLIER } from "../constants/ton";
@@ -41,6 +42,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
   isOpen,
   onclose,
 }) => {
+  const t = useTranslations("Wallet.TransactionDrawer");
   const { toast } = useToast();
   const [tonConnectUI] = useTonConnectUI();
   const { data } = useBalanceStore();
@@ -78,12 +80,12 @@ export const TransferForm: React.FC<TransferFormProps> = ({
 
     if (!transferData.address || !transferData.amount) {
       toast({
-        title: "Заполните все обязательные поля",
+        title: t("toastMessages.validationError"),
         variant: "destructive",
       });
       setError({
-        address: transferData.address ? "" : "Обязательное поле",
-        amount: transferData.amount ? "" : "Обязательное поле",
+        address: transferData.address ? "" : t("inputLabels.required"),
+        amount: transferData.amount ? "" : t("inputLabels.required"),
       });
       return;
     }
@@ -91,7 +93,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
     if (!/^\d*\.?\d*$/.test(transferData.amount)) {
       setError({
         ...error,
-        amount: "Введите корректное число",
+        amount: t("inputLabels.invalidAmount"),
       });
       return;
     }
@@ -116,13 +118,13 @@ export const TransferForm: React.FC<TransferFormProps> = ({
 
     try {
       await tonConnectUI.sendTransaction(transaction);
-      toast({ title: "Транзакция успешно отправлена" });
+      toast({ title: t("toastMessages.success") });
       setTransferData({ address: "", amount: "", comment: "" });
       reset();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       toast({
-        title: "Ошибка при отправке транзакции",
+        title: t("toastMessages.transeferError"),
         description: error?.message || "",
         variant: "destructive",
       });
@@ -137,7 +139,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
           <DrawerCloseButton />
           <DrawerHeader>
             <DrawerTitle className="text-center text-2xl">
-              Перевод средств
+              {t("drawerTitle.title")}
             </DrawerTitle>
             <DrawerDescription />
           </DrawerHeader>
@@ -149,10 +151,10 @@ export const TransferForm: React.FC<TransferFormProps> = ({
               <div>
                 <div className="relative">
                   <Textarea
-                    className={cn("min-h-10 resize-none text-base", {
+                    className={cn("min-h-10 resize-none pr-11 text-base", {
                       "border-destructive": error.address,
                     })}
-                    placeholder="Адрес кошелька"
+                    placeholder={t("placeholders.address")}
                     value={transferData.address}
                     onChange={(e) =>
                       setTransferData({
@@ -180,10 +182,10 @@ export const TransferForm: React.FC<TransferFormProps> = ({
               <div>
                 <div className="relative">
                   <Input
-                    className={cn("h-14 text-base", {
+                    className={cn("h-14 pr-11 text-base", {
                       "border-destructive": error.amount,
                     })}
-                    placeholder="Сумма (TON)"
+                    placeholder={t("placeholders.amount")}
                     value={transferData.amount}
                     onChange={(e) =>
                       setTransferData({
@@ -218,15 +220,14 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                     })
                   }
                 >
-                  Все {formattedBalance}
-                  <span className="uppercase">Ton</span>
+                  {t("transferAll.title", { amount: formattedBalance })}
                 </Button>
               </div>
 
               <div className="relative mt-3">
                 <Textarea
-                  className="min-h-10 resize-none text-base"
-                  placeholder="Комментарий"
+                  className="min-h-10 resize-none pr-11 text-base"
+                  placeholder={t("placeholders.comment")}
                   value={transferData.comment}
                   onChange={(e) =>
                     setTransferData({
@@ -250,7 +251,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
               size="lg"
               className="dark:shadow-[0_0_30px_5px_hsla(221.2,83.2%,53.3%,0.5)]"
             >
-              Отправить
+              {t("sendButton.title")}
             </Button>
           </form>
         </Container>

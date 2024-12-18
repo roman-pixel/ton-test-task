@@ -2,6 +2,7 @@
 
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 import { Plus } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 import {
   Balance,
@@ -15,6 +16,7 @@ import {
 export default function Home() {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
+  const t = useTranslations("Wallet");
 
   return (
     <Container className="relative">
@@ -38,7 +40,7 @@ export default function Home() {
                 style={{ width: "24px", height: "24px" }}
                 strokeWidth={2.7}
               />
-              Привязать кошелек
+              {t("connectWallet.title")}
             </Button>
           </div>
         )}

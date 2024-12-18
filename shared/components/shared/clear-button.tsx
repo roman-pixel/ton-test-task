@@ -13,7 +13,7 @@ export const ClearButton: React.FC<Props> = ({ onClick }) => {
       type="button"
       variant="ghost"
       size="icon"
-      className="absolute right-3 top-1/2 -translate-y-1/2"
+      className="absolute right-2 top-1/2 -translate-y-1/2"
       onClick={onClick}
     >
       <X />

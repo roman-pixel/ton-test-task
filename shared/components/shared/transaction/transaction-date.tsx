@@ -6,7 +6,8 @@ import {
   isToday,
   isYesterday,
 } from "date-fns";
-import { ru } from "date-fns/locale";
+import { enUS, ru } from "date-fns/locale";
+import { useLocale, useTranslations } from "next-intl";
 import React, { PropsWithChildren } from "react";
 
 interface Props {
@@ -17,26 +18,31 @@ export const TransactionDate: React.FC<PropsWithChildren<Props>> = ({
   date,
   children,
 }) => {
+  const t = useTranslations("Transactions.dates");
+  const locale = useLocale();
+
+  const dateFnsLocale = locale === "en" ? enUS : ru;
+
   const getFormattedDate = () => {
     const fromUnixDate = fromUnixTime(date);
 
     if (isToday(fromUnixDate)) {
-      return "Cегодня";
+      return t("today");
     } else if (isYesterday(fromUnixDate)) {
-      return "Вчера";
+      return t("yesterday");
     } else if (isThisMonth(fromUnixDate)) {
       return format(fromUnixDate, "d MMMM", {
-        locale: ru,
+        locale: dateFnsLocale,
       });
     } else if (isThisYear(fromUnixDate)) {
       const month = format(fromUnixDate, "LLLL", {
-        locale: ru,
+        locale: dateFnsLocale,
       });
 
       return month.charAt(0).toUpperCase() + month.slice(1);
     } else {
       const month = format(fromUnixDate, "LLLL, yyyy", {
-        locale: ru,
+        locale: dateFnsLocale,
       });
 
       return month.charAt(0).toUpperCase() + month.slice(1);

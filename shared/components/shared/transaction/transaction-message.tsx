@@ -1,5 +1,6 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -19,7 +20,9 @@ export const TransactionMessage: React.FC<Props> = ({
   label,
   className,
 }) => {
+  const t = useTranslations("Transactions.noTransactions");
   const router = useRouter();
+  const locale = useLocale();
 
   return (
     <Container
@@ -35,8 +38,8 @@ export const TransactionMessage: React.FC<Props> = ({
         )}
       </div>
 
-      <Button variant="secondary" onClick={() => router.push("/")}>
-        На главную
+      <Button variant="secondary" onClick={() => router.push(`/${locale}`)}>
+        {t("backButton")}
       </Button>
     </Container>
   );

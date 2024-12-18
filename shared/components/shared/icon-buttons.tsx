@@ -2,7 +2,7 @@
 
 import { useTonWallet } from "@tonconnect/ui-react";
 import { ArrowUp, Plus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
 import { IconButton } from "./icon-button";
@@ -17,8 +17,8 @@ interface Props {
 
 export const IconButtons: React.FC<Props> = ({ className }) => {
   const [isTransferOpen, setIsTransferOpen] = useState(false);
-  const router = useRouter();
   const wallet = useTonWallet();
+  const t = useTranslations("Wallet");
 
   return (
     <div className={cn("flex gap-6", className)}>
@@ -27,7 +27,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
         onclose={() => setIsTransferOpen(false)}
       />
       <IconButton
-        label="Отправить"
+        label={t("transfer.title")}
         icon={
           <ArrowUp
             className="text-background"
@@ -38,7 +38,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
       />
       <QrCode address={wallet?.account.address}>
         <IconButton
-          label="Пополнить"
+          label={t("topUp.title")}
           icon={
             <Plus
               className="text-background"
@@ -47,16 +47,6 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
           }
         />
       </QrCode>
-      {/* <IconButton
-        label="История"
-        icon={
-          <History
-            className="text-background"
-            style={{ width: "21px", height: "21px" }}
-          />
-        }
-        onClick={() => router.push("/transactions")}
-      /> */}
     </div>
   );
 };
