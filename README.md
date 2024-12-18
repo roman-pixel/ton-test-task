@@ -35,6 +35,7 @@ A single-page application built with Next.js and the ton-connect library. The ap
 - **next** - A framework for building server-side and static applications with React.
 - **tailwindcss** - A utility-first CSS framework for designing user interfaces.
 - **typescript** - A programming language for strong typing in JavaScript.
+- **next-intl** - A library for managing internationalization (i18n) in Next.js projects, providing tools for translations, locale detection, and dynamic routing based on user language preferences.
 
 ## Installation and Running the Application
 
