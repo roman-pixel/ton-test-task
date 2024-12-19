@@ -8,9 +8,8 @@
 
 You can view the demo version of the application using the following links:
 
-[🌐 Demo Application](https://ton-test-task.vercel.app)
-
-[📱 Telegram App](https://t.me/ton_link_test_bot)
+[![Deploy](https://img.shields.io/badge/-Depoloy-282828?logo=vercel&logoColor=fff)](https://ton-test-task.vercel.app)
+[![Telegram App](https://img.shields.io/badge/-Telegram_App-26a5e4?logo=telegram&logoColor=fff)](https://t.me/ton_link_test_bot)
 
 ## Description
 
@@ -35,7 +34,6 @@ A single-page application built with Next.js and the ton-connect library. The ap
 - **next** - A framework for building server-side and static applications with React.
 - **tailwindcss** - A utility-first CSS framework for designing user interfaces.
 - **typescript** - A programming language for strong typing in JavaScript.
-- **next-intl** - A library for managing internationalization (i18n) in Next.js projects, providing tools for translations, locale detection, and dynamic routing based on user language preferences.
 
 ## Installation and Running the Application
 
