@@ -27,7 +27,7 @@ export const CurrencyCard: React.FC<Props> = ({
 }) => {
   const [data] = useBalanceStore((state) => [state.data]);
 
-  const { fullPart } = convertTonsValue(data?.balance);
+  const { fullPart } = convertTonsValue(data?.result);
 
   return (
     <Card className="flex items-center justify-between">
@@ -71,7 +71,7 @@ export const CurrencyCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      {data?.balance && (
+      {data?.result && (
         <div className="flex flex-col items-end">
           {isLoading ? (
             <Skeleton className="mb-2 h-5 w-14 bg-background" />

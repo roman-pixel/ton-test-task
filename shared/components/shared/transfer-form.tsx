@@ -46,7 +46,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
   const { toast } = useToast();
   const [tonConnectUI] = useTonConnectUI();
   const { data } = useBalanceStore();
-  const formattedBalance = Number(data?.balance) / TON_MULTIPLIER;
+  const formattedBalance = Number(data?.result) / TON_MULTIPLIER;
 
   const [transferData, setTransferData] = useState<Transfer>({
     address: "",
