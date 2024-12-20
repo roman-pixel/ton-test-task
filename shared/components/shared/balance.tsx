@@ -36,7 +36,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     }
   }, [address, fetchBalance]);
 
-  if (error || data?.code || !data?.balance) {
+  if (error || data?.code || !data?.result) {
     return (
       <Button
         variant="secondary"
@@ -49,7 +49,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     );
   }
 
-  const { wholePart, decimalPart } = convertTonsValue(data.balance);
+  const { wholePart, decimalPart } = convertTonsValue(data.result);
 
   return (
     <div
@@ -58,7 +58,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
         className,
       )}
     >
-      {loading && !data.balance ? (
+      {loading && !data.result ? (
         <>
           <Skeleton className="h-8 w-24" />
           <Skeleton className="h-16 w-56" />

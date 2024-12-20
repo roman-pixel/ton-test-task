@@ -23,9 +23,12 @@ export const MenuBar: React.FC = () => {
 
   return (
     <div
-      className={cn("fixed bottom-0 left-0 w-full bg-background pb-6 pt-4", {
-        "border-t": pathName === "/transactions",
-      })}
+      className={cn(
+        "fixed bottom-0 left-0 w-full bg-background/60 pb-6 pt-4 backdrop-blur-2xl",
+        {
+          "border-t": pathName === "/transactions",
+        },
+      )}
     >
       <Container className="flex items-center justify-evenly gap-10">
         <MenuButton
