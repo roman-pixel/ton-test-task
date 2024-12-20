@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ngrok": "ngrok http http://localhost:3000"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.2",
@@ -18,6 +19,7 @@
     "@tonconnect/ui-react": "^2.0.9",
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@twa-dev/sdk": "^7.10.1",
+    "@types/telegram-web-app": "^7.10.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",

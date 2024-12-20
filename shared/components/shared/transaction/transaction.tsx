@@ -8,6 +8,7 @@ import { Card } from "../card";
 import { TransactionDrawer } from "./transaction-drawer";
 import { TransactionItem } from "./transaction-item";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { Transaction as TransactionType } from "@/shared/types/transaction-types";
 
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
 }
 
 export const Transaction: React.FC<Props> = ({ transaction }) => {
+  const triggerFeedback = useHapticFeedback();
+
   const isIncoming = !!transaction.in_msg.source;
   const isError = !transaction.in_msg.source && !transaction.out_msgs.length;
 
@@ -60,7 +63,10 @@ export const Transaction: React.FC<Props> = ({ transaction }) => {
       hash={transaction.hash}
       isError={isError}
     >
-      <Card className="grid cursor-pointer grid-cols-[auto_1fr_auto] gap-2">
+      <Card
+        className="grid cursor-pointer grid-cols-[auto_1fr_auto] gap-2"
+        onClick={() => triggerFeedback("light")}
+      >
         <TransactionItem
           isIncoming={isIncoming}
           address={formatedAddress}

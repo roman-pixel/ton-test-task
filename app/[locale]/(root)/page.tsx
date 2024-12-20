@@ -12,11 +12,18 @@ import {
   IconButtons,
   TonWalletAddress,
 } from "@/shared/components";
+import { useHapticFeedback } from "@/shared/hooks";
 
 export default function Home() {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const t = useTranslations("Wallet");
+  const triggerFeedback = useHapticFeedback();
+
+  const handleAddWallet = () => {
+    triggerFeedback("medium");
+    tonConnectUI.openModal();
+  };
 
   return (
     <Container className="relative">
@@ -32,9 +39,9 @@ export default function Home() {
         ) : (
           <div className="flex h-[65vh] items-center">
             <Button
-              className="relative rounded-2xl px-6 py-8 text-lg font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
+              className="relative select-none rounded-2xl px-6 py-8 text-lg font-bold text-white dark:shadow-[0_0_30px_10px_hsla(221.2,83.2%,53.3%,0.5)]"
               size="lg"
-              onClick={() => tonConnectUI.openModal()}
+              onClick={handleAddWallet}
             >
               <Plus
                 style={{ width: "24px", height: "24px" }}
