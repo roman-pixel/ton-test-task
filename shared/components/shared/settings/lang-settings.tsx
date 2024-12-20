@@ -19,6 +19,7 @@ import {
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 
 import { Locale, routing, usePathname, useRouter } from "@/i18n/routing";
+import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
 
 export const LangSettings: React.FC<PropsWithChildren> = ({ children }) => {
@@ -27,6 +28,7 @@ export const LangSettings: React.FC<PropsWithChildren> = ({ children }) => {
   const pathname = usePathname();
   const locale = useLocale();
   const params = useParams();
+  const triggerFeedback = useHapticFeedback();
 
   const [isPending, startTransition] = useTransition();
 
@@ -48,6 +50,8 @@ export const LangSettings: React.FC<PropsWithChildren> = ({ children }) => {
   }));
 
   const handleChange = async (event: string) => {
+    triggerFeedback("selection");
+
     const nextLocale = event as Locale;
 
     setValue(nextLocale === value ? "" : nextLocale);

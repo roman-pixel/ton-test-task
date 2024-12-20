@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 
 import { Button, Skeleton } from "../ui";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
@@ -21,6 +22,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     state.loading,
     state.fetchBalance,
   ]);
+  const triggerFeedback = useHapticFeedback();
 
   useEffect(() => {
     if (address) {
@@ -36,13 +38,18 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     }
   }, [address, fetchBalance]);
 
+  const handleClick = () => {
+    triggerFeedback("medium");
+    fetchBalance(address || "");
+  };
+
   if (error || data?.code || !data?.result) {
     return (
       <Button
         variant="secondary"
         size="icon"
         className="p-10"
-        onClick={() => fetchBalance(address || "")}
+        onClick={handleClick}
       >
         <RotateCw strokeWidth={2} style={{ width: "35px", height: "35px" }} />
       </Button>

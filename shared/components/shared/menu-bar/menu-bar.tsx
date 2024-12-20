@@ -9,6 +9,7 @@ import { Container } from "../container";
 import { Icons } from "./icons";
 import { MenuButton } from "./menu-button";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
 
 export const MenuBar: React.FC = () => {
@@ -16,10 +17,16 @@ export const MenuBar: React.FC = () => {
   const pathName = usePathname();
   const wallet = useTonWallet();
   const locale = useLocale();
+  const triggerFeedback = useHapticFeedback();
 
   const t = useTranslations("MenuBar");
 
   const { Wallet, Clock, Settings } = Icons;
+
+  const handleClick = (path: string) => {
+    triggerFeedback("light");
+    router.push(`/${locale}/${path}`);
+  };
 
   return (
     <div
@@ -36,7 +43,7 @@ export const MenuBar: React.FC = () => {
           className={cn("w-14 text-[#858F99]", {
             "text-primary": pathName === `/${locale}`,
           })}
-          onClick={() => router.push(`/${locale}`)}
+          onClick={() => handleClick("")}
         >
           <Wallet
             width="25px"
@@ -52,7 +59,7 @@ export const MenuBar: React.FC = () => {
             className={cn("w-14 text-[#858F99]", {
               "text-primary": pathName === `/${locale}/transactions`,
             })}
-            onClick={() => router.push(`/${locale}/transactions`)}
+            onClick={() => handleClick("transactions")}
           >
             <Clock
               width="24px"
@@ -68,7 +75,7 @@ export const MenuBar: React.FC = () => {
           className={cn("w-14 text-[#858F99]", {
             "text-primary": pathName === `/${locale}/settings`,
           })}
-          onClick={() => router.push(`/${locale}/settings`)}
+          onClick={() => handleClick("settings")}
         >
           <Settings
             width="26px"

@@ -22,7 +22,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/shared/components/ui/drawer";
-import { useClipboard } from "@/shared/hooks";
+import { useClipboard, useHapticFeedback } from "@/shared/hooks";
 import { cutWalletAddress } from "@/shared/lib";
 
 interface Props {
@@ -50,6 +50,7 @@ export const TransactionDrawer: React.FC<PropsWithChildren<Props>> = ({
   const t = useTranslations("Transactions.Transaction");
   const locale = useLocale();
   const { copyToClipboard } = useClipboard();
+  const triggerFeedback = useHapticFeedback();
 
   const dateFnsLocale = locale === "en" ? enUS : ru;
 
@@ -136,7 +137,13 @@ export const TransactionDrawer: React.FC<PropsWithChildren<Props>> = ({
             )}
           </Card>
           <DrawerFooter className="flex items-center">
-            <Link href={`https://testnet.tonviewer.com/transaction/${hash}`}>
+            <Link
+              href={`https://testnet.tonviewer.com/transaction/${hash}`}
+              target="_blank"
+              onClick={() => {
+                triggerFeedback("light");
+              }}
+            >
               <Card className="flex w-min items-center justify-center gap-1 rounded-full px-4 py-2">
                 <Globe
                   style={{ width: "18px", height: "18px" }}

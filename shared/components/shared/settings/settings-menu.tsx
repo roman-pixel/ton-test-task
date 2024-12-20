@@ -13,6 +13,7 @@ import { LangSettings } from "./lang-settings";
 import { ThemeSettings } from "./theme-settings";
 import { WalletDisconnect } from "./wallet-disconnect";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
 
 interface Props {
@@ -27,6 +28,7 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
   const { theme } = useTheme();
   const locale = useLocale();
   const [isLoading, setIsLoading] = useState(true);
+  const triggerFeedback = useHapticFeedback();
 
   useEffect(() => {
     if (locale || theme) {
@@ -34,7 +36,8 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
     }
   }, [locale, theme]);
 
-  const handleClick = () => {
+  const handleLogoutClick = () => {
+    triggerFeedback("light");
     router.replace(`/${locale}`);
     tonConnectUI.disconnect();
   };
@@ -45,7 +48,10 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
         {!isLoading && (
           <Card className="flex flex-col gap-4 divide-y divide-foreground/10">
             <ThemeSettings>
-              <div className="flex cursor-pointer items-center justify-between">
+              <div
+                className="flex cursor-pointer items-center justify-between"
+                onClick={() => triggerFeedback("light")}
+              >
                 <span>{t("theme.title")}</span>
                 <span className="text-primary/90">
                   {t(`theme.type.${theme}`)}
@@ -59,6 +65,7 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
                   "flex cursor-pointer items-center justify-between",
                   { "pt-4": theme },
                 )}
+                onClick={() => triggerFeedback("light")}
               >
                 <span>{t("language.title")}</span>
                 <span className="text-primary/90">
@@ -75,6 +82,7 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
             // href="https://t.me/ton_link_test_bot"
             // target="_blank"
             className="flex items-center justify-between"
+            // onClick={() => triggerFeedback("light")}
           >
             <span className="text-foreground/40">{t("support.title")}</span>
             <CircleHelp
@@ -88,6 +96,7 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
             href="https://github.com/roman-pixel/ton-test-task"
             target="_blank"
             className="flex items-center justify-between pt-4"
+            onClick={() => triggerFeedback("light")}
           >
             <span>{t("github.title")}</span>
             <svg
@@ -104,8 +113,11 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
         </Card>
 
         {wallet && (
-          <WalletDisconnect onClick={handleClick}>
-            <Card className="flex w-full cursor-pointer items-center justify-between py-4 text-base text-destructive dark:text-red-500">
+          <WalletDisconnect onClick={handleLogoutClick}>
+            <Card
+              className="flex w-full cursor-pointer items-center justify-between py-4 text-base text-destructive dark:text-red-500"
+              onClick={() => triggerFeedback("heavy")}
+            >
               <span>{t("logout.title")}</span>
               <LogOut
                 style={{ width: "18px", height: "18px" }}
@@ -123,6 +135,7 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
           href="https://github.com/roman-pixel"
           target="_blank"
           className="text-primary"
+          onClick={() => triggerFeedback("light")}
         >
           roman-pixel
         </Link>

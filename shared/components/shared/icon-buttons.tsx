@@ -9,6 +9,7 @@ import { IconButton } from "./icon-button";
 import { QrCode } from "./qr-code";
 import { TransferForm } from "./transfer-form";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
 
 interface Props {
@@ -19,6 +20,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
   const [isTransferOpen, setIsTransferOpen] = useState(false);
   const wallet = useTonWallet();
   const t = useTranslations("Wallet");
+  const triggerFeedback = useHapticFeedback();
 
   return (
     <div className={cn("flex gap-6", className)}>
@@ -34,7 +36,10 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
             style={{ width: "21px", height: "21px" }}
           />
         }
-        onClick={() => setIsTransferOpen(true)}
+        onClick={() => {
+          setIsTransferOpen(true);
+          triggerFeedback("light");
+        }}
       />
       <QrCode address={wallet?.account.address}>
         <IconButton
@@ -45,6 +50,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
               style={{ width: "21px", height: "21px" }}
             />
           }
+          onClick={() => triggerFeedback("light")}
         />
       </QrCode>
     </div>

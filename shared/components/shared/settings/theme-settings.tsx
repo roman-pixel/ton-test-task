@@ -13,6 +13,7 @@ import {
 } from "../../ui/command";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
 
 export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
@@ -21,6 +22,7 @@ export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
   const [mounted, setMounted] = useState(false);
+  const triggerFeedback = useHapticFeedback();
 
   useEffect(() => {
     setMounted(true);
@@ -36,6 +38,8 @@ export const ThemeSettings: React.FC<PropsWithChildren> = ({ children }) => {
   }));
 
   const handleChange = (selectedValue: string) => {
+    triggerFeedback("selection");
+
     setValue(selectedValue === value ? "" : selectedValue);
     setOpen(false);
     setTheme(selectedValue);

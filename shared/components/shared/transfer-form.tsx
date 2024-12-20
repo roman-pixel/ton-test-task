@@ -18,7 +18,7 @@ import { ClearButton } from "./clear-button";
 import { Container } from "./container";
 import { DrawerCloseButton } from "./drawer-close-button";
 
-import { useToast } from "@/shared/hooks";
+import { useHapticFeedback, useToast } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
@@ -47,6 +47,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
   const [tonConnectUI] = useTonConnectUI();
   const { data } = useBalanceStore();
   const formattedBalance = Number(data?.result) / TON_MULTIPLIER;
+  const triggerFeedback = useHapticFeedback();
 
   const [transferData, setTransferData] = useState<Transfer>({
     address: "",
@@ -87,6 +88,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
         address: transferData.address ? "" : t("inputLabels.required"),
         amount: transferData.amount ? "" : t("inputLabels.required"),
       });
+      triggerFeedback("notification-error");
       return;
     }
 
@@ -120,6 +122,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
       await tonConnectUI.sendTransaction(transaction);
       toast({ title: t("toastMessages.success") });
       setTransferData({ address: "", amount: "", comment: "" });
+      triggerFeedback("notification-success");
       reset();
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -128,8 +131,20 @@ export const TransferForm: React.FC<TransferFormProps> = ({
         description: error?.message || "",
         variant: "destructive",
       });
+      triggerFeedback("notification-error");
       console.error(error);
     }
+  };
+
+  const handleClearButtonClick = (
+    setState: React.Dispatch<React.SetStateAction<Transfer>>,
+    key: keyof Transfer,
+  ) => {
+    triggerFeedback("soft");
+    setState((prevState) => ({
+      ...prevState,
+      [key]: "",
+    }));
   };
 
   return (
@@ -167,7 +182,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   {transferData.address && (
                     <ClearButton
                       onClick={() =>
-                        setTransferData({ ...transferData, address: "" })
+                        handleClearButtonClick(setTransferData, "address")
                       }
                     />
                   )}
@@ -198,7 +213,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   {transferData.amount && (
                     <ClearButton
                       onClick={() =>
-                        setTransferData({ ...transferData, amount: "" })
+                        handleClearButtonClick(setTransferData, "amount")
                       }
                     />
                   )}
@@ -213,12 +228,13 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                   variant="secondary"
                   type="button"
                   size="sm"
-                  onClick={() =>
+                  onClick={() => {
                     setTransferData({
                       ...transferData,
                       amount: String(formattedBalance),
-                    })
-                  }
+                    });
+                    triggerFeedback("medium");
+                  }}
                 >
                   {t("transferAll.title", { amount: formattedBalance })}
                 </Button>
@@ -239,7 +255,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                 {transferData.comment && (
                   <ClearButton
                     onClick={() =>
-                      setTransferData({ ...transferData, comment: "" })
+                      handleClearButtonClick(setTransferData, "comment")
                     }
                   />
                 )}
@@ -250,6 +266,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
               type="submit"
               size="lg"
               className="dark:shadow-[0_0_30px_5px_hsla(221.2,83.2%,53.3%,0.5)]"
+              onClick={() => triggerFeedback("light")}
             >
               {t("sendButton.title")}
             </Button>
