@@ -1,4 +1,12 @@
 {
+  "LocaleLayout": {
+    "title": "TonLink Test"
+  },
+  "NotFound": {
+    "title": "Страница не найдена",
+    "description": "Страница, которую вы ищете, больше не существует здесь",
+    "backButton": "На главную"
+  },
   "Wallet": {
     "transfer": {
       "title": "Отправить"

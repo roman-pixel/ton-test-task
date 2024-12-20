@@ -1,4 +1,12 @@
 {
+  "LocaleLayout": {
+    "title": "TonLink Test"
+  },
+  "NotFound": {
+    "title": "Page Not Found",
+    "description": "The page you're after no longer exists here",
+    "backButton": "Go back"
+  },
   "Wallet": {
     "transfer": {
       "title": "Send"
