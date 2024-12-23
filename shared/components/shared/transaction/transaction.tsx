@@ -37,6 +37,8 @@ export const Transaction: React.FC<Props> = ({ transaction }) => {
 
   const formatedAddress = Address.parse(getRawAddress() || "").toString({
     urlSafe: true,
+    bounceable: false,
+    testOnly: true,
   });
 
   const formatTonValue = () => {

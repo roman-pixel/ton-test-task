@@ -31,7 +31,10 @@ export default function Home() {
         {wallet ? (
           <>
             <Balance address={wallet?.account.address} />
-            <TonWalletAddress walletAddress={wallet?.account.address} />
+            <TonWalletAddress
+              walletAddress={wallet?.account.address}
+              chainId={wallet?.account.chain}
+            />
             <IconButtons className="mt-4" />
 
             <CurrencyContainer className="mt-4 w-full" />
