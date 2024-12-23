@@ -1,11 +1,11 @@
 "use client";
 
-import { RotateCw } from "lucide-react";
+import { Asterisk, RotateCw } from "lucide-react";
 import React, { useEffect } from "react";
 
-import { Button, Skeleton } from "../ui";
+import { Badge, Button, Skeleton } from "../ui";
 
-import { useHapticFeedback } from "@/shared/hooks";
+import { useHapticFeedback, useLocalStorage } from "@/shared/hooks";
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
@@ -16,13 +16,22 @@ interface Props {
 }
 
 export const Balance: React.FC<Props> = ({ address, className }) => {
-  const [data, error, loading, fetchBalance] = useBalanceStore((state) => [
-    state.data,
-    state.error,
-    state.loading,
-    state.fetchBalance,
-  ]);
+  const [data, error, loading, fetchBalance, hide, updateHide] =
+    useBalanceStore((state) => [
+      state.data,
+      state.error,
+      state.loading,
+      state.fetchBalance,
+      state.hide,
+      state.updateHide,
+    ]);
   const triggerFeedback = useHapticFeedback();
+  const { getItem, setItem } = useLocalStorage();
+
+  useEffect(() => {
+    updateHide(getItem("hideBalance"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (address) {
@@ -38,7 +47,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
     }
   }, [address, fetchBalance]);
 
-  const handleClick = () => {
+  const handleRetryClick = () => {
     triggerFeedback("medium");
     fetchBalance(address || "");
   };
@@ -49,7 +58,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
         variant="secondary"
         size="icon"
         className="p-10"
-        onClick={handleClick}
+        onClick={handleRetryClick}
       >
         <RotateCw strokeWidth={2} style={{ width: "35px", height: "35px" }} />
       </Button>
@@ -57,6 +66,12 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
   }
 
   const { wholePart, decimalPart } = convertTonsValue(data.result);
+
+  const handleBalanceClick = () => {
+    triggerFeedback("medium");
+    updateHide(!hide);
+    setItem("hideBalance", String(!hide));
+  };
 
   return (
     <div
@@ -72,10 +87,38 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
         </>
       ) : (
         <>
-          <div className="flex items-end font-bold">
-            <span className="text-6xl">{wholePart || "0"}</span>
-            <span className="text-5xl">,{decimalPart || "00"}</span>
-            <span className="pl-2 text-2xl uppercase opacity-60">ton</span>
+          <div
+            className="flex items-end font-bold"
+            onClick={handleBalanceClick}
+          >
+            {hide ? (
+              <Badge
+                variant="secondary"
+                className="flex items-center justify-center px-6 py-3"
+              >
+                <Asterisk
+                  strokeWidth={2.4}
+                  className="-mx-[1px]"
+                  style={{ width: "34px", height: "34px" }}
+                />
+                <Asterisk
+                  strokeWidth={2.4}
+                  className="-mx-[1px]"
+                  style={{ width: "34px", height: "34px" }}
+                />
+                <Asterisk
+                  strokeWidth={2.4}
+                  className="-mx-[1px]"
+                  style={{ width: "34px", height: "34px" }}
+                />
+              </Badge>
+            ) : (
+              <>
+                <span className="text-6xl">{wholePart || "0"}</span>
+                <span className="text-5xl">,{decimalPart || "00"}</span>
+                <span className="pl-2 text-2xl uppercase opacity-60">ton</span>
+              </>
+            )}
           </div>
         </>
       )}
