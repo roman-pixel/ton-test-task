@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-before-interactive-script-outside-document */
-
 /* eslint-disable @next/next/no-head-element */
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
@@ -33,7 +31,7 @@ export default async function BaseLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <head>
         <meta
           name="viewport"
@@ -41,10 +39,10 @@ export default async function BaseLayout({
         />
         <Script
           src="https://telegram.org/js/telegram-web-app.js"
-          strategy="beforeInteractive"
+          strategy="afterInteractive"
         ></Script>
       </head>
-      <body className={cn(inter.className, className)}>
+      <body className={cn(inter.className, className)} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <Providers>{children}</Providers>
         </NextIntlClientProvider>

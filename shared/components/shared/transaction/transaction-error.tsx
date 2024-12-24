@@ -32,7 +32,12 @@ export const TransactionError: React.FC<Props> = ({
         <p className="text-xl tracking-wide text-foreground">{result}</p>
       </div>
       {code !== 422 && (
-        <Button variant="secondary" className="text-primary" onClick={onClick}>
+        <Button
+          variant="secondary"
+          size="lg"
+          className="text-base text-primary"
+          onClick={onClick}
+        >
           {t("buttonRetry")}
         </Button>
       )}

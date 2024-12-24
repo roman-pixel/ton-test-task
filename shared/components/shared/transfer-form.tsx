@@ -5,7 +5,6 @@ import { useTonConnectUI } from "@tonconnect/ui-react";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
 
-import { TON_MULTIPLIER } from "../constants/ton";
 import { Button, Input, Textarea } from "../ui";
 import {
   Drawer,
@@ -18,6 +17,7 @@ import { ClearButton } from "./clear-button";
 import { Container } from "./container";
 import { DrawerCloseButton } from "./drawer-close-button";
 
+import { TON_MULTIPLIER } from "@/shared/constants";
 import { useHapticFeedback, useToast } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";

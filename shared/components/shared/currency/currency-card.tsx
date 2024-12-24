@@ -1,3 +1,4 @@
+import { Asterisk } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -25,7 +26,7 @@ export const CurrencyCard: React.FC<Props> = ({
   currencyDiff,
   isLoading,
 }) => {
-  const [data] = useBalanceStore((state) => [state.data]);
+  const [data, hide] = useBalanceStore((state) => [state.data, state.hide]);
 
   const { fullPart } = convertTonsValue(data?.result);
 
@@ -71,25 +72,71 @@ export const CurrencyCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      {data?.result && (
+      {data?.ok && (
         <div className="flex flex-col items-end">
           {isLoading ? (
             <Skeleton className="mb-2 h-5 w-14 bg-background" />
           ) : (
-            <p className="font-medium">
-              {fullPart ? String(fullPart).replace(".", ",") : "0,00"}
-            </p>
+            <div className="font-medium">
+              {hide ? (
+                <div className="flex">
+                  <Asterisk
+                    strokeWidth={2.4}
+                    className="-mx-[2px]"
+                    style={{ width: "18px", height: "18px" }}
+                  />
+                  <Asterisk
+                    strokeWidth={2.4}
+                    className="-mx-[2px]"
+                    style={{ width: "18px", height: "18px" }}
+                  />
+                  <Asterisk
+                    strokeWidth={2.4}
+                    className="-mx-[2px]"
+                    style={{ width: "18px", height: "18px" }}
+                  />
+                </div>
+              ) : fullPart ? (
+                String(fullPart).replace(".", ",")
+              ) : (
+                "0,00"
+              )}
+            </div>
           )}
           {isLoading ? (
             <Skeleton className="h-4 w-12 bg-background" />
           ) : (
             currencyPrice && (
-              <p className="text-sm opacity-70">
-                <span className="mr-[1px]">$</span>
-                {String(
-                  Math.floor(fullPart * currencyPrice * 100) / 100,
-                ).replace(".", ",")}
-              </p>
+              <div className="text-sm opacity-70">
+                {hide ? (
+                  <div className="mt-1 flex">
+                    <Asterisk
+                      strokeWidth={2.4}
+                      className="-mx-[2px]"
+                      style={{ width: "15px", height: "15px" }}
+                    />
+                    <Asterisk
+                      strokeWidth={2.4}
+                      className="-mx-[2px]"
+                      style={{ width: "15px", height: "15px" }}
+                    />
+                    <Asterisk
+                      strokeWidth={2.4}
+                      className="-mx-[2px]"
+                      style={{ width: "15px", height: "15px" }}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <span className="mr-[1px]">$</span>
+                    <span>
+                      {String(
+                        Math.floor(fullPart * currencyPrice * 100) / 100,
+                      ).replace(".", ",")}
+                    </span>
+                  </>
+                )}
+              </div>
             )
           )}
         </div>

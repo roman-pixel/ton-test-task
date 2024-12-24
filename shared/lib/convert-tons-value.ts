@@ -1,4 +1,4 @@
-import { TON_MULTIPLIER } from "../components/constants/ton";
+import { TON_MULTIPLIER } from "../constants";
 
 /**
  * Converts nano Tons to Tons

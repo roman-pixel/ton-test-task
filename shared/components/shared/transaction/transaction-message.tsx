@@ -7,6 +7,7 @@ import React from "react";
 import { Button } from "../../ui";
 import { Container } from "../container";
 
+import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
 
 interface Props {
@@ -23,6 +24,12 @@ export const TransactionMessage: React.FC<Props> = ({
   const t = useTranslations("Transactions.noTransactions");
   const router = useRouter();
   const locale = useLocale();
+  const triggerFeedback = useHapticFeedback();
+
+  const handleClick = () => {
+    triggerFeedback("light");
+    router.push(`/${locale}`);
+  };
 
   return (
     <Container
@@ -38,7 +45,12 @@ export const TransactionMessage: React.FC<Props> = ({
         )}
       </div>
 
-      <Button variant="secondary" onClick={() => router.push(`/${locale}`)}>
+      <Button
+        variant="secondary"
+        size="lg"
+        className="text-base text-primary"
+        onClick={handleClick}
+      >
         {t("backButton")}
       </Button>
     </Container>

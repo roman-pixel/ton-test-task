@@ -1,7 +1,12 @@
 "use client";
 
-import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
-import { CircleHelp, LogOut } from "lucide-react";
+import {
+  Wallet,
+  WalletInfoRemote,
+  useTonConnectUI,
+  useTonWallet,
+} from "@tonconnect/ui-react";
+import { CircleHelp, Info, LogOut } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import Link from "next/link";
@@ -12,6 +17,7 @@ import { Card } from "../card";
 import { LangSettings } from "./lang-settings";
 import { ThemeSettings } from "./theme-settings";
 import { WalletDisconnect } from "./wallet-disconnect";
+import { WalletInfo } from "./wallet-info";
 
 import { useHapticFeedback } from "@/shared/hooks";
 import { cn } from "@/shared/lib";
@@ -111,6 +117,22 @@ export const SettingsMenu: React.FC<Props> = ({ className }) => {
             </svg>
           </Link>
         </Card>
+
+        {wallet && (
+          <WalletInfo wallet={wallet as WalletInfoRemote & Wallet}>
+            <Card
+              className="flex w-full cursor-pointer items-center justify-between py-4 text-base"
+              onClick={() => triggerFeedback("light")}
+            >
+              <span>{t("walletInfo.title")}</span>
+              <Info
+                style={{ width: "22px", height: "22px" }}
+                strokeWidth={2.3}
+                className="stroke-primary/90"
+              />
+            </Card>
+          </WalletInfo>
+        )}
 
         {wallet && (
           <WalletDisconnect onClick={handleLogoutClick}>

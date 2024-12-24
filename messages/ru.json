@@ -119,6 +119,15 @@
     "github": {
       "title": "GitHub"
     },
+    "walletInfo": {
+      "title": "О кошельке",
+      "infoDrawer": {
+        "title": "Информация о кошельке",
+        "description": "Данные о подключенном кошельке",
+        "link": "Подробнее на",
+        "version": "Версия {version}"
+      }
+    },
     "logout": {
       "title": "Выйти",
       "logoutDrawer": {

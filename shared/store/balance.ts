@@ -3,22 +3,26 @@ import { create } from "zustand";
 import { getBalance } from "../services/getBalance";
 
 // Успешный ответ с балансом
-interface AccountInfoResponse {
+type AccountInfoResponse = {
   ok: boolean;
   result: string;
   code: number;
   error: string;
-}
+};
 
-export interface StoreState {
+type Action = {
+  updateHide: (hide: boolean) => void;
+  fetchBalance: (address: string) => Promise<void>;
+};
+
+export type StoreState = {
   loading: boolean;
   error: boolean;
   data: AccountInfoResponse;
+  hide: boolean;
+};
 
-  fetchBalance: (address: string) => Promise<void>;
-}
-
-export const useBalanceStore = create<StoreState>((set) => ({
+export const useBalanceStore = create<StoreState & Action>((set) => ({
   error: false,
   loading: true,
   data: {
@@ -27,6 +31,9 @@ export const useBalanceStore = create<StoreState>((set) => ({
     result: "",
     ok: true,
   },
+  hide: false,
+
+  updateHide: (hide) => set(() => ({ hide })),
 
   fetchBalance: async (address: string) => {
     try {
