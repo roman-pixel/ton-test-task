@@ -72,7 +72,7 @@ export const CurrencyCard: React.FC<Props> = ({
           )}
         </div>
       </div>
-      {data?.result && (
+      {data?.ok && (
         <div className="flex flex-col items-end">
           {isLoading ? (
             <Skeleton className="mb-2 h-5 w-14 bg-background" />
@@ -129,9 +129,11 @@ export const CurrencyCard: React.FC<Props> = ({
                 ) : (
                   <>
                     <span className="mr-[1px]">$</span>
-                    {String(
-                      Math.floor(fullPart * currencyPrice * 100) / 100,
-                    ).replace(".", ",")}
+                    <span>
+                      {String(
+                        Math.floor(fullPart * currencyPrice * 100) / 100,
+                      ).replace(".", ",")}
+                    </span>
                   </>
                 )}
               </div>
