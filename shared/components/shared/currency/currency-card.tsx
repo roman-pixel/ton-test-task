@@ -77,7 +77,7 @@ export const CurrencyCard: React.FC<Props> = ({
           {isLoading ? (
             <Skeleton className="mb-2 h-5 w-14 bg-background" />
           ) : (
-            <p className="font-medium">
+            <div className="font-medium">
               {hide ? (
                 <div className="flex">
                   <Asterisk
@@ -101,13 +101,13 @@ export const CurrencyCard: React.FC<Props> = ({
               ) : (
                 "0,00"
               )}
-            </p>
+            </div>
           )}
           {isLoading ? (
             <Skeleton className="h-4 w-12 bg-background" />
           ) : (
             currencyPrice && (
-              <p className="text-sm opacity-70">
+              <div className="text-sm opacity-70">
                 {hide ? (
                   <div className="mt-1 flex">
                     <Asterisk
@@ -134,7 +134,7 @@ export const CurrencyCard: React.FC<Props> = ({
                     ).replace(".", ",")}
                   </>
                 )}
-              </p>
+              </div>
             )
           )}
         </div>

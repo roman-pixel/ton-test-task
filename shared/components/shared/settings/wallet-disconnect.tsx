@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import React, { PropsWithChildren } from "react";
 
-import { Button } from "../../ui";
+import { Badge } from "../../ui";
 import {
   Drawer,
   DrawerClose,
@@ -35,15 +35,14 @@ export const WalletDisconnect: React.FC<PropsWithChildren<Props>> = ({
             <DrawerTitle>{t("title")}</DrawerTitle>
             <DrawerDescription>{t("description")}</DrawerDescription>
           </DrawerHeader>
-          <DrawerFooter>
+          <DrawerFooter onClick={onClick}>
             <DrawerClose>
-              <Button
-                className="w-full text-destructive dark:text-red-500"
+              <Badge
+                className="flex h-12 w-full justify-center rounded-md text-sm text-destructive dark:text-red-500"
                 variant="secondary"
-                onClick={onClick}
               >
                 {t("confirmButton")}
-              </Button>
+              </Badge>
             </DrawerClose>
           </DrawerFooter>
         </Container>

@@ -13,7 +13,7 @@ import {
   TransactionMessage,
   TransactionSkeleton,
 } from "@/shared/components";
-import { useTransactions } from "@/shared/hooks";
+import { useHapticFeedback, useTransactions } from "@/shared/hooks";
 import { groupTransactionsByDate } from "@/shared/lib";
 
 export default function Transactions() {
@@ -21,6 +21,7 @@ export default function Transactions() {
   const wallet = useTonWallet();
   const router = useRouter();
   const locale = useLocale();
+  const triggerFeedback = useHapticFeedback();
 
   const {
     transactions: transactionsResponse,
@@ -37,7 +38,15 @@ export default function Transactions() {
   }, [wallet, router, locale]);
 
   if (isError) {
-    return <TransactionError error={error} onClick={fetchTransactions} />;
+    return (
+      <TransactionError
+        error={error}
+        onClick={() => {
+          triggerFeedback("light");
+          fetchTransactions();
+        }}
+      />
+    );
   }
 
   if (transactionsResponse?.transactions?.length === 0) {
