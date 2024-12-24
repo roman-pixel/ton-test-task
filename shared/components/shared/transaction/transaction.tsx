@@ -3,11 +3,11 @@
 import { Address } from "@ton/core";
 import React from "react";
 
-import { TON_MULTIPLIER } from "../../constants/ton";
 import { Card } from "../card";
 import { TransactionDrawer } from "./transaction-drawer";
 import { TransactionItem } from "./transaction-item";
 
+import { TON_MULTIPLIER } from "@/shared/constants";
 import { useHapticFeedback } from "@/shared/hooks";
 import { Transaction as TransactionType } from "@/shared/types/transaction-types";
 

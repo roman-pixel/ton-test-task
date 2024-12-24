@@ -12,7 +12,6 @@ import { Card } from "../../card";
 import { Container } from "../../container";
 import { DrawerCloseButton } from "../../drawer-close-button";
 
-import { TON_MULTIPLIER } from "@/shared/components/constants/ton";
 import {
   Drawer,
   DrawerContent,
@@ -22,6 +21,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/shared/components/ui/drawer";
+import { TON_MULTIPLIER } from "@/shared/constants";
 import { useClipboard, useHapticFeedback } from "@/shared/hooks";
 import { cutWalletAddress } from "@/shared/lib";
 
