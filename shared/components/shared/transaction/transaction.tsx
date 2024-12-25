@@ -1,6 +1,5 @@
 "use client";
 
-import { Address } from "@ton/core";
 import React from "react";
 
 import { Card } from "../card";
@@ -9,6 +8,7 @@ import { TransactionItem } from "./transaction-item";
 
 import { TON_MULTIPLIER } from "@/shared/constants";
 import { useHapticFeedback } from "@/shared/hooks";
+import { convertAddress } from "@/shared/lib";
 import { Transaction as TransactionType } from "@/shared/types/transaction-types";
 
 interface Props {
@@ -35,11 +35,7 @@ export const Transaction: React.FC<Props> = ({ transaction }) => {
       : transaction?.out_msgs?.[0]?.destination;
   };
 
-  const formatedAddress = Address.parse(getRawAddress() || "").toString({
-    urlSafe: true,
-    bounceable: false,
-    testOnly: true,
-  });
+  const formatedAddress = convertAddress(getRawAddress() || "");
 
   const formatTonValue = () => {
     const value =

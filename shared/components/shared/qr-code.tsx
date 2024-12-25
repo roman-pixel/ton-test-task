@@ -1,11 +1,12 @@
 "use client";
 
-import { Copy } from "lucide-react";
+import { Account } from "@tonconnect/ui-react";
+import { Copy, Share } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { QRCodeCanvas } from "qrcode.react";
 import React, { useEffect, useState } from "react";
 
-import { Button, Skeleton } from "../ui";
+import { Badge, Button, Skeleton } from "../ui";
 import {
   Drawer,
   DrawerContent,
@@ -18,22 +19,26 @@ import {
 import { Container } from "./container";
 import { DrawerCloseButton } from "./drawer-close-button";
 
-import { useClipboard } from "@/shared/hooks";
+import { useClipboard, useHapticFeedback } from "@/shared/hooks";
+import { convertAddress } from "@/shared/lib";
 
 interface QrCodeProps {
-  address: string | undefined;
+  walletAccount: Account | undefined;
 }
 
 export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
-  address,
+  walletAccount,
   children,
 }) => {
   const t = useTranslations("Wallet.GetTonDrawer");
   const { copyToClipboard } = useClipboard();
   const [isLoading, setIsLoading] = useState(true);
+  const triggerFeedback = useHapticFeedback();
+
+  const formatedAddress = convertAddress(walletAccount?.address || "");
 
   useEffect(() => {
-    if (!address) return;
+    if (!walletAccount) return;
 
     const timeout = setTimeout(() => {
       setIsLoading(false);
@@ -42,14 +47,28 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
     return () => {
       clearTimeout(timeout);
     };
-  }, [address]);
+  }, [walletAccount]);
+
+  const handleShareClick = () => {
+    triggerFeedback("light");
+
+    if (navigator.share) {
+      navigator
+        .share({
+          text: formatedAddress,
+        })
+        .catch((error) => console.error(t("errorMessages.shareError"), error));
+    } else {
+      console.warn(t("errorMessages.shareWarn"));
+    }
+  };
 
   return (
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <Container className="mb-4">
-          <DrawerCloseButton className="right-0" />
+          <DrawerCloseButton />
           <DrawerHeader className="mt-5 flex flex-col items-center gap-3">
             <DrawerTitle className="text-xl">
               {t("drawerTitle.title")}
@@ -61,9 +80,9 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
           {isLoading ? (
             <Skeleton className="h-80 w-full rounded-lg" />
           ) : (
-            <div className="mx-4 flex flex-col items-center gap-4 rounded-lg bg-white p-5">
+            <div className="mx-4 flex flex-col items-center gap-3 rounded-md bg-secondary p-5 dark:bg-white">
               <QRCodeCanvas
-                value={address || ""}
+                value={walletAccount?.address || ""}
                 size={260}
                 level="Q"
                 imageSettings={{
@@ -74,22 +93,31 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
                 }}
               />
               <p className="break-all text-center text-sm text-black">
-                {address}
+                {formatedAddress}
               </p>
+              {walletAccount?.chain === "-3" && (
+                <Badge className="h-6 rounded-sm bg-amber-500/90 text-[10px] uppercase text-black/90">
+                  Testnet
+                </Badge>
+              )}
             </div>
           )}
-          <DrawerFooter className="gap-4">
-            {isLoading ? (
-              <>
-                <Skeleton className="h-10 w-full" />
-                <Skeleton className="h-9 w-full" />
-              </>
-            ) : (
-              <Button onClick={() => copyToClipboard(address || "")}>
-                <Copy />
-                <span>{t("copyButton.title")}</span>
-              </Button>
-            )}
+          <DrawerFooter className="mx-7 mb-4 flex-row items-center justify-center gap-3">
+            <Button
+              variant="secondary"
+              className="h-12 rounded-full px-8"
+              onClick={() => copyToClipboard(walletAccount?.address || "")}
+            >
+              <Copy strokeWidth={2.3} />
+              <span>{t("copyButton.title")}</span>
+            </Button>
+            <Button
+              variant="secondary"
+              className="flex h-12 w-12 items-center justify-center rounded-full"
+              onClick={handleShareClick}
+            >
+              <Share strokeWidth={2.3} />
+            </Button>
           </DrawerFooter>
         </Container>
       </DrawerContent>

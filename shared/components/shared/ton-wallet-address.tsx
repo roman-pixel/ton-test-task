@@ -1,12 +1,11 @@
 "use client";
 
-import { Address } from "@ton/core";
 import React from "react";
 
 import { Badge, Button } from "../ui";
 
 import { useClipboard } from "@/shared/hooks";
-import { cutWalletAddress } from "@/shared/lib";
+import { convertAddress, cutWalletAddress } from "@/shared/lib";
 
 interface Props {
   walletAddress: string | undefined;
@@ -18,11 +17,7 @@ export const TonWalletAddress: React.FC<Props> = ({
   chainId,
 }) => {
   const { copyToClipboard } = useClipboard();
-  const formatedAddress = Address.parse(walletAddress || "").toString({
-    urlSafe: true,
-    bounceable: false,
-    testOnly: true,
-  });
+  const formatedAddress = convertAddress(walletAddress || "");
 
   return (
     <div className="flex items-center justify-center gap-2">

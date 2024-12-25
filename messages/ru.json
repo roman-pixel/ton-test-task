@@ -51,6 +51,10 @@
       },
       "copyButton": {
         "title": "Скопировать"
+      },
+      "errorMessages": {
+        "shareError": "Не удалось поделиться {error}",
+        "shareWarn": "Ваша система не поддерживает это действие"
       }
     }
   },

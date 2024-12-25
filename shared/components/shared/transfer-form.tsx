@@ -151,7 +151,7 @@ export const TransferForm: React.FC<TransferFormProps> = ({
     <Drawer open={isOpen} onOpenChange={reset}>
       <DrawerContent>
         <Container className="max-w-md py-6">
-          <DrawerCloseButton />
+          <DrawerCloseButton className="right-3" />
           <DrawerHeader>
             <DrawerTitle className="text-center text-2xl">
               {t("drawerTitle.title")}

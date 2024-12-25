@@ -41,7 +41,7 @@ export const IconButtons: React.FC<Props> = ({ className }) => {
           triggerFeedback("light");
         }}
       />
-      <QrCode address={wallet?.account.address}>
+      <QrCode walletAccount={wallet?.account}>
         <IconButton
           label={t("topUp.title")}
           icon={
