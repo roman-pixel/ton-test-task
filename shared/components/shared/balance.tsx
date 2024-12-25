@@ -1,9 +1,10 @@
 "use client";
 
-import { Asterisk, RotateCw } from "lucide-react";
+import { RotateCw } from "lucide-react";
 import React, { useEffect } from "react";
 
 import { Badge, Button, Skeleton } from "../ui";
+import { Asterisk } from "./asterisk";
 
 import { useHapticFeedback, useLocalStorage } from "@/shared/hooks";
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
@@ -57,10 +58,10 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
       <Button
         variant="secondary"
         size="icon"
-        className="p-10"
+        className="p-8"
         onClick={handleRetryClick}
       >
-        <RotateCw strokeWidth={2} style={{ width: "35px", height: "35px" }} />
+        <RotateCw strokeWidth={2} style={{ width: "32px", height: "32px" }} />
       </Button>
     );
   }
@@ -76,7 +77,7 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center gap-2",
+        "mb-1 flex flex-col items-center justify-center gap-2",
         className,
       )}
     >
@@ -97,19 +98,11 @@ export const Balance: React.FC<Props> = ({ address, className }) => {
                 className="flex items-center justify-center px-6 py-3"
               >
                 <Asterisk
+                  count={3}
                   strokeWidth={2.4}
                   className="-mx-[1px]"
-                  style={{ width: "34px", height: "34px" }}
-                />
-                <Asterisk
-                  strokeWidth={2.4}
-                  className="-mx-[1px]"
-                  style={{ width: "34px", height: "34px" }}
-                />
-                <Asterisk
-                  strokeWidth={2.4}
-                  className="-mx-[1px]"
-                  style={{ width: "34px", height: "34px" }}
+                  width={34}
+                  height={34}
                 />
               </Badge>
             ) : (

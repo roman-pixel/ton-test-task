@@ -51,6 +51,10 @@
       },
       "copyButton": {
         "title": "Copy"
+      },
+      "errorMessages": {
+        "shareError": "Share error {error}",
+        "shareWarn": "Your system does not support sharing"
       }
     }
   },
@@ -124,7 +128,6 @@
       "infoDrawer": {
         "title": "Wallet info",
         "description": "Data about connected wallet",
-        "link": "Learn more",
         "version": "Version {version}"
       }
     },
