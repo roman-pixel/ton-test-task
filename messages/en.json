@@ -124,7 +124,6 @@
       "infoDrawer": {
         "title": "Wallet info",
         "description": "Data about connected wallet",
-        "link": "Learn more",
         "version": "Version {version}"
       }
     },

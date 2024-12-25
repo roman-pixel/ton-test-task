@@ -25,41 +25,35 @@ export const WalletInfo: React.FC<PropsWithChildren<Props>> = ({
 }) => {
   const t = useTranslations("Settings.walletInfo.infoDrawer");
 
-  console.log(wallet);
-
   return (
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
         <Container className="flex flex-col gap-4 pb-8">
           <DrawerCloseButton />
-          <DrawerHeader className="mt-8 flex flex-col items-center gap-3">
+          <DrawerHeader className="mt-8">
             <DrawerTitle>{t("title")}</DrawerTitle>
             <DrawerDescription>{t("description")}</DrawerDescription>
           </DrawerHeader>
 
-          <div className="flex flex-col items-center justify-center gap-1">
+          <div className="flex flex-col items-center justify-center gap-2">
             <Image
               src={wallet.imageUrl}
               width={80}
               height={80}
-              className="mb-3 rounded-full"
+              className="rounded-full"
               alt="wallet logo"
               placeholder="blur"
               blurDataURL="/wallet-placeholder.svg"
             />
-            <p className="text-lg">{wallet.name}</p>
-            <p>
-              {t("link")}{" "}
-              <Link
-                href={wallet.aboutUrl}
-                target="_blank"
-                className="text-primary"
-              >
-                {wallet.appName}
-              </Link>
-            </p>
-            <p className="mt-3 text-sm text-foreground/70">
+            <Link
+              href={wallet.aboutUrl}
+              target="_blank"
+              className="text-lg text-primary"
+            >
+              {wallet.name}
+            </Link>
+            <p className="mt-3 text-xs text-foreground/70">
               {t("version", { version: wallet.device.appVersion })}
             </p>
           </div>

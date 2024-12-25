@@ -1,8 +1,8 @@
-import { Asterisk } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
 import { Skeleton } from "../../ui";
+import { Asterisk } from "../asterisk";
 import { Card } from "../card";
 
 import { convertTonsValue } from "@/shared/lib/convert-tons-value";
@@ -81,19 +81,11 @@ export const CurrencyCard: React.FC<Props> = ({
               {hide ? (
                 <div className="flex">
                   <Asterisk
+                    count={3}
                     strokeWidth={2.4}
                     className="-mx-[2px]"
-                    style={{ width: "18px", height: "18px" }}
-                  />
-                  <Asterisk
-                    strokeWidth={2.4}
-                    className="-mx-[2px]"
-                    style={{ width: "18px", height: "18px" }}
-                  />
-                  <Asterisk
-                    strokeWidth={2.4}
-                    className="-mx-[2px]"
-                    style={{ width: "18px", height: "18px" }}
+                    width={18}
+                    height={18}
                   />
                 </div>
               ) : fullPart ? (
@@ -111,19 +103,11 @@ export const CurrencyCard: React.FC<Props> = ({
                 {hide ? (
                   <div className="mt-1 flex">
                     <Asterisk
+                      count={3}
                       strokeWidth={2.4}
                       className="-mx-[2px]"
-                      style={{ width: "15px", height: "15px" }}
-                    />
-                    <Asterisk
-                      strokeWidth={2.4}
-                      className="-mx-[2px]"
-                      style={{ width: "15px", height: "15px" }}
-                    />
-                    <Asterisk
-                      strokeWidth={2.4}
-                      className="-mx-[2px]"
-                      style={{ width: "15px", height: "15px" }}
+                      width={15}
+                      height={15}
                     />
                   </div>
                 ) : (

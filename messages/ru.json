@@ -122,9 +122,8 @@
     "walletInfo": {
       "title": "О кошельке",
       "infoDrawer": {
-        "title": "Информация о кошельке",
+        "title": "Кошелёк",
         "description": "Данные о подключенном кошельке",
-        "link": "Подробнее на",
         "version": "Версия {version}"
       }
     },
