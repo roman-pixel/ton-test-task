@@ -5,7 +5,7 @@ import { Skeleton } from "../../ui";
 import { Asterisk } from "../asterisk";
 import { Card } from "../card";
 
-import { convertTonsValue } from "@/shared/lib/convert-tons-value";
+import { convertTonsValue, convertUsdValue } from "@/shared/lib";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
@@ -16,6 +16,7 @@ interface Props {
   currencyPrice: number | undefined;
   currencyDiff: string | undefined;
   isLoading: boolean;
+  onClick?: () => void;
 }
 
 export const CurrencyCard: React.FC<Props> = ({
@@ -25,13 +26,14 @@ export const CurrencyCard: React.FC<Props> = ({
   currencyPrice,
   currencyDiff,
   isLoading,
+  onClick,
 }) => {
   const [data, hide] = useBalanceStore((state) => [state.data, state.hide]);
 
   const { fullPart } = convertTonsValue(data?.result);
 
   return (
-    <Card className="flex items-center justify-between">
+    <Card className="flex items-center justify-between" onClick={onClick}>
       <div className="flex items-center gap-3">
         {isLoading ? (
           <Skeleton className="h-10 w-10 rounded-full bg-background" />
@@ -113,11 +115,7 @@ export const CurrencyCard: React.FC<Props> = ({
                 ) : (
                   <>
                     <span className="mr-[1px]">$</span>
-                    <span>
-                      {String(
-                        Math.floor(fullPart * currencyPrice * 100) / 100,
-                      ).replace(".", ",")}
-                    </span>
+                    <span>{convertUsdValue(fullPart, currencyPrice)}</span>
                   </>
                 )}
               </div>

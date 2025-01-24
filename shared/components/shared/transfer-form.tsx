@@ -147,6 +147,15 @@ export const TransferForm: React.FC<TransferFormProps> = ({
     }));
   };
 
+  const handleButtonAllClick = () => {
+    triggerFeedback("soft");
+
+    setTransferData((prevState) => ({
+      ...prevState,
+      amount: String(formattedBalance),
+    }));
+  };
+
   return (
     <Drawer open={isOpen} onOpenChange={reset}>
       <DrawerContent>
@@ -225,16 +234,14 @@ export const TransferForm: React.FC<TransferFormProps> = ({
                 )}
                 <Button
                   className="mt-3 h-8 text-xs opacity-85"
-                  variant="secondary"
+                  variant={
+                    transferData.amount === String(formattedBalance)
+                      ? "default"
+                      : "secondary"
+                  }
                   type="button"
                   size="sm"
-                  onClick={() => {
-                    setTransferData({
-                      ...transferData,
-                      amount: String(formattedBalance),
-                    });
-                    triggerFeedback("medium");
-                  }}
+                  onClick={handleButtonAllClick}
                 >
                   {t("transferAll.title", { amount: formattedBalance })}
                 </Button>

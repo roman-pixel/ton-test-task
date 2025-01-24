@@ -13,4 +13,6 @@ export type Rates = Record<string, TokenData>;
 
 export type RateResponseData = {
   rates: Rates;
+  error: string;
+  error_code: number;
 };

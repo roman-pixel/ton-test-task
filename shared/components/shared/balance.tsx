@@ -7,7 +7,7 @@ import { Badge, Button, Skeleton } from "../ui";
 import { Asterisk } from "./asterisk";
 
 import { useHapticFeedback, useLocalStorage } from "@/shared/hooks";
-import { convertTonsValue } from "@/shared/lib/convert-tons-value";
+import { convertTonsValue } from "@/shared/lib";
 import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
