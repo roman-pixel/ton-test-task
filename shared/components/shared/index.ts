@@ -17,3 +17,4 @@ export * from "./currency";
 export * from "./transaction";
 export * from "./settings";
 export * from "./menu-bar";
+export * from "./rate";

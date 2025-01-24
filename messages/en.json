@@ -58,6 +58,25 @@
       }
     }
   },
+  "TonRate": {
+    "warnMessage": {
+      "title": "The rates provided are for informational purposes only. Do not use this data for financial transactions."
+    },
+    "buttons": {
+      "daily": "D",
+      "weekly": "W",
+      "monthly": "M"
+    },
+    "transactionsHistory": {
+      "title": "Transaction history"
+    },
+    "more": {
+      "title": "More"
+    },
+    "error": {
+      "code": "Error code: {code}"
+    }
+  },
   "Transactions": {
     "title": "History",
     "noTransactions": {

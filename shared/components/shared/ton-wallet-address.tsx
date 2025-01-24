@@ -32,7 +32,7 @@ export const TonWalletAddress: React.FC<Props> = ({
       {chainId === "-3" && (
         <Badge
           variant="secondary"
-          className="h-9 bg-[#EAAA52]/15 px-3 uppercase text-[#EAAA52]"
+          className="bg-warning/15 text-warning h-9 px-3 uppercase"
         >
           Testnet
         </Badge>

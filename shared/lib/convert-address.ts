@@ -1,3 +1,5 @@
+"use client";
+
 import { Address } from "@ton/core";
 
 export const convertAddress = (

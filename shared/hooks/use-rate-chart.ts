@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from "react";
 
-import { getRate } from "../services/getRate";
-import { RateResponseData } from "../types/rate-types";
+import { getRateChart } from "../services/getRate";
+import { RateChartResponseData } from "../types/rate-chart-types";
 
-export const useRate = (
-  tokens: string,
-  currencies: string,
+export const useRateChart = (
+  token: string,
+  startDate: number,
+  endDate: number,
+  pointsCount: number,
   isUpdate?: boolean,
 ) => {
-  const [rate, setRate] = useState<RateResponseData>();
+  const [rateChart, setRateChart] = useState<RateChartResponseData>();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,9 +21,15 @@ export const useRate = (
       try {
         setIsLoading(true);
 
-        const res = await getRate(tokens, currencies);
+        const res = await getRateChart(
+          token,
+          "usd",
+          startDate,
+          endDate,
+          pointsCount,
+        );
         const data = await res.json();
-        setRate(data);
+        setRateChart(data);
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (e: any) {
         console.error("Error [GET RATE]", e);
@@ -42,10 +50,10 @@ export const useRate = (
         clearInterval(interval);
       };
     }
-  }, [currencies, tokens, isUpdate]);
+  }, [token, startDate, endDate, pointsCount, isUpdate]);
 
   return {
-    rate,
+    rateChart,
     isLoading,
     error,
   };

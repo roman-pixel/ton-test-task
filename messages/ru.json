@@ -58,6 +58,25 @@
       }
     }
   },
+  "TonRate": {
+    "warnMessage": {
+      "title": "Указанные ставки носят исключительно информационный характер. Не используйте эти данные для финансовых транзакций"
+    },
+    "buttons": {
+      "daily": "Д",
+      "weekly": "Н",
+      "monthly": "М"
+    },
+    "transactionsHistory": {
+      "title": "История транзакций"
+    },
+    "more": {
+      "title": "Подробнее"
+    },
+    "error": {
+      "code": "Код ошибки: {code}"
+    }
+  },
   "Transactions": {
     "title": "История",
     "noTransactions": {
