@@ -50,6 +50,7 @@ const config: Config = {
           foreground: "hsl(var(--warning-foreground))",
         },
         utility: "hsl(var(--utility))",
+        ton: "hsl(var(--ton))",
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
@@ -73,16 +74,16 @@ const config: Config = {
         "pulse-size": {
           "0%, 100%": {
             transform: "scale(1)",
-            boxShadow: "0 0 10px 3px rgba(45, 131, 236, 0.6)",
+            boxShadow: "0 0 10px 5px rgba(0, 152, 234, 0.6)",
           },
           "50%": {
             transform: "scale(1.2)",
-            boxShadow: "0 0 10px 15px rgba(45, 131, 236, 0.6)",
+            boxShadow: "0 0 20px 15px rgba(0, 152, 234, 0.6)",
           },
         },
       },
       boxShadow: {
-        pulse: "0 0 20px 5px rgba(45, 131, 236, 0.6)",
+        pulse: "0 0 20px 5px rgba(0, 152, 234, 0.6)",
       },
     },
   },
