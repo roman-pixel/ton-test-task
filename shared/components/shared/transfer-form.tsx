@@ -174,8 +174,8 @@ export const TransferForm: React.FC<TransferFormProps> = ({
             <div className="flex flex-col gap-4">
               <div>
                 <div className="relative">
-                  <Textarea
-                    className={cn("min-h-10 resize-none pr-11 text-base", {
+                  <Input
+                    className={cn("h-14 pr-11 text-base", {
                       "border-destructive": error.address,
                     })}
                     placeholder={t("placeholders.address")}

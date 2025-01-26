@@ -67,16 +67,9 @@ export const ChartContainer: React.FC<Props> = ({ className }) => {
   }
 
   return (
-    <div className={cn("flex w-full flex-col gap-3", className)}>
+    <div className={cn("flex w-full flex-col gap-1", className)}>
       {isLoading && !rateChart ? (
-        <>
-          <Skeleton className="h-52 w-full rounded-md" />
-          <div className="flex w-full items-center justify-evenly">
-            <Skeleton className="h-9 w-9 rounded-md" />
-            <Skeleton className="h-9 w-9 rounded-md" />
-            <Skeleton className="h-9 w-9 rounded-md" />
-          </div>
-        </>
+        <Skeleton className="h-64 w-full rounded-md bg-background dark:bg-muted" />
       ) : (
         <>
           <Chart data={rateChart} />
