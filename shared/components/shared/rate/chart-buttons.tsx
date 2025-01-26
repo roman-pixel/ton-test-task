@@ -34,6 +34,7 @@ export const ChartButtons: React.FC<Props> = ({ className }) => {
     >
       <Button
         className="w-full"
+
         size="sm"
         variant={searchParams.get("period") === "daily" ? "secondary" : "ghost"}
         onClick={() => {

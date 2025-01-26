@@ -12,6 +12,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        warning: "#EAAA52",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {

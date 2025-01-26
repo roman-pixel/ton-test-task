@@ -54,6 +54,7 @@ export default function Rate() {
         variant="secondary"
         size="icon"
         className="bg-utility absolute left-0 top-0 h-8 w-8 rounded-full"
+
         onClick={() => {
           triggerFeedback("light");
           router.push("/");
@@ -108,6 +109,7 @@ export default function Rate() {
         <ChartContainer />
       </div>
 
+
       {wallet && (
         <>
           <Card
@@ -128,6 +130,7 @@ export default function Rate() {
             onClick={() => triggerFeedback("light")}
           >
             <Globe style={{ width: 18, height: 18 }} />
+
             <span>{t("more.title")}</span>
           </Link>
         </>
