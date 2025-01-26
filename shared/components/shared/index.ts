@@ -12,6 +12,7 @@ export { ClearButton } from "./clear-button";
 export { Card } from "./card";
 export { DrawerCloseButton } from "./drawer-close-button";
 export { Asterisk } from "./asterisk";
+export { Loader } from "./loader";
 
 export * from "./currency";
 export * from "./transaction";

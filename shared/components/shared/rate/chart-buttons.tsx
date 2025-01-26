@@ -26,8 +26,15 @@ export const ChartButtons: React.FC<Props> = ({ className }) => {
   };
 
   return (
-    <div className={cn("flex w-full items-center justify-evenly", className)}>
+    <div
+      className={cn(
+        "flex w-full items-center justify-between rounded-lg bg-background p-1",
+        className,
+      )}
+    >
       <Button
+        className="w-full"
+
         size="sm"
         variant={searchParams.get("period") === "daily" ? "secondary" : "ghost"}
         onClick={() => {
@@ -38,6 +45,7 @@ export const ChartButtons: React.FC<Props> = ({ className }) => {
         {t("daily")}
       </Button>
       <Button
+        className="w-full"
         size="sm"
         variant={
           searchParams.get("period") === "weekly" ? "secondary" : "ghost"
@@ -50,6 +58,7 @@ export const ChartButtons: React.FC<Props> = ({ className }) => {
         {t("weekly")}
       </Button>
       <Button
+        className="w-full"
         size="sm"
         variant={
           searchParams.get("period") === "monthly" ? "secondary" : "ghost"

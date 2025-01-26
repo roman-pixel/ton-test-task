@@ -53,7 +53,7 @@ export default function Rate() {
       <Button
         variant="secondary"
         size="icon"
-        className="absolute left-0 top-0 h-8 w-8 rounded-full"
+        className="bg-utility absolute left-0 top-0 h-8 w-8 rounded-full"
         onClick={() => {
           triggerFeedback("light");
           router.push("/");
@@ -90,26 +90,28 @@ export default function Rate() {
 
       {wallet && <IconButtons className="mt-4" />}
 
-      <Card className="flex items-center gap-3 bg-warning/15 p-3 text-warning">
+      <Card className="text-attention-foreground/90 bg-attention/20 flex items-center gap-3 p-3">
         <TriangleAlert size={58} />
         <span className="text-xs">{t("warnMessage.title")}</span>
       </Card>
 
-      {rate?.rates && (
-        <RateDetails
-          tonPrice={rate?.rates?.TON?.prices.USD}
-          diff_24h={rate?.rates?.TON?.diff_24h.USD}
-          diff_7d={rate?.rates?.TON?.diff_7d.USD}
-          diff_30d={rate?.rates?.TON?.diff_30d.USD}
-          isLoading={isRateLoading}
-        />
-      )}
-      <ChartContainer />
+      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3">
+        {rate?.rates && (
+          <RateDetails
+            tonPrice={rate?.rates?.TON?.prices.USD}
+            diff_24h={rate?.rates?.TON?.diff_24h.USD}
+            diff_7d={rate?.rates?.TON?.diff_7d.USD}
+            diff_30d={rate?.rates?.TON?.diff_30d.USD}
+            isLoading={isRateLoading}
+          />
+        )}
+        <ChartContainer />
+      </div>
 
       {wallet && (
         <>
           <Card
-            className="flex w-full items-center gap-2 py-6"
+            className="flex w-full cursor-pointer items-center gap-2 py-6"
             onClick={() => {
               triggerFeedback("light");
               router.push("/transactions");
@@ -122,13 +124,11 @@ export default function Rate() {
           <Link
             href={`https://tonviewer.com/${convertAddress(wallet?.account.address as string)}`}
             target="_blank"
-            className="flex items-center gap-2 rounded-full bg-secondary px-6 py-3"
+            className="flex cursor-pointer items-center gap-2 rounded-full bg-secondary px-6 py-3"
             onClick={() => triggerFeedback("light")}
           >
-            <Globe
-              className="text-primary/90"
-              style={{ width: 18, height: 18 }}
-            />
+            <Globe style={{ width: 18, height: 18 }} />
+
             <span>{t("more.title")}</span>
           </Link>
         </>

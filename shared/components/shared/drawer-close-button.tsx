@@ -15,7 +15,11 @@ interface Props {
 export const DrawerCloseButton: React.FC<Props> = ({ className }) => {
   return (
     <DrawerClose asChild className={cn("absolute right-0 top-3", className)}>
-      <Button variant="secondary" size="icon" className="rounded-full">
+      <Button
+        variant="secondary"
+        size="icon"
+        className="bg-utility rounded-full"
+      >
         <X style={{ width: "20px", height: "20px" }} />
       </Button>
     </DrawerClose>

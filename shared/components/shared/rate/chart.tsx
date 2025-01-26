@@ -16,8 +16,8 @@ interface Props {
 }
 
 const chartConfig = {
-  desktop: {
-    label: "Desktop",
+  mobile: {
+    label: "Coin price",
     color: "hsl(var(--chart-1))",
   },
 } satisfies ChartConfig;
@@ -93,7 +93,9 @@ export const Chart: React.FC<Props> = ({ data }) => {
         />
         <Line
           dataKey="value"
-          fill="var(--color-desktop)"
+          // TODO: dynamic color
+          // fill="var(--color-mobile)"
+          // stroke="var(--color-mobile)"
           radius={4}
           type="natural"
           dot={false}

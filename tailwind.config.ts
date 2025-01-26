@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import tailwindcssAnimate from "tailwindcss-animate";
 
 const config: Config = {
   darkMode: ["class"],
@@ -11,7 +12,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        warning: "#EAAA52",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -45,6 +45,12 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        attention: {
+          DEFAULT: "hsl(var(--attention))",
+          foreground: "hsl(var(--attention-foreground))",
+        },
+        utility: "hsl(var(--utility))",
+        ton: "hsl(var(--ton))",
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",
@@ -61,8 +67,26 @@ const config: Config = {
       screens: {
         xs: "380px",
       },
+      animation: {
+        "pulse-size": "pulse-size 1.5s infinite",
+      },
+      keyframes: {
+        "pulse-size": {
+          "0%, 100%": {
+            transform: "scale(1)",
+            boxShadow: "0 0 10px 5px rgba(0, 152, 234, 0.6)",
+          },
+          "50%": {
+            transform: "scale(1.2)",
+            boxShadow: "0 0 20px 15px rgba(0, 152, 234, 0.6)",
+          },
+        },
+      },
+      boxShadow: {
+        pulse: "0 0 20px 5px rgba(0, 152, 234, 0.6)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [tailwindcssAnimate],
 };
 export default config;
