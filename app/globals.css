@@ -30,8 +30,8 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 211 100% 50%;
     --radius: 0.75rem;
-    --warning: 31 100% 65%;
-    --warning-foreground: 28 71% 26%;
+    --attention: 31 100% 65%;
+    --attention-foreground: 28 71% 26%;
     --utility: 230 10% 88%;
     --ton: 201 100% 46%;
     --chart-1: 12 76% 61%;
@@ -61,8 +61,8 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
-    --warning: 35 78% 62%;
-    --warning-foreground: 53 98% 77%;
+    --attention: 35 78% 62%;
+    --attention-foreground: 53 98% 77%;
     --utility: 213 25% 16%;
     --ton: 201 100% 46%;
     --chart-1: 220 70% 50%;

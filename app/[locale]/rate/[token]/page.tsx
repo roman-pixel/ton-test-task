@@ -54,7 +54,6 @@ export default function Rate() {
         variant="secondary"
         size="icon"
         className="bg-utility absolute left-0 top-0 h-8 w-8 rounded-full"
-
         onClick={() => {
           triggerFeedback("light");
           router.push("/");
@@ -91,7 +90,7 @@ export default function Rate() {
 
       {wallet && <IconButtons className="mt-4" />}
 
-      <Card className="text-warning-foreground/90 flex items-center gap-3 bg-warning/20 p-3">
+      <Card className="text-attention-foreground/90 bg-attention/20 flex items-center gap-3 p-3">
         <TriangleAlert size={58} />
         <span className="text-xs">{t("warnMessage.title")}</span>
       </Card>
@@ -108,7 +107,6 @@ export default function Rate() {
         )}
         <ChartContainer />
       </div>
-
 
       {wallet && (
         <>
