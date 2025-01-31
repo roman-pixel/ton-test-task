@@ -2,7 +2,6 @@ import { create } from "zustand";
 
 import { getBalance } from "../services/getBalance";
 
-// Успешный ответ с балансом
 type AccountInfoResponse = {
   ok: boolean;
   result: string;
