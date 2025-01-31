@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 import { Skeleton } from "../../ui";
+import { TokenDiff } from "../token-diff";
 
 import { cn } from "@/shared/lib/utils";
 
@@ -49,11 +50,9 @@ export const RateDetails: React.FC<Props> = ({
       {isLoading ? (
         <Skeleton className="h-5 w-28 rounded-md" />
       ) : (
-        <div
-          className={cn("flex items-center gap-2 text-sm tracking-wide", {
-            "text-green-600 dark:text-green-500": diffValue?.startsWith("+"),
-            "text-destructive dark:text-red-500": diffValue?.startsWith("−"),
-          })}
+        <TokenDiff
+          value={diffValue}
+          className="flex items-center gap-2 text-sm tracking-wide"
         >
           <p>{diffValue?.replace(".", ",")}</p>
           {diffValue && tonPrice && (
@@ -73,7 +72,7 @@ export const RateDetails: React.FC<Props> = ({
                 .replace(".", ",")}
             </p>
           )}
-        </div>
+        </TokenDiff>
       )}
     </div>
   );

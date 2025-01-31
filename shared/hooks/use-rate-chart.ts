@@ -6,7 +6,7 @@ import { getRateChart } from "../services/getRate";
 import { RateChartResponseData } from "../types/rate-chart-types";
 
 export const useRateChart = (
-  token: string,
+  token: string | undefined,
   startDate: number,
   endDate: number,
   pointsCount: number,
@@ -20,6 +20,8 @@ export const useRateChart = (
     async function fetchRate() {
       try {
         setIsLoading(true);
+
+        if (!token) throw new Error("No token");
 
         const res = await getRateChart(
           token,

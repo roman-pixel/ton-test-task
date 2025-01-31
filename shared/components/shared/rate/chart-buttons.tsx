@@ -28,13 +28,12 @@ export const ChartButtons: React.FC<Props> = ({ className }) => {
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-between rounded-lg bg-background p-1",
+        "flex w-full items-center justify-between rounded-lg bg-background px-2 py-1",
         className,
       )}
     >
       <Button
         className="w-full"
-
         size="sm"
         variant={searchParams.get("period") === "daily" ? "secondary" : "ghost"}
         onClick={() => {

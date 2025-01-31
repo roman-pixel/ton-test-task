@@ -1,7 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
-import { ChevronLeft, Globe, History, TriangleAlert } from "lucide-react";
+import { ChevronLeft, Globe, History } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,6 +16,7 @@ import {
   Container,
   IconButtons,
   Skeleton,
+  Warning,
 } from "@/shared/components";
 import { Balance, RateDetails } from "@/shared/components/shared/rate";
 import { useHapticFeedback, useRate } from "@/shared/hooks";
@@ -53,7 +54,7 @@ export default function Rate() {
       <Button
         variant="secondary"
         size="icon"
-        className="bg-utility absolute left-0 top-0 h-8 w-8 rounded-full"
+        className="absolute left-0 top-0 h-8 w-8 rounded-full bg-utility"
         onClick={() => {
           triggerFeedback("light");
           router.push("/");
@@ -64,36 +65,41 @@ export default function Rate() {
       <p className="text-center text-xl font-semibold">
         {coinName(params.token as string)}
       </p>
-      <div className="flex w-full items-center justify-between">
-        <div className="flex flex-col gap-1">
-          {loading ? (
-            <Skeleton className="h-7 w-52 rounded-md" />
-          ) : (
-            <Balance hide={hide} balance={data.result} fullPart={fullPart} />
-          )}
 
-          {isRateLoading ? (
-            <Skeleton className="h-5 w-16 rounded-md" />
-          ) : (
-            rate && (
-              <BalanceWithRate
-                hide={hide}
-                fullPart={fullPart}
-                rate={rate?.rates?.TON?.prices.USD}
-              />
-            )
-          )}
+      {wallet && (
+        <div className="flex w-full items-center justify-between">
+          <div className="flex flex-col gap-1">
+            {loading ? (
+              <Skeleton className="h-7 w-52 rounded-md" />
+            ) : (
+              <Balance hide={hide} balance={data.result} fullPart={fullPart} />
+            )}
+
+            {isRateLoading ? (
+              <Skeleton className="h-5 w-16 rounded-md" />
+            ) : (
+              rate && (
+                <BalanceWithRate
+                  hide={hide}
+                  fullPart={fullPart}
+                  rate={rate?.rates?.TON?.prices.USD}
+                />
+              )
+            )}
+          </div>
+
+          <Image
+            src="/ton-logo.svg"
+            width={60}
+            height={60}
+            alt="Toncoin logo"
+          />
         </div>
-
-        <Image src="/ton-logo.svg" width={60} height={60} alt="Toncoin logo" />
-      </div>
+      )}
 
       {wallet && <IconButtons className="mt-4" />}
 
-      <Card className="text-attention-foreground/90 bg-attention/20 flex items-center gap-3 p-3">
-        <TriangleAlert size={58} />
-        <span className="text-xs">{t("warnMessage.title")}</span>
-      </Card>
+      <Warning message={t("warnMessage.title")} />
 
       <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3">
         {rate?.rates && (

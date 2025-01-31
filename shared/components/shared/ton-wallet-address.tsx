@@ -1,5 +1,6 @@
 "use client";
 
+import { useTonWallet } from "@tonconnect/ui-react";
 import React from "react";
 
 import { Badge, Button } from "../ui";
@@ -7,15 +8,11 @@ import { Badge, Button } from "../ui";
 import { useClipboard } from "@/shared/hooks";
 import { convertAddress, cutWalletAddress } from "@/shared/lib";
 
-interface Props {
-  walletAddress: string | undefined;
-  chainId: string | undefined;
-}
+export const TonWalletAddress: React.FC = () => {
+  const wallet = useTonWallet();
+  const walletAddress = wallet?.account.address;
+  const chainId = wallet?.account.chain;
 
-export const TonWalletAddress: React.FC<Props> = ({
-  walletAddress,
-  chainId,
-}) => {
   const { copyToClipboard } = useClipboard();
   const formatedAddress = convertAddress(walletAddress || "");
 
@@ -32,7 +29,7 @@ export const TonWalletAddress: React.FC<Props> = ({
       {chainId === "-3" && (
         <Badge
           variant="secondary"
-          className="text-attention-foreground/90 bg-attention/20 h-9 px-3 uppercase"
+          className="h-9 bg-attention/20 px-3 uppercase text-attention-foreground/90"
         >
           Testnet
         </Badge>
