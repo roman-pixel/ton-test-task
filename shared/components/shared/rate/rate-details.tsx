@@ -1,41 +1,34 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import React from "react";
 
 import { Skeleton } from "../../ui";
+import { TokenDiff } from "../token-diff";
 
+import { useDiffValue } from "@/shared/hooks";
 import { cn } from "@/shared/lib/utils";
+import { RateResponseData } from "@/shared/types/rate-types";
 
 interface Props {
   tonPrice: number | undefined;
-  diff_24h: string | undefined;
-  diff_7d: string | undefined;
-  diff_30d: string | undefined;
+  rate: RateResponseData;
   isLoading?: boolean;
   className?: string;
 }
 
 export const RateDetails: React.FC<Props> = ({
   tonPrice,
-  diff_24h,
-  diff_7d,
-  diff_30d,
+  rate,
   isLoading,
   className,
 }) => {
-  const searchParams = useSearchParams();
-  const [diffValue, setDiffValue] = useState<string | undefined>("");
-
-  useEffect(() => {
-    if (searchParams.get("period") === "daily") {
-      setDiffValue(diff_24h);
-    } else if (searchParams.get("period") === "weekly") {
-      setDiffValue(diff_7d);
-    } else if (searchParams.get("period") === "monthly") {
-      setDiffValue(diff_30d);
-    }
-  }, [diff_24h, diff_30d, diff_7d, searchParams]);
+  const params = useParams();
+  const { diffValue } = useDiffValue(
+    rate,
+    (params.token as string) || "ton",
+    "usd",
+  );
 
   return (
     <div className={cn("flex w-full flex-col gap-1", className)}>
@@ -49,11 +42,9 @@ export const RateDetails: React.FC<Props> = ({
       {isLoading ? (
         <Skeleton className="h-5 w-28 rounded-md" />
       ) : (
-        <div
-          className={cn("flex items-center gap-2 text-sm tracking-wide", {
-            "text-green-600 dark:text-green-500": diffValue?.startsWith("+"),
-            "text-destructive dark:text-red-500": diffValue?.startsWith("−"),
-          })}
+        <TokenDiff
+          value={diffValue}
+          className="flex items-center gap-2 text-sm tracking-wide"
         >
           <p>{diffValue?.replace(".", ",")}</p>
           {diffValue && tonPrice && (
@@ -73,7 +64,7 @@ export const RateDetails: React.FC<Props> = ({
                 .replace(".", ",")}
             </p>
           )}
-        </div>
+        </TokenDiff>
       )}
     </div>
   );

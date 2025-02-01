@@ -51,12 +51,12 @@ const config: Config = {
         },
         utility: "hsl(var(--utility))",
         ton: "hsl(var(--ton))",
+        "red-foreground": "hsl(var(--red-foreground))",
+        "green-foreground": "hsl(var(--green-foreground))",
         chart: {
-          "1": "hsl(var(--chart-1))",
-          "2": "hsl(var(--chart-2))",
-          "3": "hsl(var(--chart-3))",
-          "4": "hsl(var(--chart-4))",
-          "5": "hsl(var(--chart-5))",
+          default: "hsl(var(--chart-default))",
+          red: "hsl(var(--chart-red))",
+          green: "hsl(var(--chart-green))",
         },
       },
       borderRadius: {
@@ -69,6 +69,8 @@ const config: Config = {
       },
       animation: {
         "pulse-size": "pulse-size 1.5s infinite",
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
       keyframes: {
         "pulse-size": {
@@ -79,6 +81,22 @@ const config: Config = {
           "50%": {
             transform: "scale(1.2)",
             boxShadow: "0 0 20px 15px rgba(0, 152, 234, 0.6)",
+          },
+        },
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
           },
         },
       },

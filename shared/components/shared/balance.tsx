@@ -1,5 +1,6 @@
 "use client";
 
+import { useTonWallet } from "@tonconnect/ui-react";
 import { RotateCw } from "lucide-react";
 import React, { useEffect } from "react";
 
@@ -12,11 +13,12 @@ import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
 interface Props {
-  address: string | undefined;
   className?: string;
 }
 
-export const Balance: React.FC<Props> = ({ address, className }) => {
+export const Balance: React.FC<Props> = ({ className }) => {
+  const wallet = useTonWallet();
+  const address = wallet?.account?.address;
   const [data, error, loading, fetchBalance, hide, updateHide] =
     useBalanceStore((state) => [
       state.data,

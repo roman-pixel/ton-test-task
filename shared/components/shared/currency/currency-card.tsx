@@ -4,9 +4,9 @@ import React from "react";
 import { Skeleton } from "../../ui";
 import { Asterisk } from "../asterisk";
 import { Card } from "../card";
+import { TokenDiff } from "../token-diff";
 
 import { convertTonsValue, convertUsdValue } from "@/shared/lib";
-import { cn } from "@/shared/lib/utils";
 import { useBalanceStore } from "@/shared/store/balance";
 
 interface Props {
@@ -60,16 +60,9 @@ export const CurrencyCard: React.FC<Props> = ({
                   )}
                 </p>
               )}
-              <p
-                className={cn("opacity-90", {
-                  "text-green-600 dark:text-green-500":
-                    currencyDiff?.startsWith("+"),
-                  "text-destructive dark:text-red-500":
-                    currencyDiff?.startsWith("−"),
-                })}
-              >
+              <TokenDiff value={currencyDiff} className="opacity-90">
                 {currencyDiff}
-              </p>
+              </TokenDiff>
             </div>
           )}
         </div>
