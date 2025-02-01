@@ -15,8 +15,8 @@ export const TokenDiff: React.FC<PropsWithChildren<Props>> = ({
   return (
     <div
       className={cn(className, {
-        "text-green-600 dark:text-green-500": value?.startsWith("+"),
-        "text-destructive dark:text-red-500": value?.startsWith("−"),
+        "text-green-foreground": value?.startsWith("+"),
+        "text-red-foreground": value?.startsWith("−"),
       })}
     >
       {children}

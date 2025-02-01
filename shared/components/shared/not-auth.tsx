@@ -99,14 +99,13 @@ export const NotAuth: React.FC<Props> = ({ className }) => {
               {rate?.rates && (
                 <RateDetails
                   tonPrice={rate?.rates?.TON?.prices.USD}
-                  diff_24h={rate?.rates?.TON?.diff_24h.USD}
-                  diff_7d={rate?.rates?.TON?.diff_7d.USD}
-                  diff_30d={rate?.rates?.TON?.diff_30d.USD}
+                  rate={rate}
                   isLoading={isRateLoading}
                 />
               )}
               <ChartContainer
                 token="ton"
+                rate={rate}
                 className="gap-2 rounded-2xl bg-card py-4"
               />
             </div>

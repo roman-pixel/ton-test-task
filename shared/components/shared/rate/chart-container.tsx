@@ -12,13 +12,15 @@ import { ChartButtons } from "./chart-buttons";
 
 import { useRateChart } from "@/shared/hooks/use-rate-chart";
 import { cn } from "@/shared/lib/utils";
+import { RateResponseData } from "@/shared/types/rate-types";
 
 interface Props {
   token?: string;
   className?: string;
+  rate?: RateResponseData;
 }
 
-export const ChartContainer: React.FC<Props> = ({ token, className }) => {
+export const ChartContainer: React.FC<Props> = ({ token, className, rate }) => {
   const t = useTranslations("TonRate");
   const params = useParams();
   const router = useRouter();
@@ -73,7 +75,7 @@ export const ChartContainer: React.FC<Props> = ({ token, className }) => {
         <Skeleton className="h-64 w-full rounded-md bg-background dark:bg-muted" />
       ) : (
         <>
-          <Chart data={rateChart} />
+          <Chart data={rateChart} token={token} rate={rate} />
           <ChartButtons />
         </>
       )}
