@@ -1,16 +1,15 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
-import { ChevronLeft, Globe, History } from "lucide-react";
+import { Globe, History } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import {
   BalanceWithRate,
-  Button,
   Card,
   ChartContainer,
   Container,
@@ -20,7 +19,7 @@ import {
 } from "@/shared/components";
 import { Balance, RateDetails } from "@/shared/components/shared/rate";
 import { useHapticFeedback, useRate } from "@/shared/hooks";
-import { cn, coinName, convertAddress, convertTonsValue } from "@/shared/lib";
+import { convertAddress, convertTonsValue } from "@/shared/lib";
 import { useBalanceStore } from "@/shared/store/balance";
 
 export default function Rate() {
@@ -65,24 +64,12 @@ export default function Rate() {
       tg.BackButton.offClick(handleBackClick);
       tg.BackButton.hide();
     };
-  }, [router]);
+  }, [router, triggerFeedback]);
 
   const { fullPart } = convertTonsValue(data.result, false);
 
-  const bottomInset = getComputedStyle(document.documentElement)
-    .getPropertyValue("--tg-safe-area-inset-bottom")
-    .trim();
-
   return (
-    <Container
-      className={cn("my-4 flex flex-col items-center justify-center gap-6", {
-        "mb-[var(--tg-safe-area-inset-bottom)]": bottomInset,
-      })}
-    >
-      <p className="text-center text-xl font-semibold">
-        {coinName(params.token as string)}
-      </p>
-
+    <Container className="mb-24 mt-3 flex flex-col items-center justify-center gap-6">
       {wallet && (
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col gap-1">

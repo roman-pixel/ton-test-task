@@ -46,7 +46,9 @@ export const MenuBar: React.FC = () => {
         <MenuButton
           label={t("wallet.title")}
           className={cn("w-14 text-[#858F99]", {
-            "text-primary": pathName === `/${locale}`,
+            "text-primary":
+              pathName === `/${locale}` ||
+              pathName.startsWith(`/${locale}/rate/`),
           })}
           onClick={() => handleClick("")}
         >
@@ -54,7 +56,9 @@ export const MenuBar: React.FC = () => {
             width="25px"
             height="22px"
             className={cn("fill-[#858F99]", {
-              "fill-primary": pathName === `/${locale}`,
+              "fill-primary":
+                pathName === `/${locale}` ||
+                pathName.startsWith(`/${locale}/rate/`),
             })}
           />
         </MenuButton>
