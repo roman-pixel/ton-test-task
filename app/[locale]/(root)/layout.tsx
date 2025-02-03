@@ -24,7 +24,7 @@ export default function HomeLayout({
   }
 
   return (
-    <main className="mb-28 flex flex-col">
+    <main className="flex flex-col">
       <Header />
       <div className="flex-grow">{children}</div>
       <MenuBar />

@@ -84,9 +84,15 @@ export const NotAuth: React.FC<Props> = ({ className }) => {
                 ) : (
                   !isOpen && (
                     <div className="flex items-center gap-2 text-sm font-light">
-                      <p>$ {rate?.rates?.TON?.prices.USD.toFixed(4)}</p>
+                      <p>
+                        ${" "}
+                        {rate?.rates?.TON?.prices.USD.toFixed(4).replace(
+                          ".",
+                          ",",
+                        )}
+                      </p>
                       <TokenDiff value={rate?.rates?.TON?.diff_24h.USD}>
-                        {rate?.rates?.TON?.diff_24h.USD}
+                        {rate?.rates?.TON?.diff_24h.USD.replace(".", ",")}
                       </TokenDiff>
                     </div>
                   )

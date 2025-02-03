@@ -72,7 +72,7 @@ export const TransactionDrawer: React.FC<PropsWithChildren<Props>> = ({
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container className="flex w-full flex-col gap-4 py-8">
+        <Container className="flex w-full flex-col gap-4 pt-8">
           <DrawerCloseButton />
           <DrawerHeader className="flex flex-col items-center gap-1">
             <Image

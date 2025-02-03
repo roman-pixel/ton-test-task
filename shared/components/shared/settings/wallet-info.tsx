@@ -29,7 +29,7 @@ export const WalletInfo: React.FC<PropsWithChildren<Props>> = ({
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container className="flex flex-col gap-4 pb-8">
+        <Container className="flex flex-col gap-4">
           <DrawerCloseButton />
           <DrawerHeader className="mt-8">
             <DrawerTitle>{t("title")}</DrawerTitle>

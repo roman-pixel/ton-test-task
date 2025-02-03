@@ -20,7 +20,7 @@ import {
 } from "@/shared/components";
 import { Balance, RateDetails } from "@/shared/components/shared/rate";
 import { useHapticFeedback, useRate } from "@/shared/hooks";
-import { coinName, convertAddress, convertTonsValue } from "@/shared/lib";
+import { cn, coinName, convertAddress, convertTonsValue } from "@/shared/lib";
 import { useBalanceStore } from "@/shared/store/balance";
 
 export default function Rate() {
@@ -73,8 +73,16 @@ export default function Rate() {
 
   const { fullPart } = convertTonsValue(data.result, false);
 
+  const bottomInset = getComputedStyle(document.documentElement)
+    .getPropertyValue("--tg-safe-area-inset-bottom")
+    .trim();
+
   return (
-    <Container className="my-8 flex flex-col items-center justify-center gap-6">
+    <Container
+      className={cn("my-4 flex flex-col items-center justify-center gap-6", {
+        "mb-[var(--tg-safe-area-inset-bottom)]": bottomInset,
+      })}
+    >
       {uiBackButton && (
         <Button
           variant="secondary"
