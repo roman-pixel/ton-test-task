@@ -27,7 +27,9 @@ export const Balance: React.FC<Props> = ({
       className={cn("flex items-center gap-2 text-xl font-medium", className)}
     >
       {hide ? (
-        <Asterisk count={3} />
+        <div className="flex items-center">
+          <Asterisk count={3} />
+        </div>
       ) : (
         <span>{balance ? String(fullPart).replace(".", ",") : "0,00"}</span>
       )}

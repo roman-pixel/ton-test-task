@@ -35,7 +35,6 @@ export default function Rate() {
     state.loading,
   ]);
   const params = useParams();
-  const [uiBackButton, setUiBackButton] = useState(false);
 
   const { rate, isLoading: isRateLoading } = useRate(
     params.token as string,
@@ -51,14 +50,12 @@ export default function Rate() {
   useEffect(() => {
     const tg = window?.Telegram?.WebApp;
 
-    if (!tg) {
-      setUiBackButton(true);
-      return;
-    }
+    if (!tg) return;
 
     tg.BackButton.show();
 
     const handleBackClick = () => {
+      triggerFeedback("light");
       router.push("/");
     };
 
@@ -67,7 +64,6 @@ export default function Rate() {
     return () => {
       tg.BackButton.offClick(handleBackClick);
       tg.BackButton.hide();
-      setUiBackButton(false);
     };
   }, [router]);
 
@@ -83,19 +79,6 @@ export default function Rate() {
         "mb-[var(--tg-safe-area-inset-bottom)]": bottomInset,
       })}
     >
-      {uiBackButton && (
-        <Button
-          variant="secondary"
-          size="icon"
-          className="absolute left-0 top-0 h-8 w-8 rounded-full bg-utility"
-          onClick={() => {
-            triggerFeedback("light");
-            router.push("/");
-          }}
-        >
-          <ChevronLeft style={{ width: 18, height: 18 }} />
-        </Button>
-      )}
       <p className="text-center text-xl font-semibold">
         {coinName(params.token as string)}
       </p>
@@ -135,7 +118,7 @@ export default function Rate() {
 
       <Warning message={t("warnMessage.title")} />
 
-      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3">
+      <div className="flex w-full flex-col gap-2 rounded-md bg-card p-3">
         {rate?.rates && (
           <RateDetails
             tonPrice={rate?.rates?.TON?.prices.USD}

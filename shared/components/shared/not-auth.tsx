@@ -101,7 +101,7 @@ export const NotAuth: React.FC<Props> = ({ className }) => {
             </div>
           </AccordionTrigger>
           <AccordionContent className="flex flex-col gap-2">
-            <div className="flex w-full flex-col gap-2 rounded-lg">
+            <div className="flex w-full flex-col gap-2">
               {rate?.rates && (
                 <RateDetails
                   tonPrice={rate?.rates?.TON?.prices.USD}
