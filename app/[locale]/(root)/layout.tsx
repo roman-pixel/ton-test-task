@@ -15,7 +15,7 @@ export default function HomeLayout({
   const [isInitialized, setIsInitialized] = useState(false);
   const { resolvedTheme } = useTheme();
 
-  const tg = window?.Telegram?.WebApp;
+  const tg = typeof window !== "undefined" ? window?.Telegram?.WebApp : null;
 
   useEffect(() => {
     if (!tg) return;
