@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   BalanceWithRate,
@@ -35,6 +35,7 @@ export default function Rate() {
     state.loading,
   ]);
   const params = useParams();
+  const [uiBackButton, setUiBackButton] = useState(false);
 
   const { rate, isLoading: isRateLoading } = useRate(
     params.token as string,
@@ -47,21 +48,46 @@ export default function Rate() {
     }
   }, [wallet, fetchBalance, data]);
 
+  useEffect(() => {
+    const tg = window?.Telegram?.WebApp;
+
+    if (!tg) {
+      setUiBackButton(true);
+      return;
+    }
+
+    tg.BackButton.show();
+
+    const handleBackClick = () => {
+      router.push("/");
+    };
+
+    tg.BackButton.onClick(handleBackClick);
+
+    return () => {
+      tg.BackButton.offClick(handleBackClick);
+      tg.BackButton.hide();
+      setUiBackButton(false);
+    };
+  }, [router]);
+
   const { fullPart } = convertTonsValue(data.result, false);
 
   return (
     <Container className="my-8 flex flex-col items-center justify-center gap-6">
-      <Button
-        variant="secondary"
-        size="icon"
-        className="absolute left-0 top-0 h-8 w-8 rounded-full bg-utility"
-        onClick={() => {
-          triggerFeedback("light");
-          router.push("/");
-        }}
-      >
-        <ChevronLeft style={{ width: 18, height: 18 }} />
-      </Button>
+      {uiBackButton && (
+        <Button
+          variant="secondary"
+          size="icon"
+          className="absolute left-0 top-0 h-8 w-8 rounded-full bg-utility"
+          onClick={() => {
+            triggerFeedback("light");
+            router.push("/");
+          }}
+        >
+          <ChevronLeft style={{ width: 18, height: 18 }} />
+        </Button>
+      )}
       <p className="text-center text-xl font-semibold">
         {coinName(params.token as string)}
       </p>
