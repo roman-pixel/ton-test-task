@@ -29,7 +29,7 @@ export const WalletDisconnect: React.FC<PropsWithChildren<Props>> = ({
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container className="mb-4">
+        <Container>
           <DrawerCloseButton />
           <DrawerHeader className="mt-6">
             <DrawerTitle>{t("title")}</DrawerTitle>

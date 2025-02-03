@@ -26,7 +26,14 @@ export const BalanceWithRate: React.FC<Props> = ({
       )}
     >
       {hide ? (
-        <Asterisk count={3} />
+        <div className="flex items-center">
+          <Asterisk
+            className="text-muted-foreground"
+            count={3}
+            width={20}
+            height={20}
+          />
+        </div>
       ) : (
         rate && (
           <p className="flex items-center gap-[2px]">

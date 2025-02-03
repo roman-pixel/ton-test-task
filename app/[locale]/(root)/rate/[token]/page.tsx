@@ -1,7 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
-import { ChevronLeft, Globe, History } from "lucide-react";
+import { Globe, History } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,6 @@ import { useEffect } from "react";
 
 import {
   BalanceWithRate,
-  Button,
   Card,
   ChartContainer,
   Container,
@@ -20,7 +19,7 @@ import {
 } from "@/shared/components";
 import { Balance, RateDetails } from "@/shared/components/shared/rate";
 import { useHapticFeedback, useRate } from "@/shared/hooks";
-import { coinName, convertAddress, convertTonsValue } from "@/shared/lib";
+import { convertAddress, convertTonsValue } from "@/shared/lib";
 import { useBalanceStore } from "@/shared/store/balance";
 
 export default function Rate() {
@@ -47,25 +46,30 @@ export default function Rate() {
     }
   }, [wallet, fetchBalance, data]);
 
+  useEffect(() => {
+    const tg = window?.Telegram?.WebApp;
+
+    if (!tg) return;
+
+    tg.BackButton.show();
+
+    const handleBackClick = () => {
+      triggerFeedback("light");
+      router.push("/");
+    };
+
+    tg.BackButton.onClick(handleBackClick);
+
+    return () => {
+      tg.BackButton.offClick(handleBackClick);
+      tg.BackButton.hide();
+    };
+  }, [router, triggerFeedback]);
+
   const { fullPart } = convertTonsValue(data.result, false);
 
   return (
-    <Container className="my-8 flex flex-col items-center justify-center gap-6">
-      <Button
-        variant="secondary"
-        size="icon"
-        className="absolute left-0 top-0 h-8 w-8 rounded-full bg-utility"
-        onClick={() => {
-          triggerFeedback("light");
-          router.push("/");
-        }}
-      >
-        <ChevronLeft style={{ width: 18, height: 18 }} />
-      </Button>
-      <p className="text-center text-xl font-semibold">
-        {coinName(params.token as string)}
-      </p>
-
+    <Container className="mb-24 mt-3 flex flex-col items-center justify-center gap-6">
       {wallet && (
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col gap-1">
@@ -101,7 +105,7 @@ export default function Rate() {
 
       <Warning message={t("warnMessage.title")} />
 
-      <div className="flex w-full flex-col gap-2 rounded-lg bg-card p-3">
+      <div className="flex w-full flex-col gap-2 rounded-md bg-card p-3">
         {rate?.rates && (
           <RateDetails
             tonPrice={rate?.rates?.TON?.prices.USD}

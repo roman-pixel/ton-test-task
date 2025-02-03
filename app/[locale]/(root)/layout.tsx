@@ -1,6 +1,7 @@
 "use client";
 
 import { useTonWallet } from "@tonconnect/ui-react";
+import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 import { Header, Loader, MenuBar } from "@/shared/components/shared";
@@ -12,6 +13,19 @@ export default function HomeLayout({
 }>) {
   const wallet = useTonWallet();
   const [isInitialized, setIsInitialized] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  const tg = typeof window !== "undefined" ? window?.Telegram?.WebApp : null;
+
+  useEffect(() => {
+    if (!tg) return;
+
+    tg.ready();
+
+    // TODO: get color from css
+    tg.setBackgroundColor(resolvedTheme === "dark" ? "#020817" : "#f0f0f5");
+    tg.setHeaderColor(resolvedTheme === "dark" ? "#020817" : "#f0f0f5");
+  }, [resolvedTheme, tg]);
 
   useEffect(() => {
     if (wallet !== undefined) {
@@ -24,7 +38,7 @@ export default function HomeLayout({
   }
 
   return (
-    <main className="mb-28 flex flex-col">
+    <main className="flex flex-col">
       <Header />
       <div className="flex-grow">{children}</div>
       <MenuBar />

@@ -28,12 +28,17 @@ export const MenuBar: React.FC = () => {
     router.push(`/${locale}/${path}`);
   };
 
+  const bottomInset = getComputedStyle(document.documentElement)
+    .getPropertyValue("--tg-safe-area-inset-bottom")
+    .trim();
+
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-0 w-full bg-background/60 pb-6 pt-4 backdrop-blur-2xl",
+        "fixed bottom-0 left-0 w-full bg-background/60 py-4 backdrop-blur-2xl",
         {
           "border-t": pathName === "/transactions",
+          "pb-[var(--tg-safe-area-inset-bottom)]": bottomInset,
         },
       )}
     >
@@ -41,7 +46,9 @@ export const MenuBar: React.FC = () => {
         <MenuButton
           label={t("wallet.title")}
           className={cn("w-14 text-[#858F99]", {
-            "text-primary": pathName === `/${locale}`,
+            "text-primary":
+              pathName === `/${locale}` ||
+              pathName.startsWith(`/${locale}/rate/`),
           })}
           onClick={() => handleClick("")}
         >
@@ -49,7 +56,9 @@ export const MenuBar: React.FC = () => {
             width="25px"
             height="22px"
             className={cn("fill-[#858F99]", {
-              "fill-primary": pathName === `/${locale}`,
+              "fill-primary":
+                pathName === `/${locale}` ||
+                pathName.startsWith(`/${locale}/rate/`),
             })}
           />
         </MenuButton>

@@ -61,7 +61,7 @@ export const CurrencyCard: React.FC<Props> = ({
                 </p>
               )}
               <TokenDiff value={currencyDiff} className="opacity-90">
-                {currencyDiff}
+                {currencyDiff?.replace(".", ",")}
               </TokenDiff>
             </div>
           )}

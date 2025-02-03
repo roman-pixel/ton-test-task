@@ -67,7 +67,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
       <DrawerContent>
-        <Container className="mb-4">
+        <Container>
           <DrawerCloseButton />
           <DrawerHeader className="mt-5 flex flex-col items-center gap-3">
             <DrawerTitle className="text-xl">
@@ -102,7 +102,7 @@ export const QrCode: React.FC<React.PropsWithChildren<QrCodeProps>> = ({
               )}
             </div>
           )}
-          <DrawerFooter className="mx-7 mb-4 flex-row items-center justify-center gap-3">
+          <DrawerFooter className="mx-7 flex-row items-center justify-center gap-3">
             <Button
               variant="secondary"
               className="h-12 rounded-full px-8"

@@ -68,7 +68,7 @@ export default function Transactions() {
   );
 
   return (
-    <Container className="flex flex-col gap-2">
+    <Container className="mb-24 flex flex-col gap-2">
       <p className="text-2xl font-semibold tracking-wide">{t("title")}</p>
       {isLoading ? (
         <TransactionSkeleton count={10} />
