@@ -41,7 +41,7 @@ export const NotAuth: React.FC<Props> = ({ className }) => {
   return (
     <Container
       className={cn(
-        "mt-2 flex flex-col items-center justify-center gap-4",
+        "mb-28 mt-5 flex flex-col items-center justify-center gap-4",
         { "h-[70vh]": !isOpen },
         className,
       )}
