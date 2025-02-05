@@ -19,7 +19,7 @@ import {
 } from "@/shared/components";
 import { Balance, RateDetails } from "@/shared/components/shared/rate";
 import { useHapticFeedback, useRate } from "@/shared/hooks";
-import { convertAddress, convertTonsValue } from "@/shared/lib";
+import { coinName, convertAddress, convertTonsValue } from "@/shared/lib";
 import { useBalanceStore } from "@/shared/store/balance";
 
 export default function Rate() {
@@ -73,10 +73,18 @@ export default function Rate() {
       {wallet && (
         <div className="flex w-full items-center justify-between">
           <div className="flex flex-col gap-1">
+            <p className="text-xl font-semibold tracking-wide">
+              {coinName(params.token as string)}
+            </p>
             {loading ? (
               <Skeleton className="h-7 w-52 rounded-md" />
             ) : (
-              <Balance hide={hide} balance={data.result} fullPart={fullPart} />
+              <Balance
+                hide={hide}
+                balance={data.result}
+                fullPart={fullPart}
+                className="text-lg font-medium"
+              />
             )}
 
             {isRateLoading ? (
@@ -94,8 +102,8 @@ export default function Rate() {
 
           <Image
             src="/ton-logo.svg"
-            width={60}
-            height={60}
+            width={65}
+            height={65}
             alt="Toncoin logo"
           />
         </div>

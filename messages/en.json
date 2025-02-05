@@ -82,6 +82,10 @@
   },
   "Transactions": {
     "title": "History",
+    "loadMore": {
+      "message": "Load more",
+      "loading": "Loading..."
+    },
     "noTransactions": {
       "message": "Your history will be shown here",
       "label": "Make the first transaction!",
