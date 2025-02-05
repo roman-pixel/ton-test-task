@@ -3,6 +3,18 @@ import { useCallback, useEffect, useState } from "react";
 import { getTransactions } from "../services/getTransactions";
 import { TransactionsResponse } from "../types/transaction-types";
 
+/**
+ *
+ * @param address - wallet address
+ * @param limit - transactions limit
+ * @param offset - transactions offset
+ * @returns ```
+ * transactions: TransactionsResponse;
+ * isLoading: boolean;
+ * isError: boolean; error: string;
+ * fetchTransactions: () => Promise<void>
+ * ```
+ */
 export const useTransactions = (
   address: string | undefined,
   limit?: number,

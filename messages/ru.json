@@ -82,6 +82,10 @@
   },
   "Transactions": {
     "title": "История",
+    "loadMore": {
+      "message": "Показать ещё",
+      "loading": "Загрузка..."
+    },
     "noTransactions": {
       "message": "Ваша история будет показана здесь",
       "label": "Совершите первую транзакцию!",
