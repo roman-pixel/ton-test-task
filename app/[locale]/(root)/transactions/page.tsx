@@ -83,7 +83,7 @@ export default function Transactions() {
     );
   }
 
-  if (allTransactions?.length === 0) {
+  if (allTransactions?.length === 0 && !isLoading) {
     return (
       <TransactionMessage
         message={t("noTransactions.message")}
@@ -102,7 +102,7 @@ export default function Transactions() {
   return (
     <Container className="mb-24 flex flex-col gap-2">
       <p className="text-2xl font-semibold tracking-wide">{t("title")}</p>
-      {isLoading && !allTransactions ? (
+      {isLoading && !allTransactions.length ? (
         <TransactionSkeleton count={10} />
       ) : (
         <div className="flex flex-col gap-4">
