@@ -40,6 +40,7 @@ export default function Transactions() {
 
   const loadMore = () => {
     setOffset((prev) => prev + 10);
+    triggerFeedback("light");
   };
 
   useEffect(() => {
@@ -117,7 +118,7 @@ export default function Transactions() {
       {hasMore && (
         <Button
           variant="secondary"
-          className="mt-6 w-full"
+          className="mb-2 mt-4 w-full"
           onClick={loadMore}
           disabled={isLoading}
         >
